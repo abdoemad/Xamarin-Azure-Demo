@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EShope.Pages;
+using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,11 +9,15 @@ namespace EShope
 {
     public partial class App : Application
     {
+        public static Page AppMainPage => Current.MainPage;
+
+        public static IDictionary<string, object> AppProperties => Current.Properties;
+
         public App()
         {
             InitializeComponent();
-
-            MainPage = new MainPage();
+            
+            MainPage = new LoginPage();
         }
 
         protected override void OnStart()
