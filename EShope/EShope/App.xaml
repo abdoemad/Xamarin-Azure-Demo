@@ -1,8 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="EShope.App">
+			 xmlns:local="clr-namespace:EShope"
+			 xmlns:uie="clr-namespace:EShope.UIExtensions.Converters"
+			 x:Class="EShope.App">
     <Application.Resources>
-
-    </Application.Resources>
+		<uie:FirstErrorConverter x:Key="FirstErrorConverter" />
+		
+		<local:ViewModelLocator x:Key="ViewModelLocator"/>
+	</Application.Resources>
 </Application>

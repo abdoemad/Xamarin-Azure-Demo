@@ -157,4 +157,7 @@
       <Name>EShope</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\cart_image.png" />
+  </ItemGroup>
 </Project>

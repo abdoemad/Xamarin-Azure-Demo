@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EShope.Pages.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace EShope.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class LoginPage : ContentPage
-	{
+    {
 		public LoginPage ()
 		{
 			InitializeComponent ();

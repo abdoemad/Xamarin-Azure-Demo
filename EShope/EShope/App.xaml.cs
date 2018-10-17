@@ -1,4 +1,5 @@
 ﻿using EShope.Pages;
+using EShope.ViewModels;
 using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
@@ -13,11 +14,23 @@ namespace EShope
 
         public static IDictionary<string, object> AppProperties => Current.Properties;
 
+        public static INavigation Navigation => Current.MainPage.Navigation;
+
+        private static ViewModelLocator _locator;
+        public static ViewModelLocator Locator => _locator ?? (_locator = new ViewModelLocator());
+            
         public App()
         {
             InitializeComponent();
+
+            InitializeApp();
+
+            MainPage = new NavigationPage(new LoginPage());
+        }
+
+        private void InitializeApp()
+        {
             
-            MainPage = new LoginPage();
         }
 
         protected override void OnStart()

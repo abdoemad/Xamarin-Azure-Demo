@@ -3,20 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:viewModels="clr-namespace:EShope.ViewModels"
 			 xmlns:resources="clr-namespace:EShope.Resources"
-			 x:Class="EShope.Pages.LoginPage">
-	<ContentPage.BindingContext>
+			 BindingContext="{Binding Login,Source={StaticResource ViewModelLocator}}"
+			 xmlns:uie="clr-namespace:EShope.UIExtensions"
+			 NavigationPage.HasNavigationBar="False"
+			 x:Class="EShope.Pages.LoginPage" BackgroundColor="LightGreen">
+	<!--<ContentPage.BindingContext>
 		<viewModels:LoginViewModel></viewModels:LoginViewModel>
-	</ContentPage.BindingContext>
-    <ContentPage.Content>
+	</ContentPage.BindingContext>-->
+	<ContentPage.Content>
         <Grid HorizontalOptions="Center" VerticalOptions="Center">
 			<Grid.RowDefinitions>
 				<RowDefinition></RowDefinition>
 				<RowDefinition></RowDefinition>
 				<RowDefinition></RowDefinition>
+				<RowDefinition></RowDefinition>
 			</Grid.RowDefinitions>
-			<Label Grid.Row="0" Text="{x:Static resources:AppResources.AppTitle}"></Label>
-			<Entry Grid.Row="1" Text="{Binding User.UserName}"></Entry>
-			<Button Grid.Row="2" Command="{Binding LoginCommand}"></Button>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition></ColumnDefinition>
+					<ColumnDefinition></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Image Source="cart_image.png"  Opacity=".5" WidthRequest="2" HeightRequest="2" IsOpaque="True"></Image>
+				<!--Source="{uie:ImageResource Source=EShope.Resources.Images.cart_image.png}"-->
+				<Label Grid.Column="1" Text="{x:Static resources:AppResources.AppTitle}" VerticalTextAlignment="Center"></Label>
+			</Grid>
+			
+			<Entry Grid.Row="1" Text="{Binding User.UserName}" Placeholder="Enter username.." uie:Validation.Errors="{Binding User.Errors[UserName]}"></Entry>
+			<Label Grid.Row="2" Text="{Binding User.Errors[UserName], Converter={StaticResource FirstErrorConverter}}" FontSize="Small" TextColor="Red"></Label>
+			<Button Grid.Row="3" Command="{Binding LoginCommand}" Text="Login"></Button>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
