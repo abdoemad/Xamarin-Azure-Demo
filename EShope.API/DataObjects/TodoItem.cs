@@ -1,6 +1,6 @@
 ﻿using Microsoft.Azure.Mobile.Server;
 
-namespace EShope.AzureMobileAPI.DataObjects
+namespace EShope.API.DataObjects
 {
     public class TodoItem : EntityData
     {

@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Tables;
-using EShope.AzureMobileAPI.DataObjects;
+using EShope.API.DataObjects;
 
-namespace EShope.AzureMobileAPI.Models
+namespace EShope.API.Models
 {
     public class MobileServiceContext : DbContext
     {
@@ -20,7 +20,7 @@ namespace EShope.AzureMobileAPI.Models
         // service name, set by the 'MS_MobileServiceName' AppSettings in the local 
         // Web.config, is the same as the service name when hosted in Azure.
 
-        private const string connectionStringName = "Name=EShopeConnectionString";
+        private const string connectionStringName = "Name=MS_TableConnectionString";
 
         public MobileServiceContext() : base(connectionStringName)
         {

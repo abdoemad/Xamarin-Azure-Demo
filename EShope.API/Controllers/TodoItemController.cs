@@ -4,10 +4,10 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.OData;
 using Microsoft.Azure.Mobile.Server;
-using EShope.AzureMobileAPI.DataObjects;
-using EShope.AzureMobileAPI.Models;
+using EShope.API.DataObjects;
+using EShope.API.Models;
 
-namespace EShope.AzureMobileAPI.Controllers
+namespace EShope.API.Controllers
 {
     public class TodoItemController : TableController<TodoItem>
     {

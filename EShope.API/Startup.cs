@@ -1,9 +1,9 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(EShope.AzureMobileAPI.Startup))]
+[assembly: OwinStartup(typeof(EShope.API.Startup))]
 
-namespace EShope.AzureMobileAPI
+namespace EShope.API
 {
     public partial class Startup
     {

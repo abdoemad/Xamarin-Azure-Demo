@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
 using Microsoft.Azure.Mobile.Server.Config;
 
-namespace EShope.AzureMobileAPI.Controllers
+namespace EShope.API.Controllers
 {
     // Use the MobileAppController attribute for each ApiController you want to use  
     // from your mobile clients 

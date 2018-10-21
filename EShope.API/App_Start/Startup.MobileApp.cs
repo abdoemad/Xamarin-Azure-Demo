@@ -6,11 +6,11 @@ using System.Web.Http;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Authentication;
 using Microsoft.Azure.Mobile.Server.Config;
-using EShope.AzureMobileAPI.DataObjects;
-using EShope.AzureMobileAPI.Models;
+using EShope.API.DataObjects;
+using EShope.API.Models;
 using Owin;
 
-namespace EShope.AzureMobileAPI
+namespace EShope.API
 {
     public partial class Startup
     {
