@@ -6,11 +6,12 @@
 			 BindingContext="{Binding Login,Source={StaticResource ViewModelLocator}}"
 			 xmlns:uie="clr-namespace:EShope.UIExtensions"
 			 NavigationPage.HasNavigationBar="False"
-			 x:Class="EShope.Pages.LoginPage" BackgroundColor="LightGreen">
+			 x:Class="EShope.Pages.LoginPage" BackgroundColor="LightGreen" IsBusy="{Binding IsBusy}">
 	<!--<ContentPage.BindingContext>
 		<viewModels:LoginViewModel></viewModels:LoginViewModel>
 	</ContentPage.BindingContext>-->
 	<ContentPage.Content>
+		<Grid>
         <Grid HorizontalOptions="Center" VerticalOptions="Center">
 			<Grid.RowDefinitions>
 				<RowDefinition></RowDefinition>
@@ -32,5 +33,10 @@
 			<Label Grid.Row="2" Text="{Binding User.Errors[UserName], Converter={StaticResource FirstErrorConverter}}" FontSize="Small" TextColor="Red"></Label>
 			<Button Grid.Row="3" Command="{Binding LoginCommand}" Text="Login"></Button>
         </Grid>
-    </ContentPage.Content>
+			<ActivityIndicator  
+				IsRunning="{Binding IsBusy}"
+				IsVisible="{Binding IsBusy}"
+				VerticalOptions="Center" HorizontalOptions="Center"></ActivityIndicator>
+		</Grid>
+	</ContentPage.Content>
 </ContentPage>

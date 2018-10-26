@@ -8,7 +8,7 @@ using System.Text;
 
 namespace EShope.Models
 {
-    public class User : ValidatableBase
+    public class UserViewMode : ValidatableBase
     {
         string _userName;
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "Login_UserName_EmptyValidation", ErrorMessageResourceType = typeof(ErrorMessagesResources))]

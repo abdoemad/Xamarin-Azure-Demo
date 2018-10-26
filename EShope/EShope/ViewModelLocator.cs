@@ -1,4 +1,6 @@
-﻿using EShope.Services.UI;
+﻿using EShope.Services.Infra;
+using EShope.Services.Infra.Imp;
+using EShope.Services.UI;
 using EShope.Services.UI.Imp;
 using EShope.ViewModels;
 using GalaSoft.MvvmLight;
@@ -14,25 +16,28 @@ namespace EShope
     //  Bootstrapper
     public class ViewModelLocator
     {
-        private SimpleIoc _container;
+        static SimpleIoc _container;
 
         public ViewModelLocator()
         {
             _container = SimpleIoc.Default;
-            if (ViewModelBase.IsInDesignModeStatic)
-            {
+            //if (ViewModelBase.IsInDesignModeStatic)
+            //{
 
-            }
+            //}
+
+            //--- Infra
+            _container.Register<IAPIConsumer, APIConsumer>();
+            _container.Register<IAuthenticationService, AuthenticationService>();
+
+            //--- UI
+            _container.Register<INavigationService, NavigationService>();
+            _container.Register<IDialogService, DialogService>();
 
             // ViewModels
             _container.Register<LoginViewModel>();
-            _container.Register<INavigationService, NavigationService>();
-
-            
-
         }
-
-        public T Resolve<T>()
+        public static T Resolve<T>()
         {
             return _container.GetInstance<T>();
         }

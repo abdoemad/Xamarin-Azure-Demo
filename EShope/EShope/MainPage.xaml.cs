@@ -13,5 +13,10 @@ namespace EShope
         {
             InitializeComponent();
         }
+
+        public MainPage(Page homePage) : base(homePage)
+        {
+            
+        }
     }
 }

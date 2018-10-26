@@ -23,7 +23,7 @@ namespace EShope.Services.UI.Imp
         public Task NagigatoToHomePage()
         {
             var homePage = Activator.CreateInstance(homePageType) as Page;
-            Application.Current.MainPage = homePage;
+            Application.Current.MainPage = new MainPage(homePage);
             return Task.FromResult(true);
         }
 

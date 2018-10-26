@@ -1,4 +1,5 @@
 ﻿using EShope.Models;
+using EShope.Services.Infra;
 using EShope.Services.UI;
 using EShope.ViewModels.Base;
 using GalaSoft.MvvmLight.Command;
@@ -10,12 +11,14 @@ namespace EShope.ViewModels
     public class LoginViewModel : BaseViewModel
     {
         INavigationService _navigationService;
+        IAuthenticationService _authenticationService;
 
-
-        public LoginViewModel(INavigationService navigationService)
+        public LoginViewModel(INavigationService navigationService, IAuthenticationService authenticationService)
         {
             _navigationService = navigationService;
-            User = new User() { };
+            _authenticationService = authenticationService;
+
+            User = new UserViewMode() { };
 
             User.Errors.ErrorsChanged += Errors_ErrorsChanged;
         }
@@ -26,21 +29,24 @@ namespace EShope.ViewModels
         }
 
         #region Properties
-        User _user;
-        public User User
+        UserViewMode _user;
+        public UserViewMode User
         {
             get => _user;
             set => SetProperty(ref _user, value);
         }
         #endregion
 
-        public RelayCommand LoginCommand => new RelayCommand(() =>
+        public RelayCommand LoginCommand => new RelayCommand(async () =>
         {
             User.ValidateProperties();
             if (User.HasErrors)
                 return;
-
-            _navigationService.NagigatoToHomePage();
+            IsBusy = true;
+            var authnticationResponse = await _authenticationService.Authenticate(User.UserName, string.Empty); 
+            IsBusy = false;
+            if (authnticationResponse.IsAuthenticated)
+                await _navigationService.NagigatoToHomePage();
 
         }, () => !User.HasErrors);
     }
