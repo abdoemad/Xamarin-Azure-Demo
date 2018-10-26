@@ -34,5 +34,7 @@ namespace EShope.API.Models
                 new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
         }
+
+        public System.Data.Entity.DbSet<EShope.API.DataObjects.Product> Products { get; set; }
     }
 }
