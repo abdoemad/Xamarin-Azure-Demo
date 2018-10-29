@@ -1,12 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<base:ContentPageBase
+	xmlns:base="clr-namespace:EShope.Pages.Base" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="EShope.Pages.HomePage">
+			 xmlns:uie="clr-namespace:EShope.UIExtensions"
+			 x:Class="EShope.Pages.HomePage"
+			 BindingContext="{Binding Home,Source={StaticResource ViewModelLocator}}"
+			 IsBusy="{Binding IsBusy}">
+	<ContentPage.ToolbarItems>
+		
+	</ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+		<ListView ItemsSource="{Binding ProductList}" HasUnevenRows="True" VerticalOptions="FillAndExpand">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="2*"></ColumnDefinition>
+								<ColumnDefinition Width="8*"></ColumnDefinition>
+							</Grid.ColumnDefinitions>
+							<Image Aspect="Fill" Grid.Column="0" Source="{uie:ImageResourceExtension Source=EShope.Resources.Images.cart_image.png}"></Image>
+							<Grid Grid.Column="1">
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto"></RowDefinition>
+									<RowDefinition Height="*"></RowDefinition>
+									<RowDefinition Height="Auto"></RowDefinition>
+								</Grid.RowDefinitions>
+								<Label Grid.Row="0" Text="{Binding Name}"></Label>
+								<Label Grid.Row="1" Text="{Binding Description}"></Label>
+								<Label Grid.Row="2" Text="{Binding Price, StringFormat={}{0}}" ></Label>
+							</Grid>
+						</Grid>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
     </ContentPage.Content>
-</ContentPage>
+</base:ContentPageBase>

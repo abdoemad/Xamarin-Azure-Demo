@@ -1,10 +1,12 @@
-﻿using System;
+﻿using EShope.Services.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace EShope.Services.Data
 {
-    interface IProductService
+    public interface IProductService
     {
+        List<Product> GetProducts();
     }
 }

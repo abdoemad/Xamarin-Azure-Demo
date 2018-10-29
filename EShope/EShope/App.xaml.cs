@@ -25,7 +25,7 @@ namespace EShope
 
             InitializeApp();
 
-            MainPage = new NavigationPage(new LoginPage());
+            MainPage = new NavigationPage(new HomePage()); // new NavigationPage(new LoginPage()); //
         }
 
         private void InitializeApp()

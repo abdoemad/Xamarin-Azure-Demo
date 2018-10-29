@@ -3,10 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:viewModels="clr-namespace:EShope.ViewModels"
 			 xmlns:resources="clr-namespace:EShope.Resources"
-			 BindingContext="{Binding Login,Source={StaticResource ViewModelLocator}}"
 			 xmlns:uie="clr-namespace:EShope.UIExtensions"
 			 NavigationPage.HasNavigationBar="False"
-			 x:Class="EShope.Pages.LoginPage" BackgroundColor="LightGreen" IsBusy="{Binding IsBusy}">
+			 x:Class="EShope.Pages.LoginPage" 
+			 BackgroundColor="LightGreen" 
+			 BindingContext="{Binding Login,Source={StaticResource ViewModelLocator}}"
+			 IsBusy="{Binding IsBusy}">
 	<!--<ContentPage.BindingContext>
 		<viewModels:LoginViewModel></viewModels:LoginViewModel>
 	</ContentPage.BindingContext>-->

@@ -16,5 +16,8 @@ namespace EShope.ViewModels.Base
             get => _isBusy;
             set => SetProperty(ref _isBusy, value);
         }
+
+
+        public virtual void OnAppearing() { }
     }
 }

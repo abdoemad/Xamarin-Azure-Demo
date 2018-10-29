@@ -1,4 +1,6 @@
-﻿using EShope.Services.Infra;
+﻿using EShope.Services.Data;
+using EShope.Services.Data.Imp;
+using EShope.Services.Infra;
 using EShope.Services.Infra.Imp;
 using EShope.Services.UI;
 using EShope.Services.UI.Imp;
@@ -27,6 +29,7 @@ namespace EShope
             //}
 
             //--- Infra
+            _container.Register<IMapper, Services.Infra.Imp.AutoMapper>();
             _container.Register<IAPIConsumer, APIConsumer>();
             _container.Register<IAuthenticationService, AuthenticationService>();
 
@@ -34,8 +37,14 @@ namespace EShope
             _container.Register<INavigationService, NavigationService>();
             _container.Register<IDialogService, DialogService>();
 
-            // ViewModels
+            //--- Data Services
+            _container.Register<IProductService, ProductService>();
+
+            //-- ViewModels
             _container.Register<LoginViewModel>();
+            _container.Register<HomeViewModel>();
+
+            
         }
         public static T Resolve<T>()
         {
@@ -44,6 +53,8 @@ namespace EShope
 
         #region ViewModels
         public LoginViewModel Login => SimpleIoc.Default.GetInstance<LoginViewModel>();
+
+        public HomeViewModel Home => SimpleIoc.Default.GetInstance<HomeViewModel>();
         #endregion
     }
 }

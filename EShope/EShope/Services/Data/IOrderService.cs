@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EShope.Services.Data
 {
-    interface IOrderService
+    public interface IOrderService
     {
     }
 }

@@ -148,6 +148,9 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="AutoMapper">
+      <Version>7.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.Azure.Mobile.Client">
       <Version>4.0.2</Version>
     </PackageReference>
