@@ -1,5 +1,7 @@
 ﻿using EShope.Services.Data;
 using EShope.Services.Data.Imp;
+using EShope.Services.Device;
+using EShope.Services.Device.Imp;
 using EShope.Services.Infra;
 using EShope.Services.Infra.Imp;
 using EShope.Services.UI;
@@ -7,9 +9,13 @@ using EShope.Services.UI.Imp;
 using EShope.ViewModels;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Xamarin.Forms;
+
+//using System;
+//using System.Collections.Generic;
+//using System.Text;
+//using Xamarin.Forms;
+//using Xamarin.Forms;
 //using CommonServiceLocator;
 //using GalaSoft.MvvmLight;
 
@@ -23,10 +29,19 @@ namespace EShope
         public ViewModelLocator()
         {
             _container = SimpleIoc.Default;
-            //if (ViewModelBase.IsInDesignModeStatic)
-            //{
+            //App.LoggedInUser = new Models.UserViewMode { UserName = "Test user", IsOnlineAuthenticate = false };
+            #region Design Mode
+            if (DesignMode.IsDesignModeEnabled)
+            {
+            }
+            if (ViewModelBase.IsInDesignModeStatic)
+            {
+                
+            }
+            #endregion
 
-            //}
+            //--- Device
+            _container.Register<IConnectionService, ConnectionService>();
 
             //--- Infra
             _container.Register<IMapper, Services.Infra.Imp.AutoMapper>();
@@ -39,22 +54,32 @@ namespace EShope
 
             //--- Data Services
             _container.Register<IProductService, ProductService>();
+            _container.Register<IOrderService, OrderService>();
 
             //-- ViewModels
             _container.Register<LoginViewModel>();
-            _container.Register<HomeViewModel>();
+            _container.Register<ProductCatalogViewModel>();
+            _container.Register<ProductDetailsViewModel>();
 
-            
+            _container.Register<ShoppingCartViewModel>(true);
+            _container.Register<ShoppingBarViewModel>(true);
+
+            //MessagingCenter.Instance.
         }
+
         public static T Resolve<T>()
         {
             return _container.GetInstance<T>();
         }
 
-        #region ViewModels
-        public LoginViewModel Login => SimpleIoc.Default.GetInstance<LoginViewModel>();
+        public bool IsPreview => ViewModelBase.IsInDesignModeStatic;
 
-        public HomeViewModel Home => SimpleIoc.Default.GetInstance<HomeViewModel>();
+        #region ViewModels Resolving
+        public LoginViewModel Login => SimpleIoc.Default.GetInstance<LoginViewModel>();
+        public ProductCatalogViewModel ProductCatalog => SimpleIoc.Default.GetInstance<ProductCatalogViewModel>();
+        public ProductDetailsViewModel ProductDetails => SimpleIoc.Default.GetInstance<ProductDetailsViewModel>();
+        public ShoppingCartViewModel ShoppingCart=> SimpleIoc.Default.GetInstance<ShoppingCartViewModel>();
+        public ShoppingBarViewModel ShoppingBar => SimpleIoc.Default.GetInstance<ShoppingBarViewModel>();
         #endregion
     }
 }

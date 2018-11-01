@@ -21,7 +21,7 @@ namespace EShope.Services.Device.Imp
             ConnectivityChanged?.Invoke(this, e.IsConnected);
         }
 
-        public bool IsConnected => _connectivity.IsConnected;
+        public bool IsConnected => false;//#if d _connectivity.IsConnected;
 
         public event EventHandler<bool> ConnectivityChanged;
     }

@@ -13,11 +13,11 @@ namespace EShope.Models.Base
     {
         readonly Validator validator;
 
-        public bool IsValidationEnabled
-        {
-            get { return validator.IsValidationEnabled; }
-            set { validator.IsValidationEnabled = value; }
-        }
+        //public bool IsValidationEnabled
+        //{
+        //    get { return validator.IsValidationEnabled; }
+        //    set { validator.IsValidationEnabled = value; }
+        //}
 
         public Validator Errors
         {

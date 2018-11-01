@@ -1,4 +1,5 @@
-﻿using EShope.Pages.Base;
+﻿using EShope.Models;
+using EShope.Pages.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,16 @@ namespace EShope.Pages
 		public HomePage ()
 		{
 			InitializeComponent ();
-		}
-	}
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (DesignMode.IsDesignModeEnabled)
+            {
+                this.BindingContext = new List<Product> { new Product { Name = "Test", Description = "Desc", Price = 50 } };
+            }
+        }
+    }
 }

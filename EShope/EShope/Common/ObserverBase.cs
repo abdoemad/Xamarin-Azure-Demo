@@ -9,15 +9,15 @@ using Xamarin.Forms;
 
 namespace EShope.Common
 {
-    public class ObserverBase : BindableObject
+    public class ObserverBase : INotifyPropertyChanged
     {
         #region INPC
-        //public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        //protected virtual void OnPropertyChanged([CallerMemberName]string propertyName = null)
-        //{
-        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs((propertyName)));
-        //}
+        protected virtual void OnPropertyChanged([CallerMemberName]string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs((propertyName)));
+        }
 
         protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName]string propertyName = null)
         {

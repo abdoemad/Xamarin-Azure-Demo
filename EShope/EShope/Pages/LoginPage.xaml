@@ -4,6 +4,7 @@
 			 xmlns:viewModels="clr-namespace:EShope.ViewModels"
 			 xmlns:resources="clr-namespace:EShope.Resources"
 			 xmlns:uie="clr-namespace:EShope.UIExtensions"
+			 xmlns:converters="clr-namespace:EShope.Converters"
 			 NavigationPage.HasNavigationBar="False"
 			 x:Class="EShope.Pages.LoginPage" 
 			 BackgroundColor="LightGreen" 
@@ -12,9 +13,14 @@
 	<!--<ContentPage.BindingContext>
 		<viewModels:LoginViewModel></viewModels:LoginViewModel>
 	</ContentPage.BindingContext>-->
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<converters:FirstErrorConverter x:Key="firstErrorConverter" />
+		</ResourceDictionary>
+	</ContentPage.Resources>
 	<ContentPage.Content>
 		<Grid>
-        <Grid HorizontalOptions="Center" VerticalOptions="Center">
+        <Grid HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsBusy, Converter={StaticResource inverseBoolConverter}}">
 			<Grid.RowDefinitions>
 				<RowDefinition></RowDefinition>
 				<RowDefinition></RowDefinition>
@@ -30,15 +36,19 @@
 				<!--Source="{uie:ImageResource Source=EShope.Resources.Images.cart_image.png}"-->
 				<Label Grid.Column="1" Text="{x:Static resources:AppResources.AppTitle}" VerticalTextAlignment="Center"></Label>
 			</Grid>
-			
-			<Entry Grid.Row="1" Text="{Binding User.UserName}" Placeholder="Enter username.." uie:Validation.Errors="{Binding User.Errors[UserName]}"></Entry>
-			<Label Grid.Row="2" Text="{Binding User.Errors[UserName], Converter={StaticResource FirstErrorConverter}}" FontSize="Small" TextColor="Red"></Label>
-			<Button Grid.Row="3" Command="{Binding LoginCommand}" Text="Login"></Button>
+				<!--<BoxView Color="Gray" WidthRequest="30" HeightRequest="30"></BoxView>-->
+				<Entry Grid.Row="1" Text="{Binding User.UserName}" Placeholder="Enter username.." uie:Validation.Errors="{Binding User.Errors[UserName]}"></Entry>
+				
+				<Label Grid.Row="2" Text="{Binding User.Errors[UserName], Converter={StaticResource firstErrorConverter}}" FontSize="Small" TextColor="Red"></Label>
+				<Button Grid.Row="3" Command="{Binding LoginCommand}" Text="Login" IsEnabled="{Binding IsUserEntityValid}"></Button>
         </Grid>
-			<ActivityIndicator  
-				IsRunning="{Binding IsBusy}"
-				IsVisible="{Binding IsBusy}"
-				VerticalOptions="Center" HorizontalOptions="Center"></ActivityIndicator>
+			<StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsBusy}">
+		<ActivityIndicator  
+			IsRunning="{Binding IsBusy}"
+			IsVisible="{Binding IsBusy}"
+			VerticalOptions="Center" HorizontalOptions="Center"></ActivityIndicator>
+				<Label Text="{x:Static resources:AppResources.Login_SigningOnline}"></Label>
+			</StackLayout>
 		</Grid>
 	</ContentPage.Content>
 </ContentPage>

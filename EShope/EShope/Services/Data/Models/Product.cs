@@ -10,7 +10,6 @@ namespace EShope.Services.Data.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string ThumbnailURL { get; set; }
-
         public decimal Price { get; set; } 
     }
 }

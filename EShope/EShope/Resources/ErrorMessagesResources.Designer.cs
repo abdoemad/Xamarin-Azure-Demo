@@ -61,6 +61,15 @@ namespace EShope.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cann&apos;t authnticate throght server. The logging-in will be offline..
+        /// </summary>
+        public static string Login_ServerAuthenticationFailed {
+            get {
+                return ResourceManager.GetString("Login_ServerAuthenticationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User name field is required..
         /// </summary>
         public static string Login_UserName_EmptyValidation {

@@ -3,37 +3,52 @@
 	xmlns:base="clr-namespace:EShope.Pages.Base" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:uie="clr-namespace:EShope.UIExtensions"
-			 x:Class="EShope.Pages.HomePage"
-			 BindingContext="{Binding Home,Source={StaticResource ViewModelLocator}}"
-			 IsBusy="{Binding IsBusy}">
-	<ContentPage.ToolbarItems>
-		
-	</ContentPage.ToolbarItems>
-    <ContentPage.Content>
-		<ListView ItemsSource="{Binding ProductList}" HasUnevenRows="True" VerticalOptions="FillAndExpand">
-			<ListView.ItemTemplate>
-				<DataTemplate>
-					<ViewCell>
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="2*"></ColumnDefinition>
-								<ColumnDefinition Width="8*"></ColumnDefinition>
-							</Grid.ColumnDefinitions>
-							<Image Aspect="Fill" Grid.Column="0" Source="{uie:ImageResourceExtension Source=EShope.Resources.Images.cart_image.png}"></Image>
-							<Grid Grid.Column="1">
-								<Grid.RowDefinitions>
-									<RowDefinition Height="Auto"></RowDefinition>
-									<RowDefinition Height="*"></RowDefinition>
-									<RowDefinition Height="Auto"></RowDefinition>
-								</Grid.RowDefinitions>
-								<Label Grid.Row="0" Text="{Binding Name}"></Label>
-								<Label Grid.Row="1" Text="{Binding Description}"></Label>
-								<Label Grid.Row="2" Text="{Binding Price, StringFormat={}{0}}" ></Label>
+	xmlns:views="clr-namespace:EShope.Views"
+	x:Class="EShope.Pages.HomePage"
+			 BindingContext="{Binding ProductCatalog, Source={StaticResource ViewModelLocator}}"
+			 IsBusy="{Binding IsBusy}" NavigationPage.HasNavigationBar="False">
+	<!--BindingContext="{Binding Home,Source={StaticResource ViewModelLocator}}"-->
+	<!--<ContentPage.ToolbarItems>
+		<ToolbarItem Text="asd"></ToolbarItem>
+	</ContentPage.ToolbarItems>-->
+	<!--<ContentPage.Triggers>
+		<DataTrigger TargetType="ContentPage" Binding="{Binding Path=IsPreview, Source={x:Static ViewModelLocator}}" Value="True" >
+			<Setter Property="BindingContext" Value="{Binding Source={x:Reference Self}}" />
+		</DataTrigger>
+	</ContentPage.Triggers>-->
+	<ContentPage.Content>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			<views:ShoppingBarView></views:ShoppingBarView>
+			<ListView Grid.Row="1" ItemsSource="{Binding ProductList}" HasUnevenRows="True" VerticalOptions="FillAndExpand" RowHeight="50">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="3*"></ColumnDefinition>
+									<ColumnDefinition Width="7*"></ColumnDefinition>
+								</Grid.ColumnDefinitions>
+								<Image Aspect="AspectFit" VerticalOptions="CenterAndExpand" Grid.Column="0" Source="{uie:ImageResourceExtension Source=EShope.Resources.Images.cart_image.png}" Margin="3"></Image>
+								<Grid Grid.Column="1">
+									<Grid.RowDefinitions>
+										<RowDefinition></RowDefinition>
+										<RowDefinition></RowDefinition>
+										<RowDefinition></RowDefinition>
+									</Grid.RowDefinitions>
+									<Label Grid.Row="0" Text="{Binding Name}" FontSize="Small" VerticalTextAlignment="End"></Label>
+									<Label Grid.Row="1" Text="{Binding ShortDescription}" FontSize="Micro" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand"></Label>
+									<Label Grid.Row="2" Text="{Binding Price, StringFormat='{}{0:C0}.00'}" FontSize="Small" VerticalTextAlignment="Start"></Label>
+								</Grid>
 							</Grid>
-						</Grid>
-					</ViewCell>
-				</DataTemplate>
-			</ListView.ItemTemplate>
-		</ListView>
+						</ViewCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+
+		</Grid>
     </ContentPage.Content>
 </base:ContentPageBase>

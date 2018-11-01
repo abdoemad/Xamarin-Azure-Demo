@@ -2,11 +2,15 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:local="clr-namespace:EShope"
-			 xmlns:uie="clr-namespace:EShope.UIExtensions.Converters"
+			 xmlns:viewModels="clr-namespace:EShope.ViewModels"
+			 xmlns:x1="clr-namespace:System;assembly=netstandard"
+			 xmlns:converters="clr-namespace:EShope.Converters"
 			 x:Class="EShope.App">
     <Application.Resources>
-		<uie:FirstErrorConverter x:Key="FirstErrorConverter" />
+		<ResourceDictionary>
+			<converters:InverseBoolConverter x:Key="inverseBoolConverter"></converters:InverseBoolConverter>
+			<local:ViewModelLocator x:Key="ViewModelLocator"/>
+		</ResourceDictionary>		
 		
-		<local:ViewModelLocator x:Key="ViewModelLocator"/>
 	</Application.Resources>
 </Application>

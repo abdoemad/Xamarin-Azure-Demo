@@ -8,12 +8,12 @@ using System.Collections.ObjectModel;
 
 namespace EShope.ViewModels
 {
-    public class HomeViewModel : BaseViewModel
+    public class ProductCatalogViewModel : BaseViewModel
     {
         private readonly IProductService _productService;
         private readonly Services.Infra.IMapper _mapper;
-        private ObservableCollection<ProductViewModel> _productList;
-        public ObservableCollection<ProductViewModel> ProductList
+        private ObservableCollection<Models.Product> _productList;
+        public ObservableCollection<Models.Product> ProductList
         {
             get => _productList;
             set
@@ -22,12 +22,12 @@ namespace EShope.ViewModels
                 RaisePropertyChanged(() => ProductList);
             }
         }
-        public HomeViewModel(IProductService productService, Services.Infra.IMapper mapper)
+        public ProductCatalogViewModel(IProductService productService, Services.Infra.IMapper mapper)
         {
             _productService = productService;
             _mapper = mapper;
 
-            var mapConfig = new Dictionary<Type, Type> { { typeof(Product), typeof(ProductViewModel) } };
+            var mapConfig = new Dictionary<Type, Type> { { typeof(Services.Data.Models.Product), typeof(Models.Product) } };
             mapper.Initialize(mapConfig);
 
             
@@ -38,8 +38,8 @@ namespace EShope.ViewModels
             base.OnAppearing();
             IsBusy = true;
             var products = _productService.GetProducts();
-            var productsViewModel = _mapper.Map<List<Product>, List<ProductViewModel>>(products);
-            ProductList = new ObservableCollection<ProductViewModel>(productsViewModel);
+            var productsViewModel = _mapper.Map<List<Services.Data.Models.Product>, List<Models.Product>>(products);
+            ProductList = new ObservableCollection<Models.Product>(productsViewModel);
             IsBusy = false;
         }
     }

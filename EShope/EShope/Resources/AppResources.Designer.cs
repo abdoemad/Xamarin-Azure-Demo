@@ -68,5 +68,14 @@ namespace EShope.Resources {
                 return ResourceManager.GetString("AppTitle", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Signing online ....
+        /// </summary>
+        public static string Login_SigningOnline {
+            get {
+                return ResourceManager.GetString("Login_SigningOnline", resourceCulture);
+            }
+        }
     }
 }

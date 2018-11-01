@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using Xamarin.Forms;
 
-namespace EShope.UIExtensions.Converters
+namespace EShope.Converters
 {
     public class FirstErrorConverter : IValueConverter
     {

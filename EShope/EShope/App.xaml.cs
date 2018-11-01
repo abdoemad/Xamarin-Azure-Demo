@@ -1,8 +1,10 @@
-﻿using EShope.Pages;
+﻿using EShope.Models;
+using EShope.Pages;
 using EShope.ViewModels;
 using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -18,19 +20,20 @@ namespace EShope
 
         private static ViewModelLocator _locator;
         public static ViewModelLocator Locator => _locator ?? (_locator = new ViewModelLocator());
-            
+
+        public static UserViewMode LoggedInUser { get; set; }
         public App()
         {
             InitializeComponent();
 
             InitializeApp();
 
-            MainPage = new NavigationPage(new HomePage()); // new NavigationPage(new LoginPage()); //
+            MainPage = new LoginPage(); // new MainPage(new HomePage()); //
         }
 
         private void InitializeApp()
         {
-            
+            //DependencyResolver.ResolveUsing(type=>_locator.
         }
 
         protected override void OnStart()

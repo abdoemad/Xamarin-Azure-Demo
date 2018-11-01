@@ -120,4 +120,7 @@
   <data name="AppTitle" xml:space="preserve">
     <value>eShop.com</value>
   </data>
+  <data name="Login_SigningOnline" xml:space="preserve">
+    <value>Signing online ...</value>
+  </data>
 </root>

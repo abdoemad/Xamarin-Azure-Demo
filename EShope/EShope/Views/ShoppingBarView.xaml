@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EShope.Views.ShoppingBarView"
+			 xmlns:uie="clr-namespace:EShope.UIExtensions"
+			 BindingContext="{Binding ShoppingBar, Source={StaticResource ViewModelLocator}}"
+			 BackgroundColor="LightGreen">
+  <ContentView.Content>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="7*"></ColumnDefinition>
+				<ColumnDefinition Width="3*"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Label Grid.Column="0" Margin="10,0,0,0" Text="{Binding UserName}" VerticalOptions="Center"></Label>
+			<!--<Frame Grid.Column="1" HeightRequest="25" WidthRequest="20">-->
+			<Grid Grid.Column="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition></ColumnDefinition>
+					<ColumnDefinition></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<!--<Frame Grid.Column="0" CornerRadius="100" WidthRequest="2" HeightRequest="2" >
+					<Label Text="{Binding CartItemsQuantities}" TextColor="Red" FontSize="Large"></Label>
+				</Frame>
+				<Image Margin="-2,0,0,0" Grid.Column="1" Source="{uie:ImageResource Source=EShope.Resources.Images.cart_image.png}" WidthRequest="20" HeightRequest="20"></Image>-->
+			</Grid>
+			<!--</Frame>-->
+		</Grid>
+  </ContentView.Content>
+</ContentView>

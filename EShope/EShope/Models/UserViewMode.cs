@@ -18,5 +18,6 @@ namespace EShope.Models
             get => _userName;
             set => SetProperty(ref _userName, value);
         }
+        public bool IsOnlineAuthenticate { get; set; }
     }
 }
