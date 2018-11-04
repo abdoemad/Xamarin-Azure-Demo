@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace EShope.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class LoginViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
         private readonly IDialogService _dialogService;

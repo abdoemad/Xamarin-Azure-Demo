@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EShope.Pages.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ using Xamarin.Forms.Xaml;
 namespace EShope.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ProductDetailsPage : ContentPage
+	public partial class ProductDetailsPage : PageBase
 	{
 		public ProductDetailsPage ()
 		{

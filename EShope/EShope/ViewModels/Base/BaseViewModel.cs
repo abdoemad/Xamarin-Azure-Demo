@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace EShope.ViewModels.Base
 {
-    public class BaseViewModel : ObserverBase
+    public class ViewModelBase : ObserverBase
     {
         private bool _isBusy;
 
@@ -18,6 +19,9 @@ namespace EShope.ViewModels.Base
         }
 
 
-        public virtual void OnAppearing() { }
+        public virtual Task Initialize()
+        {
+            return Task.FromResult(false);
+        }
     }
 }

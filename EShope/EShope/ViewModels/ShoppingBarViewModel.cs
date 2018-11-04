@@ -1,18 +1,22 @@
 ﻿using EShope.Services.Device;
+using EShope.Services.UI;
 using EShope.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace EShope.ViewModels
 {
-    public class ShoppingBarViewModel : BaseViewModel, IDisposable
+    public class ShoppingBarViewModel : ViewModelBase, IDisposable
     {
-        
+        private readonly INavigationService _navigationService;
         private readonly IConnectionService _connectionService;
         private ShoppingCartViewModel _shoppingCartViewModel;
-        public ShoppingBarViewModel(IConnectionService connectionService, ShoppingCartViewModel shoppingCartViewModel)
+        public ShoppingBarViewModel(INavigationService navigationService, IConnectionService connectionService, ShoppingCartViewModel shoppingCartViewModel)
         {
+            _navigationService = navigationService;
             _shoppingCartViewModel = shoppingCartViewModel;
             _shoppingCartViewModel.CartListChanged += _shoppingCartViewModel_CartListChanged;
 
@@ -27,6 +31,7 @@ namespace EShope.ViewModels
 
         private void ConnectivityChanged(object sender, bool e)
         {
+            
             RaisePropertyChanged(() => IsOnline);
         }
 
@@ -40,5 +45,12 @@ namespace EShope.ViewModels
         public int CartItemsQuantities => _shoppingCartViewModel.TotalQuantities;
 
         public bool IsOnline => _connectionService.IsConnected;
+
+        #region Commands
+        public ICommand NavigateToShoppingCartCommand => new Command(async () =>
+        {
+            await _navigationService.NavigateTo<ShoppingCartViewModel>();
+        });
+        #endregion
     }
 }

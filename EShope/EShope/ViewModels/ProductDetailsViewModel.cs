@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EShope.ViewModels
 {
-    public class ProductDetailsViewModel : BaseViewModel
+    public class ProductDetailsViewModel : ViewModelBase
     {
         public ProductDetailsViewModel()
         {

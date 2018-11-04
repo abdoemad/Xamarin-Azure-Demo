@@ -17,5 +17,6 @@ namespace EShope.Services.UI.Imp
         {
             return App.AppMainPage.DisplayAlert(message, title, acceptbtnLabel, cancelbtnLabel);
         }
+
     }
 }

@@ -10,5 +10,7 @@ namespace EShope.Services.UI
         Task ShowDialog(string message, string title, string buttonLabel);
 
         Task ShowDialog(string message, string title, string acceptbtnLabel, string cancelbtnLabel);
+
+        
     }
 }

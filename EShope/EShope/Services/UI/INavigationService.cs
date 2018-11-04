@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EShope.Pages.Base;
+using EShope.ViewModels.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +11,7 @@ namespace EShope.Services.UI
     {
         Task Initialize();
 
-        Task NavigateTo(Type viewModelType);
+        Task NavigateTo<TViewModel>() where TViewModel : ViewModelBase;
 
         Task NagigatoToHomePage();
     }

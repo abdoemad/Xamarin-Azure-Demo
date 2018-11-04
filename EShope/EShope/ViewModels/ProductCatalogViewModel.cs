@@ -5,10 +5,11 @@ using EShope.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace EShope.ViewModels
 {
-    public class ProductCatalogViewModel : BaseViewModel
+    public class ProductCatalogViewModel : ViewModelBase
     {
         private readonly IProductService _productService;
         private readonly Services.Infra.IMapper _mapper;
@@ -32,12 +33,10 @@ namespace EShope.ViewModels
 
             
         }
-
-        public override void OnAppearing()
+        public override async Task Initialize()
         {
-            base.OnAppearing();
             IsBusy = true;
-            var products = _productService.GetProducts();
+            var products = await _productService.GetProducts();
             var productsViewModel = _mapper.Map<List<Services.Data.Models.Product>, List<Models.Product>>(products);
             ProductList = new ObservableCollection<Models.Product>(productsViewModel);
             IsBusy = false;

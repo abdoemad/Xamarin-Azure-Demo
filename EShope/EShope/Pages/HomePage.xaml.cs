@@ -12,7 +12,7 @@ using Xamarin.Forms.Xaml;
 namespace EShope.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class HomePage : ContentPageBase
+	public partial class HomePage : PageBase
 	{
 		public HomePage ()
 		{

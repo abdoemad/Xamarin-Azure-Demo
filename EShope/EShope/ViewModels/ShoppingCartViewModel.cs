@@ -10,7 +10,7 @@ using System.Text;
 
 namespace EShope.ViewModels
 {
-    public class ShoppingCartViewModel : BaseViewModel
+    public class ShoppingCartViewModel : ViewModelBase
     {
         #region Private Variables
 

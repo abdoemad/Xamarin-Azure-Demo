@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EShope.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +17,13 @@ namespace EShope.Views
 		{
 			InitializeComponent ();
 		}
-	}
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            var viewModel = this.BindingContext as ShoppingBarViewModel;
+
+            viewModel.NavigateToShoppingCartCommand.Execute(null);
+            
+        }
+    }
 }

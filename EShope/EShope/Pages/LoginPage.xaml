@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<base:PageBase
+	xmlns:base="clr-namespace:EShope.Pages.Base" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:viewModels="clr-namespace:EShope.ViewModels"
 			 xmlns:resources="clr-namespace:EShope.Resources"
@@ -51,4 +52,4 @@
 			</StackLayout>
 		</Grid>
 	</ContentPage.Content>
-</ContentPage>
+</base:PageBase>
