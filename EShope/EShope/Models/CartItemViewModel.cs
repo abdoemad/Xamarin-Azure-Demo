@@ -15,7 +15,6 @@ namespace EShope.Models
             _quantity = quantity;
         }
         public Product Product { get; set; }
-
         
         public int Quantity
         {
