@@ -1,4 +1,5 @@
-﻿using EShope.Services.Device;
+﻿using EShope.Common;
+using EShope.Services.Device;
 using EShope.Services.UI;
 using EShope.ViewModels.Base;
 using System;
@@ -47,7 +48,7 @@ namespace EShope.ViewModels
         public bool IsOnline => _connectionService.IsConnected;
 
         #region Commands
-        public ICommand NavigateToShoppingCartCommand => new Command(async () =>
+        public IAsyncCommand NavigateToShoppingCartCommand => new AsyncCommand(async () =>
         {
             await _navigationService.NavigateTo<ShoppingCartViewModel>();
         });

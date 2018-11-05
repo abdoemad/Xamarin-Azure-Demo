@@ -18,11 +18,11 @@ namespace EShope.Views
 			InitializeComponent ();
 		}
 
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             var viewModel = this.BindingContext as ShoppingBarViewModel;
 
-            viewModel.NavigateToShoppingCartCommand.Execute(null);
+            await viewModel.NavigateToShoppingCartCommand.ExecuteAsync();
             
         }
     }
