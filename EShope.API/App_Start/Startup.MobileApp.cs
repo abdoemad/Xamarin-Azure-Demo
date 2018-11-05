@@ -9,6 +9,9 @@ using Microsoft.Azure.Mobile.Server.Config;
 using EShope.API.DataObjects;
 using EShope.API.Models;
 using Owin;
+using System.Linq;
+using Microsoft.Azure.Mobile.Server.Tables.Config;
+using System.Data.Entity.Migrations;
 
 namespace EShope.API
 {
@@ -20,10 +23,25 @@ namespace EShope.API
 
             new MobileAppConfiguration()
                 .UseDefaultConfiguration()
+                //.AddMobileAppHomeController()             // from the Home package
+                //.MapApiControllers()
+                //.AddTables(                               // from the Tables package
+                //    new MobileAppTableConfiguration()
+                //        .MapTableControllers()
+                //        .AddEntityFramework()             // from the Entity package
+                //    )
+                ////.AddPushNotifications()                   // from the Notifications package
+                //.MapLegacyCrossDomainController()         // from the CrossDomain package
+
+                //.AddTablesWithEntityFramework()
+
                 .ApplyTo(config);
 
             // Use Entity Framework Code First to create database tables based on your DbContext
-            Database.SetInitializer(new MobileServiceInitializer());
+            //Database.SetInitializer(new MobileServiceInitializer());
+
+            var migrator = new DbMigrator(new Migrations.Configuration());
+            migrator.Update();
 
             MobileAppSettingsDictionary settings = config.GetMobileAppSettingsProvider().GetMobileAppSettings();
 
@@ -44,22 +62,11 @@ namespace EShope.API
         }
     }
 
-    public class MobileServiceInitializer : CreateDatabaseIfNotExists<MobileServiceContext>
+    public class MobileServiceInitializer : CreateDatabaseIfNotExists<EShopeMobileServiceContext>
     {
-        protected override void Seed(MobileServiceContext context)
+        protected override void Seed(EShopeMobileServiceContext context)
         {
-            //List<TodoItem> todoItems = new List<TodoItem>
-            //{
-            //    new TodoItem { Id = Guid.NewGuid().ToString(), Text = "First item", Complete = false },
-            //    new TodoItem { Id = Guid.NewGuid().ToString(), Text = "Second item", Complete = false }
-            //};
-
-            //foreach (TodoItem todoItem in todoItems)
-            //{
-            //    context.Set<TodoItem>().Add(todoItem);
-            //}
-
-            base.Seed(context);
+            
         }
     }
 }

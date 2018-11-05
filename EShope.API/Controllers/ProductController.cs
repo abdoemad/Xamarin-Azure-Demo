@@ -14,7 +14,7 @@ namespace EShope.API.Controllers
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             base.Initialize(controllerContext);
-            MobileServiceContext context = new MobileServiceContext();
+            EShopeMobileServiceContext context = new EShopeMobileServiceContext();
             DomainManager = new EntityDomainManager<Product>(context, Request);
         }
 

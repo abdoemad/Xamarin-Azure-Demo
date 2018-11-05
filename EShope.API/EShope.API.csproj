@@ -165,14 +165,24 @@
     <Compile Include="Controllers\TodoItemController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DataObjects\Order.cs" />
-    <Compile Include="DataObjects\OrderProduct.cs" />
+    <Compile Include="DataObjects\OrderItem.cs" />
     <Compile Include="DataObjects\Product.cs" />
     <Compile Include="DataObjects\TodoItem.cs" />
+    <Compile Include="DataObjects\User.cs" />
+    <Compile Include="Migrations\201811041447161_InitialMigration.cs" />
+    <Compile Include="Migrations\201811041447161_InitialMigration.Designer.cs">
+      <DependentUpon>201811041447161_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\EShopeSeedData.cs" />
     <Compile Include="Models\MobileServiceContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\default_product.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -189,6 +199,11 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\eshopemobile - Web Deploy.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201811041447161_InitialMigration.resx">
+      <DependentUpon>201811041447161_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
