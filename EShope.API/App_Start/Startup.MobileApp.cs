@@ -20,7 +20,24 @@ namespace EShope.API
         public static void ConfigureMobileApp(IAppBuilder app)
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.EnableSystemDiagnosticsTracing();
+            //config.EnableSystemDiagnosticsTracing();
+
+            //config.MapHttpAttributeRoutes();
+
+            //config.Routes.MapHttpRoute(
+            //    name: "DefaultApi",
+            //    routeTemplate: "api/{controller}/{id}",
+            //    defaults: new { id = RouteParameter.Optional });
+
+            //config.Routes.MapHttpRoute(
+            //name: "ActionApi",
+            //routeTemplate: "api/{controller}/{action}/{id}",
+            //defaults: new { id = RouteParameter.Optional });
+
+            //config.Services
+            //app.Use
+            // Swagger
+            //SwaggerConfig.Register(config);
 
             var mobileAppConfiguration = new MobileAppConfiguration();
 
@@ -36,7 +53,7 @@ namespace EShope.API
                 //.MapLegacyCrossDomainController()         // from the CrossDomain package
 
             //.AddTablesWithEntityFramework()
-            mobileAppConfiguration.MapApiControllers();
+            //mobileAppConfiguration.MapApiControllers();
             mobileAppConfiguration.ApplyTo(config);
 
             // Use Entity Framework Code First to create database tables based on your DbContext
