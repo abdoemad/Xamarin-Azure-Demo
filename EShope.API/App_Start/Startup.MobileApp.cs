@@ -20,9 +20,11 @@ namespace EShope.API
         public static void ConfigureMobileApp(IAppBuilder app)
         {
             HttpConfiguration config = new HttpConfiguration();
+            config.EnableSystemDiagnosticsTracing();
 
-            new MobileAppConfiguration()
-                .UseDefaultConfiguration()
+            var mobileAppConfiguration = new MobileAppConfiguration();
+
+            mobileAppConfiguration.UseDefaultConfiguration();
                 //.AddMobileAppHomeController()             // from the Home package
                 //.MapApiControllers()
                 //.AddTables(                               // from the Tables package
@@ -33,9 +35,9 @@ namespace EShope.API
                 ////.AddPushNotifications()                   // from the Notifications package
                 //.MapLegacyCrossDomainController()         // from the CrossDomain package
 
-                //.AddTablesWithEntityFramework()
-
-                .ApplyTo(config);
+            //.AddTablesWithEntityFramework()
+            mobileAppConfiguration.MapApiControllers();
+            mobileAppConfiguration.ApplyTo(config);
 
             // Use Entity Framework Code First to create database tables based on your DbContext
             //Database.SetInitializer(new MobileServiceInitializer());

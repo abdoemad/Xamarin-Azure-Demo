@@ -11,9 +11,11 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using EShope.API.DataObjects;
 using EShope.API.Models;
+using Microsoft.Azure.Mobile.Server.Config;
 
 namespace EShope.API.Controllers
 {
+    [MobileAppController]
     public class UsersController : ApiController
     {
         private EShopeMobileServiceContext db = new EShopeMobileServiceContext();
