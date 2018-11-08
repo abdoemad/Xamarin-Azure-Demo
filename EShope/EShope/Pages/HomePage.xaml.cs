@@ -25,7 +25,7 @@ namespace EShope.Pages
 
             if (DesignMode.IsDesignModeEnabled)
             {
-                this.BindingContext = new List<Product> { new Product { Name = "Test", Description = "Desc", Price = 50 } };
+                this.BindingContext = new List<ProductViewModel> { new ProductViewModel { Name = "Test", Description = "Desc", Price = 50 } };
             }
         }
     }

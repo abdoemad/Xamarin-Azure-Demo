@@ -16,16 +16,18 @@ namespace EShope.Services.UI.Imp
 
         protected Type _homePageType;
         protected Type _loginPageType;
-        //protected NavigationPage _rootPage;
+        protected Type _navigationRootPage;
         public NavigationService()
         {
             CreatePageViewModelMappings();
-            //_rootPage
         }
 
         private void CreatePageViewModelMappings()
         {
             _homePageType = typeof(HomePage);
+            _loginPageType = typeof(LoginPage);
+            _navigationRootPage = typeof(MainPage);
+
             _mappings = new Dictionary<Type, Type>
             {
                 { typeof(ProductCatalogViewModel), typeof(HomePage) },
@@ -45,19 +47,19 @@ namespace EShope.Services.UI.Imp
             PageBase homePage = Activator.CreateInstance(_homePageType) as PageBase;
             Application.Current.MainPage = new MainPage(homePage);
             var viewModel = homePage.BindingContext as ViewModelBase;
-            await viewModel.Initialize();
+            await viewModel.OnAppearing();
         }
 
         public async Task NavigateTo<TViewModel>() where TViewModel : ViewModelBase
         {
             var pageType = _mappings[typeof(TViewModel)];
             var page = Activator.CreateInstance(pageType) as PageBase;
-            NavigationPage navigationPage = App.AppMainPage as NavigationPage;
+            NavigationPage navigationPage = App.AppMainPage as MainPage;
             if (navigationPage == null)
                 await Task.FromResult(false);
             await navigationPage.PushAsync(page);
             var viewModel = page.BindingContext as ViewModelBase;
-            await viewModel.Initialize();
+            await viewModel.OnAppearing();
         }
     }
 }

@@ -8,13 +8,13 @@ namespace EShope.Models
     public class CartItemViewModel : ObserverBase
     {
         private int _quantity;
-        private Product _product;
-        public CartItemViewModel(Product product, int quantity = 1)
+        private ProductViewModel _product;
+        public CartItemViewModel(ProductViewModel product, int quantity = 1)
         {
             _product = product;
             _quantity = quantity;
         }
-        public Product Product { get; set; }
+        public ProductViewModel Product { get; set; }
         
         public int Quantity
         {

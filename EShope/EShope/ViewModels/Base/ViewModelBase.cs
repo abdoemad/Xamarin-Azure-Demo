@@ -18,8 +18,7 @@ namespace EShope.ViewModels.Base
             set => SetProperty(ref _isBusy, value);
         }
 
-
-        public virtual Task Initialize()
+        public virtual Task OnAppearing()
         {
             return Task.FromResult(false);
         }

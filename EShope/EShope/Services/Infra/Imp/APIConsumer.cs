@@ -10,7 +10,7 @@ namespace EShope.Services.Infra.Imp
 {
     public class APIConsumer : IAPIConsumer
     {
-        string _defaultEndPoint = "http://eshopemobile.azurewebsites.net/api";
+        string _defaultEndPoint = "http://eshopemobile.azurewebsites.net";
         public APIConsumer()
         {
         }

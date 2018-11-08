@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace EShope.ViewModels
 {
@@ -13,8 +14,9 @@ namespace EShope.ViewModels
     {
         private readonly IProductService _productService;
         private readonly Services.Infra.IMapper _mapper;
-        private ObservableCollection<Models.Product> _productList;
-        public ObservableCollection<Models.Product> ProductList
+        private ObservableCollection<ProductViewModel> _productList;
+
+        public ObservableCollection<ProductViewModel> ProductList
         {
             get => _productList;
             set
@@ -28,17 +30,20 @@ namespace EShope.ViewModels
             _productService = productService;
             _mapper = mapper;
 
-            var mapConfig = new Dictionary<Type, Type> { { typeof(Services.Data.Models.Product), typeof(Models.Product) } };
+            var mapConfig = new Dictionary<Type, Type> {
+                { typeof(Product), typeof(ProductViewModel) }
+            };
             mapper.Initialize(mapConfig);
 
-            
+
         }
-        public override async Task Initialize()
+        public override async Task OnAppearing()
         {
             IsBusy = true;
-            var products = await _productService.GetProducts();
-            var productsViewModel = _mapper.Map<List<Services.Data.Models.Product>, List<Models.Product>>(products);
-            ProductList = new ObservableCollection<Models.Product>(productsViewModel);
+            var products = await _productService.GetProductsAsync(true);
+            var productsViewModels = _mapper.Map<IEnumerable<Product>, ObservableCollection<ProductViewModel>>(products.OrderBy(p => p.Price));
+
+            ProductList = productsViewModels;
             IsBusy = false;
         }
     }

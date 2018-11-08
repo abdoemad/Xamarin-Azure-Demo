@@ -36,10 +36,14 @@ namespace EShope
             }
             if (ViewModelBase.IsInDesignModeStatic)
             {
-                
+
             }
             #endregion
-
+            RegisterDependancies();
+            //MessagingCenter.Instance.
+        }
+        private void RegisterDependancies()
+        {
             //--- Device
             _container.Register<IConnectionService, ConnectionService>();
 
@@ -63,8 +67,6 @@ namespace EShope
 
             _container.Register<ShoppingCartViewModel>(true);
             _container.Register<ShoppingBarViewModel>(true);
-
-            //MessagingCenter.Instance.
         }
 
         public static T Resolve<T>()
@@ -78,7 +80,7 @@ namespace EShope
         public LoginViewModel Login => SimpleIoc.Default.GetInstance<LoginViewModel>();
         public ProductCatalogViewModel ProductCatalog => SimpleIoc.Default.GetInstance<ProductCatalogViewModel>();
         public ProductDetailsViewModel ProductDetails => SimpleIoc.Default.GetInstance<ProductDetailsViewModel>();
-        public ShoppingCartViewModel ShoppingCart=> SimpleIoc.Default.GetInstance<ShoppingCartViewModel>();
+        public ShoppingCartViewModel ShoppingCart => SimpleIoc.Default.GetInstance<ShoppingCartViewModel>();
         public ShoppingBarViewModel ShoppingBar => SimpleIoc.Default.GetInstance<ShoppingBarViewModel>();
         #endregion
     }

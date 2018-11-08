@@ -9,14 +9,12 @@ namespace EShope.Services.Infra.Imp
     {
         public void Initialize(Dictionary<Type,Type> mapConfiguration)
         {
-            
             Mapper.Initialize(cfg => {
                 //cfg.AddCollectionMappers();
                 mapConfiguration.ToList().ForEach(mapConfig =>
                 {
                     cfg.CreateMap(mapConfig.Key, mapConfig.Value);
                 });
-                
             });
         }
 

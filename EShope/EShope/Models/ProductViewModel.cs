@@ -6,9 +6,9 @@ using System.Text;
 
 namespace EShope.Models
 {
-    public class Product
+    public class ProductViewModel : ObserverBase
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string ThumnailURL { get; set; }
@@ -18,6 +18,5 @@ namespace EShope.Models
         public decimal Price { get; set; }
         public int AvailableQuantity { get; set; }
         public string ShortDescription => Description.TruncateLongString(70);
-        
     }
 }

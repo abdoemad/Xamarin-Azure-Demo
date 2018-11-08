@@ -41,7 +41,7 @@ namespace EShope.ViewModels
             RaisePropertyChanged(() => CartList);
         }
 
-        public void AddProductToCartList(Product product, int quantities)
+        public void AddProductToCartList(ProductViewModel product, int quantities)
         {
             CartItemViewModel cartItem = _cartList.FirstOrDefault(c => c.Product.Id == product.Id);
             if (cartItem == null)
@@ -56,7 +56,7 @@ namespace EShope.ViewModels
             CartListChanged(this, null);
         }
 
-        public void DecrementCartItemQuantity(Product product)
+        public void DecrementCartItemQuantity(ProductViewModel product)
         {
             CartItemViewModel cartItem = _cartList.FirstOrDefault(c => c.Product.Id == product.Id);
             if (cartItem == null)
@@ -66,7 +66,7 @@ namespace EShope.ViewModels
             cartItem.DecrementQuantity();
 
             CartListChanged(this, null);
-        } 
+        }
         #endregion
 
         #region Private Methods

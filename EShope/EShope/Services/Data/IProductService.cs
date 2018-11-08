@@ -8,6 +8,6 @@ namespace EShope.Services.Data
 {
     public interface IProductService
     {
-        Task<List<Product>> GetProducts();
+        Task<List<Product>> GetProductsAsync(bool syncItems = false);
     }
 }
