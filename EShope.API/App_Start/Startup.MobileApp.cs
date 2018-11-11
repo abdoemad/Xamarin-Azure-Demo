@@ -20,6 +20,7 @@ namespace EShope.API
         public static void ConfigureMobileApp(IAppBuilder app)
         {
             HttpConfiguration config = new HttpConfiguration();
+            //config.Formatters.JsonFormatter.SupportedMediaTypes
             //config.EnableSystemDiagnosticsTracing();
 
             //config.MapHttpAttributeRoutes();

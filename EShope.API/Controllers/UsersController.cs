@@ -38,7 +38,17 @@ namespace EShope.API.Controllers
 
             return Ok(user);
         }
+        [ResponseType(typeof(User))]
+        public async Task<IHttpActionResult> GetUser([FromUri]string userName)
+        {
+            User user = await db.Users.FirstOrDefaultAsync(u => u.Name == userName);
+            if (user == null)
+            {
+                return NotFound();
+            }
 
+            return Ok(user);
+        }
         // PUT: api/Users/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutUser(Guid id, User user)
