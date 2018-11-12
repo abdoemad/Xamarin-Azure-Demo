@@ -52,16 +52,21 @@ namespace EShope.ViewModels
             set => SetProperty(ref _user, value);
         }
         #endregion
-
-        public ICommand LoginCommand => new Command(async () =>
+        private readonly ICommand _loginCommand;
+        public ICommand LoginCommand => _loginCommand ?? new Command(async () =>//
         {
-            User.ValidateProperties();
-            if (User.HasErrors)
-            {
-                RaisePropertyChanged(() => IsUserEntityValid);
-                return;
-            }
-            IsBusy = true;
+            //Device.BeginInvokeOnMainThread(() => 
+            //{
+                IsBusy = true;
+            //});
+              var res = await User.ValidatePropertiesAsync();
+              if (User.HasErrors)
+              {
+                  IsBusy = false;
+                  RaisePropertyChanged(() => IsUserEntityValid);
+                  return;
+              }
+
             if (_connectionService.IsConnected)
             {
                 try
@@ -70,21 +75,23 @@ namespace EShope.ViewModels
 
                     if (authnticationResponse.IsAuthenticated)
                     {
-                        User.IsOnlineAuthenticate = true;
+                        User.Id = authnticationResponse.User.Id;
+                        //User.IsOnlineAuthenticate = true;
                     }
                 }
                 catch (Exception ex)
                 {
+                    //IsBusy = false;
                     await _dialogService.ShowDialog(ErrorMessagesResources.Login_ServerAuthenticationFailed, "Warning", "Ok");
+                    //return;
                 }
             }
             App.LoggedInUser = User;
-            IsBusy = false;
             await _navigationService.NagigatoToHomePage();
+            IsBusy = false;
 
         }, () => !User.HasErrors);
 
-        
         public bool IsUserEntityValid => !User.HasErrors;
     }
 }

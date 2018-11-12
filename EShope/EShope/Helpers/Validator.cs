@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace EShope.Helpers
 {
@@ -69,7 +70,6 @@ namespace EShope.Helpers
             OnPropertyChanged("Item[]");
             OnErrorsChanged(string.Empty);
         }
-
         public bool ValidateProperty(string propertyName)
         {
             if (string.IsNullOrEmpty(propertyName))
@@ -95,7 +95,31 @@ namespace EShope.Helpers
 
             return isValid;
         }
+        public async Task<bool> ValidatePropertyAsync(string propertyName)
+        {
+            if (string.IsNullOrEmpty(propertyName))
+            {
+                throw new ArgumentNullException("propertyName");
+            }
 
+            var propertyInfo = entityToValidate.GetType().GetRuntimeProperty(propertyName);
+            if (propertyInfo == null)
+            {
+                throw new ArgumentException("The entity does not contain a property with that name.", propertyName);
+            }
+
+            var propertyErrors = new List<string>();
+            bool isValid = await TryValidatePropertyAsync(propertyInfo, propertyErrors);
+            bool errorsChanged = SetPropertyErrors(propertyInfo.Name, propertyErrors);
+
+            if (errorsChanged)
+            {
+                OnErrorsChanged(propertyName);
+                OnPropertyChanged(string.Format(CultureInfo.CurrentCulture, "Item[{0}]", propertyName));
+            }
+
+            return isValid;
+        }
         public bool ValidateProperties()
         {
             var propertiesWithChangedErrors = new List<string>();
@@ -123,7 +147,33 @@ namespace EShope.Helpers
 
             return errors.Values.Count == 0;
         }
+        public async Task<bool> ValidatePropertiesAsync()
+        {
+            var propertiesWithChangedErrors = new List<string>();
+            var propertiesToValidate = entityToValidate.GetType()
+                                                       .GetRuntimeProperties()
+                                                       .Where(c => c.GetCustomAttributes(typeof(ValidationAttribute)).Any());
 
+            foreach (PropertyInfo propertyInfo in propertiesToValidate)
+            {
+                var propertyErrors = new List<string>();
+                await TryValidatePropertyAsync(propertyInfo, propertyErrors);
+
+                bool errorsChanged = SetPropertyErrors(propertyInfo.Name, propertyErrors);
+                if (errorsChanged && !propertiesWithChangedErrors.Contains(propertyInfo.Name))
+                {
+                    propertiesWithChangedErrors.Add(propertyInfo.Name);
+                }
+            }
+
+            foreach (string propertyName in propertiesWithChangedErrors)
+            {
+                OnErrorsChanged(propertyName);
+                OnPropertyChanged(string.Format(CultureInfo.CurrentCulture, "Item[{0}]", propertyName));
+            }
+
+            return errors.Values.Count == 0;
+        }
         bool TryValidateProperty(PropertyInfo propertyInfo, List<string> propertyErrors)
         {
             var results = new List<ValidationResult>();
@@ -131,6 +181,26 @@ namespace EShope.Helpers
             var propertyValue = propertyInfo.GetValue(entityToValidate);
 
             bool isValid = System.ComponentModel.DataAnnotations.Validator.TryValidateProperty(propertyValue, context, results);
+            
+            if (results.Any())
+            {
+                propertyErrors.AddRange(results.Select(c => c.ErrorMessage));
+            }
+
+            return isValid;
+        }
+        async Task<bool> TryValidatePropertyAsync(PropertyInfo propertyInfo, List<string> propertyErrors)
+        {
+            var results = new List<ValidationResult>();
+            var context = new ValidationContext(entityToValidate) { MemberName = propertyInfo.Name };
+            var propertyValue = propertyInfo.GetValue(entityToValidate);
+
+            Func<bool> propertyValidationMethod = () => System.ComponentModel.DataAnnotations.Validator.TryValidateProperty(propertyValue, context, results);
+
+            bool isValid = await Task.Run<bool>(propertyValidationMethod);
+            //bool isValid = await Task.FromResult(propertyValidationMethod.Invoke());
+            //bool isValid = await Task.Factory.StartNew<bool>(propertyValidationMethod);
+
             if (results.Any())
             {
                 propertyErrors.AddRange(results.Select(c => c.ErrorMessage));

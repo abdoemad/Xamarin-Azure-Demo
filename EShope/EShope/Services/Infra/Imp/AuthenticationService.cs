@@ -16,17 +16,21 @@ namespace EShope.Services.Infra.Imp
         }
         public async Task<AuthenticationResponse> Authenticate(string userName, string password)
         {
-            var uri = new Uri($"{_api.DefaultEndPoint}/values");
-            
-            AuthenticationRequest authenticationRequest = new AuthenticationRequest()
+            var uriBuilder = new UriBuilder($"{_api.DefaultEndPoint}")
             {
-                UserName = userName,
-                Password = password
+                Path = $"api/users",
+                Query = $"username={userName}"
             };
 
-            var res = await _api.PostAsync<AuthenticationRequest, string>(uri.AbsoluteUri, authenticationRequest);
+            //var uri = new Uri($"{_api.DefaultEndPoint}/api/users/{userName}");
 
-            return new AuthenticationResponse { IsAuthenticated = true };
+            var user = await _api.GetAsync<User>(uriBuilder.Uri.AbsoluteUri);
+
+            return new AuthenticationResponse
+            {
+                User = user,
+                IsAuthenticated = user != null
+            };
         }
     }
 }

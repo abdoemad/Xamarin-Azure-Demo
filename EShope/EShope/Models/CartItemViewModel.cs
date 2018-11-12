@@ -13,7 +13,16 @@ namespace EShope.Models
         {
             _product = product;
             _quantity = quantity;
+
+            PropertyChanged += CartItemViewModel_PropertyChanged;
         }
+
+        private void CartItemViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Quantity))
+                QuantityChanged(this, null);
+        }
+        public event EventHandler QuantityChanged;
         public ProductViewModel Product { get; set; }
         
         public int Quantity

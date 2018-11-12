@@ -36,8 +36,7 @@ namespace EShope.Services.Infra.Imp
             HttpResponseMessage response = await httpClient.GetAsync(uri);
             string serialized = await response.Content.ReadAsStringAsync();
 
-            var result = await Task.Run(() =>
-               JsonConvert.DeserializeObject<T>(serialized));
+            var result = await Task.Run(() => JsonConvert.DeserializeObject<T>(serialized));
 
             return result;
         }

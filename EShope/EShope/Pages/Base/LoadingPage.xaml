@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:PageBase
+	xmlns:base="clr-namespace:EShope.Pages.Base" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 
+             x:Class="EShope.Pages.Base.LoadingPage"
+			 x:Name="loadingPagePlaceHolder">
+    <ContentPage.Content>
+		<Grid>
+			<ContentView Content="{Binding Source={x:Reference loadingPagePlaceHolder}, Path=ContentPlaceHolder}"
+                         HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
+                         AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+			</ContentView>
+			
+			<ActivityIndicator x:Name="busyIndicator" 
+							   IsRunning="{Binding Source={x:Reference loadingPagePlaceHolder}, Path=IsBusy}" 
+							   IsVisible="{Binding Source={x:Reference loadingPagePlaceHolder}, Path=IsBusy}" 
+                               AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"></ActivityIndicator>
+		</Grid>
+		
+    </ContentPage.Content>
+</base:PageBase>

@@ -3,13 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:local="clr-namespace:EShope"
 			 xmlns:viewModels="clr-namespace:EShope.ViewModels"
-			 xmlns:x1="clr-namespace:System;assembly=netstandard"
 			 xmlns:converters="clr-namespace:EShope.Converters"
+			 xmlns:views="clr-namespace:EShope.Views"
 			 x:Class="EShope.App">
     <Application.Resources>
 		<ResourceDictionary>
+			<converters:ItemTappedEventArgsConverter x:Key="itemTappedEventArgsConverter" />
 			<converters:InverseBoolConverter x:Key="inverseBoolConverter"></converters:InverseBoolConverter>
-			<local:ViewModelLocator x:Key="ViewModelLocator"/>
+			<local:ViewModelLocator x:Key="viewModelLocator"/>
+
+			<ControlTemplate x:Key="shoppingBarContainer">
+				<Grid>
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="*"></RowDefinition>
+					</Grid.RowDefinitions>
+					<views:ShoppingBarView></views:ShoppingBarView>
+					<ContentPresenter Grid.Row="1"></ContentPresenter>
+				</Grid>
+				<!--<ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"></ActivityIndicator>-->
+				</Grid>
+			</ControlTemplate>
 		</ResourceDictionary>		
 		
 	</Application.Resources>

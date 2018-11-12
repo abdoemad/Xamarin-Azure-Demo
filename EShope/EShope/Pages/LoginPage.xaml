@@ -9,7 +9,7 @@
 			 NavigationPage.HasNavigationBar="False"
 			 x:Class="EShope.Pages.LoginPage" 
 			 BackgroundColor="LightGreen" 
-			 BindingContext="{Binding Login,Source={StaticResource ViewModelLocator}}"
+			 BindingContext="{Binding Login, Source={StaticResource viewModelLocator}}"
 			 IsBusy="{Binding IsBusy}">
 	<!--<ContentPage.BindingContext>
 		<viewModels:LoginViewModel></viewModels:LoginViewModel>
@@ -21,7 +21,8 @@
 	</ContentPage.Resources>
 	<ContentPage.Content>
 		<Grid>
-        <Grid HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsBusy, Converter={StaticResource inverseBoolConverter}}">
+			<!--IsVisible="{Binding IsBusy, Converter={StaticResource inverseBoolConverter}}"-->
+        <Grid HorizontalOptions="Center" VerticalOptions="Center">
 			<Grid.RowDefinitions>
 				<RowDefinition></RowDefinition>
 				<RowDefinition></RowDefinition>
@@ -43,13 +44,13 @@
 				<Label Grid.Row="2" Text="{Binding User.Errors[UserName], Converter={StaticResource firstErrorConverter}}" FontSize="Small" TextColor="Red"></Label>
 				<Button Grid.Row="3" Command="{Binding LoginCommand}" Text="Login" IsEnabled="{Binding IsUserEntityValid}"></Button>
         </Grid>
-			<StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsBusy}">
-		<ActivityIndicator  
-			IsRunning="{Binding IsBusy}"
-			IsVisible="{Binding IsBusy}"
-			VerticalOptions="Center" HorizontalOptions="Center"></ActivityIndicator>
-				<Label Text="{x:Static resources:AppResources.Login_SigningOnline}"></Label>
-			</StackLayout>
+			
+		<StackLayout VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsBusy}">
+			<ActivityIndicator  
+				IsRunning="{Binding IsBusy}"
+				VerticalOptions="Center" HorizontalOptions="Center"></ActivityIndicator>
+			<Label Text="{x:Static resources:AppResources.Login_SigningOnline}"></Label>
+		</StackLayout>
 		</Grid>
 	</ContentPage.Content>
 </base:PageBase>

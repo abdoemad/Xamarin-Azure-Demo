@@ -12,21 +12,27 @@ using Xamarin.Forms.Xaml;
 namespace EShope.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class HomePage : PageBase
+	public partial class HomePage : LoadingPage
 	{
 		public HomePage ()
 		{
-			InitializeComponent ();
+            InitializeComponent();
+            this.productCatalogList.ItemTapped += ProductCatalogList_ItemTapped;
         }
 
-        protected override void OnAppearing()
+        private void ProductCatalogList_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            base.OnAppearing();
-
-            if (DesignMode.IsDesignModeEnabled)
-            {
-                this.BindingContext = new List<ProductViewModel> { new ProductViewModel { Name = "Test", Description = "Desc", Price = 50 } };
-            }
+            this.productCatalogList.SelectedItem = null;
         }
+
+        //protected override void OnAppearing()
+        //{
+        //    base.OnAppearing();
+
+        //    if (DesignMode.IsDesignModeEnabled)
+        //    {
+        //        this.BindingContext = new List<ProductViewModel> { new ProductViewModel { Name = "Test", Description = "Desc", Price = 50 } };
+        //    }
+        //}
     }
 }

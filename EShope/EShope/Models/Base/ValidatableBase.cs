@@ -6,6 +6,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace EShope.Models.Base
 {
@@ -42,11 +44,14 @@ namespace EShope.Models.Base
             return validator.GetAllErrors();
         }
 
+        public async Task<bool> ValidatePropertiesAsync()
+        {
+            return await validator.ValidatePropertiesAsync();
+        }
         public bool ValidateProperties()
         {
             return validator.ValidateProperties();
         }
-
         public void SetAllErrors(IDictionary<string, ReadOnlyCollection<string>> entityErrors)
         {
             validator.SetAllErrors(entityErrors);
@@ -60,7 +65,10 @@ namespace EShope.Models.Base
             {
                 if (validator.IsValidationEnabled)
                 {
-                    validator.ValidateProperty(propertyName);
+                    //Device.BeginInvokeOnMainThread(() =>
+                    //{
+                        validator.ValidateProperty(propertyName);//.Wait();
+                    //});
                 }
             }
             return result;

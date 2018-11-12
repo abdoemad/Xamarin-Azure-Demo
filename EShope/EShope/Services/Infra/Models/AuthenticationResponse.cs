@@ -7,6 +7,6 @@ namespace EShope.Services.Data.Models
     public class AuthenticationResponse : ResponseBase
     {
         public bool IsAuthenticated { get; set; }
-        public string UserName { get; set; }
+        public User User { get; set; }
     }
 }

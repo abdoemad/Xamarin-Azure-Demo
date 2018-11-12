@@ -18,6 +18,8 @@ namespace EShope.Models
             get => _userName;
             set => SetProperty(ref _userName, value);
         }
-        public bool IsOnlineAuthenticate { get; set; }
+
+        public Guid Id { get; set; }
+        public bool IsOnlineAuthenticate => Id != Guid.Empty;
     }
 }

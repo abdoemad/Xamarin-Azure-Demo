@@ -1,14 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<base:PageBase
-	xmlns:base="clr-namespace:EShope.Pages.Base" xmlns="http://xamarin.com/schemas/2014/forms"
+<base:LoadingPage
+			 xmlns:base="clr-namespace:EShope.Pages.Base" 
+			 xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 BindingContext="{Binding ProductDetails,Source={StaticResource ViewModelLocator}}"
-             x:Class="EShope.Pages.ProductDetailsPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
-</base:PageBase>
+			 ControlTemplate="{StaticResource shoppingBarContainer}"
+             x:Class="EShope.Pages.ProductDetailsPage" 
+			 NavigationPage.HasNavigationBar="False">
+	<!--BindingContext="{Binding ProductDetails, Source={StaticResource viewModelLocator}}"-->
+	<base:LoadingPage.ContentPlaceHolder>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="*"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="*"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+			</Grid.RowDefinitions>
+			
+			<Grid Grid.Row="4">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition></ColumnDefinition>
+						<ColumnDefinition></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Stepper Grid.Column="0" Grid.ColumnSpan="2"></Stepper>
+					<Button Grid.Column="1" HorizontalOptions="End" Text="Add To Cart"></Button>
+				</Grid>
+			</Grid>
+		</Grid>
+</base:LoadingPage.ContentPlaceHolder>
+</base:LoadingPage>

@@ -34,6 +34,11 @@ namespace EShope.ViewModels
         #endregion
 
         #region Public Methods
+
+        public CartItemViewModel GetCartItemByProduct(string productId)
+        {
+            return _cartList.FirstOrDefault(cart => cart.Product.Id == productId);
+        }
         public void DeleteCartItem(CartItemViewModel cartItem)
         {
             _cartList.Remove(cartItem);
@@ -51,7 +56,9 @@ namespace EShope.ViewModels
                 RaisePropertyChanged(() => CartList);
             }
             else
+            {
                 cartItem.AddQuantities(quantities);
+            }
 
             CartListChanged(this, null);
         }

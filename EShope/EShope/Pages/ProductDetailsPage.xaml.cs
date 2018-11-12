@@ -11,7 +11,7 @@ using Xamarin.Forms.Xaml;
 namespace EShope.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ProductDetailsPage : PageBase
+	public partial class ProductDetailsPage : LoadingPage
 	{
 		public ProductDetailsPage ()
 		{

@@ -8,6 +8,11 @@ namespace EShope.Pages.Base
 {
     public class PageBase : ContentPage
     {
+        public PageBase() {
+            //Content = new Grid {
+                 
+            //};
+        }
         //protected override void OnAppearing()
         //{
         //    base.OnAppearing();

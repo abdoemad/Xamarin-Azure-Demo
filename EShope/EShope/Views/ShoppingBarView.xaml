@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EShope.Views.ShoppingBarView"
 			 xmlns:uie="clr-namespace:EShope.UIExtensions"
-			 xmlns:behaviors="clr-namespace:EShope.Behaviors"
-			 BindingContext="{Binding ShoppingBar, Source={StaticResource ViewModelLocator}}"
+			 BindingContext="{Binding ShoppingBar, Source={StaticResource viewModelLocator}}"
 			 BackgroundColor="LightGreen" HeightRequest="25">
 	<ContentView.Resources>
 		<Style TargetType="Frame" x:Key="ContextMenuButtonStyle">

@@ -2,7 +2,7 @@
 <base:PageBase
 	xmlns:base="clr-namespace:EShope.Pages.Base" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 BindingContext="{Binding ShoppingCart, Source={StaticResource ViewModelLocator}}"
+			 BindingContext="{Binding ShoppingCart, Source={StaticResource viewModelLocator}}"
              x:Class="EShope.Pages.ShoppingCartPage">
     <ContentPage.Content>
         <StackLayout>

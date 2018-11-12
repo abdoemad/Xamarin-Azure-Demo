@@ -1,4 +1,5 @@
-﻿using EShope.Services.Data;
+﻿using EShope.Repository;
+using EShope.Services.Data;
 using EShope.Services.Data.Imp;
 using EShope.Services.Device;
 using EShope.Services.Device.Imp;
@@ -59,11 +60,12 @@ namespace EShope
             //--- Data Services
             _container.Register<IProductService, ProductService>();
             _container.Register<IOrderService, OrderService>();
+            //_container.Register<IRepository<Product>, Repository<Product>>();
 
             //-- ViewModels
             _container.Register<LoginViewModel>();
             _container.Register<ProductCatalogViewModel>();
-            _container.Register<ProductDetailsViewModel>();
+            //_container.Register<ProductDetailsViewModel>();
 
             _container.Register<ShoppingCartViewModel>(true);
             _container.Register<ShoppingBarViewModel>(true);

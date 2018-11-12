@@ -47,7 +47,7 @@ namespace EShope.Services.UI.Imp
             PageBase homePage = Activator.CreateInstance(_homePageType) as PageBase;
             Application.Current.MainPage = new MainPage(homePage);
             var viewModel = homePage.BindingContext as ViewModelBase;
-            await viewModel.OnAppearing();
+            await viewModel.InitializeAsync(null);
         }
 
         public async Task NavigateTo<TViewModel>() where TViewModel : ViewModelBase
@@ -59,7 +59,24 @@ namespace EShope.Services.UI.Imp
                 await Task.FromResult(false);
             await navigationPage.PushAsync(page);
             var viewModel = page.BindingContext as ViewModelBase;
-            await viewModel.OnAppearing();
+            await viewModel.InitializeAsync(null);
+        }
+
+        public async Task NavigateTo<TViewModel>(object parameter, bool initiateViewModel) where TViewModel : ViewModelBase
+        {
+            var pageType = _mappings[typeof(TViewModel)];
+            var page = Activator.CreateInstance(pageType) as PageBase;
+            NavigationPage navigationPage = App.AppMainPage as MainPage;
+            if (navigationPage == null)
+                await Task.FromResult(false);
+            if (initiateViewModel)
+            {
+                page.BindingContext = Activator.CreateInstance(typeof(TViewModel), parameter);
+            }
+            await navigationPage.PushAsync(page);
+
+            var viewModel = page.BindingContext as ViewModelBase;
+            await viewModel.InitializeAsync(parameter);
         }
     }
 }
