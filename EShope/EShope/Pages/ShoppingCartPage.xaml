@@ -1,14 +1,76 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<base:PageBase
+<base:LoadingPage
 	xmlns:base="clr-namespace:EShope.Pages.Base" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:uie="clr-namespace:EShope.UIExtensions"
+	ControlTemplate="{StaticResource shoppingBarContainer}"
 			 BindingContext="{Binding ShoppingCart, Source={StaticResource viewModelLocator}}"
-             x:Class="EShope.Pages.ShoppingCartPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
-</base:PageBase>
+             x:Class="EShope.Pages.ShoppingCartPage"
+	NavigationPage.HasNavigationBar="False"
+	Title="Shopping cart"
+			 x:Name="cartPage">
+	<base:LoadingPage.ContentPlaceHolder>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+			</Grid.RowDefinitions>
+			<ListView x:Name="cartList" 
+					  Grid.Row="0"
+					  HasUnevenRows="True"
+					  RowHeight="40"
+					  VerticalOptions="Fill"
+				  ItemsSource="{Binding CartList}">
+				<ListView.Header>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="6*"></ColumnDefinition>
+							<ColumnDefinition Width="2*"></ColumnDefinition>
+							<ColumnDefinition Width="2*"></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<Label Grid.Column="1" Text="Price"></Label>
+						<Label Grid.Column="2" Text="Quantity"></Label>
+					</Grid>
+				</ListView.Header>
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="3*"></ColumnDefinition>
+									<ColumnDefinition Width="3*"></ColumnDefinition>
+									<ColumnDefinition Width="2*"></ColumnDefinition>
+									<ColumnDefinition Width="2*"></ColumnDefinition>
+								</Grid.ColumnDefinitions>
+								<Image Grid.Column="0" Margin="3" Aspect="AspectFit" VerticalOptions="CenterAndExpand" Source="{uie:ImageResourceExtension Source=EShope.Resources.Images.cart_image.png}"></Image>
+								<Grid Grid.Column="1">
+									<Grid.RowDefinitions>
+										<RowDefinition Height="*"></RowDefinition>
+										<RowDefinition></RowDefinition>
+										<RowDefinition></RowDefinition>
+									</Grid.RowDefinitions>
+									<Label Grid.Row="0" Text="{Binding Product.Name}" FontSize="Small"></Label>
+									<Label Grid.Row="1" Text="In stock" TextColor="Green"></Label>
+									<Label Grid.Row="2" Text="Delete" FontSize="Micro" TextColor="Blue">
+										<Label.GestureRecognizers>
+											<TapGestureRecognizer Command="{Binding Source={x:Reference cartPage}, Path=BindingContext.DeleteCartItemCommand}" CommandParameter="{Binding}"></TapGestureRecognizer>
+										</Label.GestureRecognizers>
+									</Label>
+								</Grid>
+								<Label Grid.Column="2" Text="{Binding Product.Price}"></Label>
+								<Label Grid.Column="3" Text="{Binding Quantity}"></Label>
+							</Grid>
+						</ViewCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+			<Button Grid.Row="1" HorizontalOptions="End" Text="Submit" Command="{Binding SubmitCommand}">
+				<Button.Triggers>
+					<DataTrigger TargetType="Button" Binding="{Binding CartList.Count}" Value="0">
+						<Setter Property="IsEnabled" Value="False"></Setter>
+					</DataTrigger>
+				</Button.Triggers>
+			</Button>
+		</Grid>
+    </base:LoadingPage.ContentPlaceHolder>
+</base:LoadingPage>

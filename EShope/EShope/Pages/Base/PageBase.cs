@@ -8,10 +8,16 @@ namespace EShope.Pages.Base
 {
     public class PageBase : ContentPage
     {
-        public PageBase() {
+        public PageBase()
+        {
+            
             //Content = new Grid {
                  
             //};
+        }
+        public PageBase(ViewModelBase viewModel)
+        {
+            //this.BindingContext = viewModel;
         }
         //protected override void OnAppearing()
         //{

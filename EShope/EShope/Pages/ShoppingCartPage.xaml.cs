@@ -11,11 +11,17 @@ using Xamarin.Forms.Xaml;
 namespace EShope.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ShoppingCartPage : PageBase
+	public partial class ShoppingCartPage : LoadingPage
 	{
 		public ShoppingCartPage ()
 		{
 			InitializeComponent ();
+            this.cartList.ItemSelected += CartList_ItemSelected;
 		}
-	}
+
+        private void CartList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            cartList.SelectedItem = null;
+        }
+    }
 }

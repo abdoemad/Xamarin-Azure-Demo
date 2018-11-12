@@ -20,21 +20,33 @@ namespace EShope.Models
         private void CartItemViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(Quantity))
-                QuantityChanged(this, null);
+                QuantityChanged?.Invoke(this, null);
         }
         public event EventHandler QuantityChanged;
-        public ProductViewModel Product { get; set; }
-        
+        public ProductViewModel Product => _product;
+        public int ProductAvailableQuantity => _product.AvailableQuantity;
+
         public int Quantity
         {
             get
             {
                 return _quantity;
             }
+            //set
+            //{
+            //    SetProperty(ref _quantity, value);
+            //}
         }
         public void AddQuantities(int quantities)
         {
             _quantity += quantities;
+            _product.DeductAvailableQuantity(quantities);
+            RaisePropertyChanged(() => Quantity);
+        }
+        public void SubtractQuantiries(int quantities)
+        {
+            _quantity -= quantities;
+            _product.RestoreQuantities(quantities);
             RaisePropertyChanged(() => Quantity);
         }
         public void IncrementQuantity() {

@@ -16,7 +16,20 @@ namespace EShope.Models
         public string[] PicturesURLs { get; set; }
 
         public decimal Price { get; set; }
-        public int AvailableQuantity { get; set; }
+        private int _availableQuantity;
+        public int AvailableQuantity { get { return _availableQuantity; } private set { _availableQuantity = value; } }
         public string ShortDescription => Description.TruncateLongString(70);
+
+        public void DeductAvailableQuantity(int quantities)
+        {
+            _availableQuantity -= quantities;
+            RaisePropertyChanged(() => AvailableQuantity);
+        }
+
+        public void RestoreQuantities(int quantities)
+        {
+            _availableQuantity += quantities;
+            RaisePropertyChanged(() => AvailableQuantity);
+        }
     }
 }

@@ -3,12 +3,14 @@
 			 xmlns:base="clr-namespace:EShope.Pages.Base" 
 			 xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 ControlTemplate="{StaticResource shoppingBarContainer}"
+	xmlns:behaviors="clr-namespace:EShope.Behaviors"
+	xmlns:uie="clr-namespace:EShope.UIExtensions"
+	ControlTemplate="{StaticResource shoppingBarContainer}"
              x:Class="EShope.Pages.ProductDetailsPage" 
 			 NavigationPage.HasNavigationBar="False">
 	<!--BindingContext="{Binding ProductDetails, Source={StaticResource viewModelLocator}}"-->
 	<base:LoadingPage.ContentPlaceHolder>
-		<Grid>
+		<Grid Margin="5">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto"></RowDefinition>
 				<RowDefinition Height="*"></RowDefinition>
@@ -16,15 +18,45 @@
 				<RowDefinition Height="*"></RowDefinition>
 				<RowDefinition Height="Auto"></RowDefinition>
 			</Grid.RowDefinitions>
-			
+			<Label Grid.Row="0" Text="{Binding CartItem.Product.Name}" 
+				   VerticalTextAlignment="Center" 
+				   HorizontalTextAlignment="Start" 
+				   Margin="5,3,0,0" FontSize="Small"></Label>
+			<Image Grid.Row="1" Margin="3" Aspect="Fill" VerticalOptions="CenterAndExpand" 
+				   Source="{uie:ImageResourceExtension Source=EShope.Resources.Images.cart_image.png}"></Image>
+			<Label Grid.Row="2" FontAttributes="Bold" FontSize="Small" 
+				   Text="{Binding CartItem.Product.Price, StringFormat='$ {0}.00'}"></Label>
+			<ScrollView Grid.Row="3">
+				<Label FontSize="Micro" 
+					   Text="{Binding CartItem.Product.Description, Mode=OneWay}"></Label>
+			</ScrollView>
 			<Grid Grid.Row="4">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition></ColumnDefinition>
 						<ColumnDefinition></ColumnDefinition>
 					</Grid.ColumnDefinitions>
-					<Stepper Grid.Column="0" Grid.ColumnSpan="2"></Stepper>
-					<Button Grid.Column="1" HorizontalOptions="End" Text="Add To Cart"></Button>
+					<StackLayout Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+						<!--HorizontalOptions="Center"-->
+						<Stepper Increment="1" 
+								Minimum="1" 
+								 Maximum="{Binding CartItem.ProductAvailableQuantity}"
+								 Value="{Binding CartItem.Quantity}">
+							<Stepper.Behaviors>
+								<!--<behaviors:SimpleEventToCommandBehavior-->
+								<!--CommandParameter="{Binding CartItem.Quantity}"-->
+								<behaviors:EventToCommandBehavior
+									EventName="ValueChanged"
+									Command="{Binding QuantityChangedCommand}"
+									EventArgsConverter="{StaticResource valueChangedEventArgsConverter}">
+								</behaviors:EventToCommandBehavior>
+							</Stepper.Behaviors>
+						</Stepper>
+						<Label Text="{Binding CartItem.Quantity}" VerticalTextAlignment="Center"></Label>
+					</StackLayout>
+					<Button Grid.Column="1" HorizontalOptions="End" 
+							Text="Add To Cart"
+							Command="{Binding AddToCartCommand}"></Button>
 				</Grid>
 			</Grid>
 		</Grid>

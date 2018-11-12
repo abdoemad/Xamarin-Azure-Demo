@@ -1,4 +1,5 @@
-﻿using EShope.Pages;
+﻿using EShope.Helpers;
+using EShope.Pages;
 using EShope.Pages.Base;
 using EShope.ViewModels;
 using EShope.ViewModels.Base;
@@ -21,7 +22,7 @@ namespace EShope.Services.UI.Imp
         {
             CreatePageViewModelMappings();
         }
-
+        protected Page MainPage => Application.Current.MainPage;
         private void CreatePageViewModelMappings()
         {
             _homePageType = typeof(HomePage);
@@ -64,19 +65,40 @@ namespace EShope.Services.UI.Imp
 
         public async Task NavigateTo<TViewModel>(object parameter, bool initiateViewModel) where TViewModel : ViewModelBase
         {
-            var pageType = _mappings[typeof(TViewModel)];
-            var page = Activator.CreateInstance(pageType) as PageBase;
-            NavigationPage navigationPage = App.AppMainPage as MainPage;
-            if (navigationPage == null)
-                await Task.FromResult(false);
-            if (initiateViewModel)
+            await ExceptionHandlingHelper.TryCatchAsync(async () =>
             {
-                page.BindingContext = Activator.CreateInstance(typeof(TViewModel), parameter);
-            }
-            await navigationPage.PushAsync(page);
+                var navigationPage = App.AppMainPage as MainPage;
+                if (navigationPage == null)
+                    await Task.FromResult(false);
 
-            var viewModel = page.BindingContext as ViewModelBase;
-            await viewModel.InitializeAsync(parameter);
+                PageBase page = null;
+                ViewModelBase viewModel;
+                var pageType = _mappings[typeof(TViewModel)];
+
+                //if (initiateViewModel)
+                //{
+                //    viewModel = Activator.CreateInstance(typeof(TViewModel), parameter) as ViewModelBase;
+                //page = Activator.CreateInstance(pageType, viewModel) as PageBase;
+                //}
+                //else
+                page = Activator.CreateInstance(pageType) as PageBase;
+                if (initiateViewModel)
+                {
+                    page.BindingContext = Activator.CreateInstance(typeof(TViewModel), parameter);
+                }
+                await navigationPage.PushAsync(page);
+
+                viewModel = page.BindingContext as ViewModelBase;
+                await viewModel.InitializeAsync(parameter);
+            });
+        }
+
+        public async Task NavigateBackAsync()
+        {
+            if (MainPage is MainPage mainPage)
+            {
+                await mainPage.Navigation.PopAsync();
+            }
         }
     }
 }

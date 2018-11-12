@@ -1,4 +1,5 @@
 ﻿using EShope.Pages.Base;
+using EShope.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,11 @@ namespace EShope.Pages
 		{
 			InitializeComponent ();
 		}
-	}
+
+        public ProductDetailsPage(ViewModelBase viewModel) : base(viewModel)
+        {
+            InitializeComponent();
+            this.BindingContext = viewModel;
+        }
+    }
 }

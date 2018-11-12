@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace EShope.ViewModels
 {
@@ -60,7 +62,18 @@ namespace EShope.ViewModels
                 cartItem.AddQuantities(quantities);
             }
 
-            CartListChanged(this, null);
+            CartListChanged?.Invoke(this, null);
+        }
+        public void UpdateCartItemQuantities(CartItemViewModel existCartItem, int quantities)
+        {
+            //var existCartItem = _cartList.FirstOrDefault(c => c == cartItem);
+            existCartItem.AddQuantities(quantities);
+            CartListChanged?.Invoke(this, null);
+        }
+        public void AddCartItemToCartList(CartItemViewModel cartItem)
+        {
+            _cartList.Add(cartItem);
+            CartListChanged?.Invoke(this, null);
         }
 
         public void DecrementCartItemQuantity(ProductViewModel product)
@@ -72,7 +85,7 @@ namespace EShope.ViewModels
 
             cartItem.DecrementQuantity();
 
-            CartListChanged(this, null);
+            CartListChanged?.Invoke(this, null);
         }
         #endregion
 
@@ -87,5 +100,13 @@ namespace EShope.ViewModels
             RaisePropertyChanged(() => TotalQuantities);
         }
         #endregion
+
+        private ICommand _deleteCartItemCommand;
+
+        public ICommand DeleteCartItemCommand => _deleteCartItemCommand ?? new Command<CartItemViewModel>((cartItem) =>
+        {
+            _cartList.Remove(cartItem);
+            CartListChanged?.Invoke(this, null);
+        });
     }
 }

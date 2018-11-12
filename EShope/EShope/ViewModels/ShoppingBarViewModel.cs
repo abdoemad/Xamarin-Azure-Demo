@@ -32,7 +32,6 @@ namespace EShope.ViewModels
 
         private void ConnectivityChanged(object sender, bool e)
         {
-            
             RaisePropertyChanged(() => IsOnline);
         }
 

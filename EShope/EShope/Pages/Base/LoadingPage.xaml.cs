@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EShope.ViewModels.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,9 +16,13 @@ namespace EShope.Pages.Base
 	{
 		public LoadingPage ()
 		{
-			InitializeComponent ();
+            InitializeComponent();
 		}
-
+        public LoadingPage(ViewModelBase viewModel) : base(viewModel)
+        {
+            InitializeComponent();
+            //this.BindingContext = viewModel;
+        }
         public static readonly BindableProperty MainContentProperty =
         BindableProperty.Create(nameof(ContentPlaceHolder), typeof(View), typeof(LoadingPage));
 

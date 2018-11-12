@@ -16,5 +16,7 @@ namespace EShope.Services.UI
         Task NavigateTo<TViewModel>(object paramter, bool initiateViewModel) where TViewModel : ViewModelBase;
 
         Task NagigatoToHomePage();
+
+        Task NavigateBackAsync();
     }
 }

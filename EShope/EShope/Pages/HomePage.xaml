@@ -46,7 +46,7 @@
 									<ColumnDefinition Width="3*"></ColumnDefinition>
 									<ColumnDefinition Width="7*"></ColumnDefinition>
 								</Grid.ColumnDefinitions>
-								<Image Aspect="AspectFit" VerticalOptions="CenterAndExpand" Grid.Column="0" Source="{uie:ImageResourceExtension Source=EShope.Resources.Images.cart_image.png}" Margin="3"></Image>
+								<Image Grid.Column="0" Margin="3" Aspect="AspectFit" VerticalOptions="CenterAndExpand" Source="{uie:ImageResourceExtension Source=EShope.Resources.Images.cart_image.png}"></Image>
 								<Grid Grid.Column="1">
 									<Grid.RowDefinitions>
 										<RowDefinition></RowDefinition>
