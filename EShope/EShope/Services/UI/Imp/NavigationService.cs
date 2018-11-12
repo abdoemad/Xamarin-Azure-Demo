@@ -5,6 +5,7 @@ using EShope.ViewModels;
 using EShope.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -53,11 +54,22 @@ namespace EShope.Services.UI.Imp
 
         public async Task NavigateTo<TViewModel>() where TViewModel : ViewModelBase
         {
-            var pageType = _mappings[typeof(TViewModel)];
-            var page = Activator.CreateInstance(pageType) as PageBase;
             NavigationPage navigationPage = App.AppMainPage as MainPage;
             if (navigationPage == null)
-                await Task.FromResult(false);
+            {
+                //await Task.FromResult(false);
+                return;
+            }
+            var lastPage = navigationPage.Navigation.NavigationStack.Last();
+            
+            var pageType = _mappings[typeof(TViewModel)];
+            if (pageType == lastPage.GetType())
+            {
+                //await Task.FromResult(false);
+                return;
+            }
+            var page = Activator.CreateInstance(pageType) as PageBase;
+           
             await navigationPage.PushAsync(page);
             var viewModel = page.BindingContext as ViewModelBase;
             await viewModel.InitializeAsync(null);
@@ -69,8 +81,10 @@ namespace EShope.Services.UI.Imp
             {
                 var navigationPage = App.AppMainPage as MainPage;
                 if (navigationPage == null)
-                    await Task.FromResult(false);
-
+                {
+                    //await Task.FromResult(false);
+                    return;
+                }
                 PageBase page = null;
                 ViewModelBase viewModel;
                 var pageType = _mappings[typeof(TViewModel)];

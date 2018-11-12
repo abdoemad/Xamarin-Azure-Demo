@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<base:LoadingPage
+<base:ShopppingBarContainerPage
 	xmlns:base="clr-namespace:EShope.Pages.Base" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:uie="clr-namespace:EShope.UIExtensions"
 	xmlns:behaviors="clr-namespace:EShope.Behaviors"
 	x:Class="EShope.Pages.HomePage"
-			 ControlTemplate="{StaticResource shoppingBarContainer}"
+			 
 			 BindingContext="{Binding ProductCatalog, Source={StaticResource viewModelLocator}}"
 			 IsBusy="{Binding IsBusy}" NavigationPage.HasNavigationBar="False">
+	<!--ControlTemplate="{StaticResource shoppingBarContainer}"-->
 	<!--<ContentPage.ToolbarItems>
 		<ToolbarItem Text="asd"></ToolbarItem>
 	</ContentPage.ToolbarItems>-->
@@ -16,7 +17,7 @@
 			<Setter Property="BindingContext" Value="{Binding Source={x:Reference Self}}" />
 		</DataTrigger>
 	</ContentPage.Triggers>-->
-	<base:LoadingPage.ContentPlaceHolder>
+	<base:ShopppingBarContainerPage.ContentPlaceHolder>
 		<Grid>
 			<Grid.RowDefinitions>
 				<!--<RowDefinition Height="Auto"/>-->
@@ -64,5 +65,5 @@
 			</ListView>
 
 		</Grid>
-	</base:LoadingPage.ContentPlaceHolder>
-</base:LoadingPage>
+	</base:ShopppingBarContainerPage.ContentPlaceHolder>
+</base:ShopppingBarContainerPage>

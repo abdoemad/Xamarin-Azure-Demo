@@ -50,7 +50,7 @@ namespace EShope.ViewModels
             
             var products = await _productService.GetProductsAsync(false);
 
-            if (products.Count == 0)
+            //if (products.Count == 0)
             {
                 var isInternetConnected = _connectionService.IsConnected;
                 if (isInternetConnected)

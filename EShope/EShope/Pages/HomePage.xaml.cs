@@ -12,8 +12,8 @@ using Xamarin.Forms.Xaml;
 namespace EShope.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class HomePage : LoadingPage
-	{
+	public partial class HomePage : ShopppingBarContainerPage //LoadingPage // PageBase
+    {
 		public HomePage ()
 		{
             InitializeComponent();

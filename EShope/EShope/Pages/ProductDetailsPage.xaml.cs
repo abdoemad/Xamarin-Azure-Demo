@@ -12,17 +12,18 @@ using Xamarin.Forms.Xaml;
 namespace EShope.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ProductDetailsPage : LoadingPage
-	{
+	public partial class ProductDetailsPage : ShopppingBarContainerPage //LoadingPage // PageBase
+    {
 		public ProductDetailsPage ()
 		{
+            
 			InitializeComponent ();
 		}
 
-        public ProductDetailsPage(ViewModelBase viewModel) : base(viewModel)
-        {
-            InitializeComponent();
-            this.BindingContext = viewModel;
-        }
+        //public ProductDetailsPage(ViewModelBase viewModel) : base(viewModel)
+        //{
+        //    InitializeComponent();
+        //    this.BindingContext = viewModel;
+        //}
     }
 }
