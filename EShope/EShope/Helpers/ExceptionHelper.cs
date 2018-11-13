@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace EShope.Helpers
 {
-    public class ExceptionHandlingHelper
+    public class ExceptionHelper
     {
         public static void TryCatch(Action action)
         {

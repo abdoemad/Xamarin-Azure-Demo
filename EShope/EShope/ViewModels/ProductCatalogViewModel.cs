@@ -65,7 +65,7 @@ namespace EShope.ViewModels
         private readonly ICommand _productSelectionCommand;
         public ICommand ProductSelectionCommand => _productSelectionCommand ?? new Command<ProductViewModel>(product =>
          {
-             _navigationService.NavigateTo<ProductDetailsViewModel>(product, true);
+             _navigationService.NavigateTo<AddToCartViewModel>(product, true);
          });
     }
 }

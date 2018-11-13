@@ -1,4 +1,5 @@
-﻿using EShope.Models;
+﻿using EShope.Helpers;
+using EShope.Models;
 using EShope.Services.Data;
 using EShope.Services.Infra;
 using EShope.ViewModels.Base;
@@ -41,12 +42,12 @@ namespace EShope.ViewModels
         {
             return _cartList.FirstOrDefault(cart => cart.Product.Id == productId);
         }
-        public void DeleteCartItem(CartItemViewModel cartItem)
-        {
-            _cartList.Remove(cartItem);
-            CartListChanged(this, null);
-            RaisePropertyChanged(() => CartList);
-        }
+        //public void DeleteCartItem(CartItemViewModel cartItem)
+        //{
+        //    _cartList.Remove(cartItem);
+        //    CartListChanged(this, null);
+        //    RaisePropertyChanged(() => CartList);
+        //}
 
         public void AddProductToCartList(ProductViewModel product, int quantities)
         {
@@ -61,32 +62,55 @@ namespace EShope.ViewModels
             {
                 cartItem.AddQuantities(quantities);
             }
-
-            CartListChanged?.Invoke(this, null);
-        }
-        public void UpdateCartItemQuantities(CartItemViewModel existCartItem, int quantities)
-        {
-            //var existCartItem = _cartList.FirstOrDefault(c => c == cartItem);
-            existCartItem.AddQuantities(quantities);
-            CartListChanged?.Invoke(this, null);
-        }
-        public void AddCartItemToCartList(CartItemViewModel cartItem)
-        {
-            _cartList.Add(cartItem);
+            product.DeductQuantities(quantities);
             CartListChanged?.Invoke(this, null);
         }
 
-        public void DecrementCartItemQuantity(ProductViewModel product)
-        {
-            CartItemViewModel cartItem = _cartList.FirstOrDefault(c => c.Product.Id == product.Id);
-            if (cartItem == null)
-                throw new Exception($"Trying to decrement the quantity of product '{product.Name}' witch doesn't exist yet in the cart!" +
-                    $"{Environment.NewLine}Cart Items ({_cartList.Count}): {string.Join(", ", _cartList.Select(c => c.Product.Name))}");
+        //public void UpdateCartItemQuantities(CartItemViewModel cartItem)//, int quantities
+        //{
+        //    var existCartItem = _cartList.FirstOrDefault(c => c.Product.Id == cartItem.Product.Id);
+        //    var delta = (cartItem.Quantity + 1) - existCartItem.Quantity;
+        //    if (delta >= 1)
+        //    {
+        //        existCartItem.AddQuantities(delta);
+        //    }
+        //    else
+        //    {
+        //        existCartItem.SubtractQuantiries((delta * -1) + 1);
+        //    }
 
-            cartItem.DecrementQuantity();
+        //    CartListChanged?.Invoke(this, null);
+        //}
+        //public void AddCartItemToCartList(CartItemViewModel cartItem)
+        //{
+        //    ExceptionHelper.TryCatch(() =>
+        //    {
+        //        var cart = _cartList.FirstOrDefault(c => c.Product.Id == cartItem.Product.Id);
+        //        if (cart == null)
+        //        {
+        //            cart = cartItem;
+        //            _cartList.Add(cart);
+        //        }
+        //        else
+        //        {
+        //            cart.AddQuantities(cartItem.Quantity);
+        //        }
+        //        cart.Product.DeductQuantities(cartItem.Quantity);
+        //        CartListChanged?.Invoke(this, null);
+        //    });
+        //}
 
-            CartListChanged?.Invoke(this, null);
-        }
+        //public void DecrementCartItemQuantity(ProductViewModel product)
+        //{
+        //    CartItemViewModel cartItem = _cartList.FirstOrDefault(c => c.Product.Id == product.Id);
+        //    if (cartItem == null)
+        //        throw new Exception($"Trying to decrement the quantity of product '{product.Name}' witch doesn't exist yet in the cart!" +
+        //            $"{Environment.NewLine}Cart Items ({_cartList.Count}): {string.Join(", ", _cartList.Select(c => c.Product.Name))}");
+
+        //    cartItem.DecrementQuantity();
+
+        //    CartListChanged?.Invoke(this, null);
+        //}
         #endregion
 
         #region Private Methods
@@ -106,6 +130,7 @@ namespace EShope.ViewModels
         public ICommand DeleteCartItemCommand => _deleteCartItemCommand ?? new Command<CartItemViewModel>((cartItem) =>
         {
             _cartList.Remove(cartItem);
+            cartItem.Product.RestoreQuantities(cartItem.Quantity);
             CartListChanged?.Invoke(this, null);
         });
     }

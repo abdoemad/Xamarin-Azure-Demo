@@ -12,9 +12,9 @@ using Xamarin.Forms.Xaml;
 namespace EShope.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class HomePage : ShopppingBarContainerPage //LoadingPage // PageBase
+	public partial class ProductCatalogPage : ShopppingBarContainerPage //LoadingPage // PageBase
     {
-		public HomePage ()
+		public ProductCatalogPage()
 		{
             InitializeComponent();
             this.productCatalogList.ItemTapped += ProductCatalogList_ItemTapped;

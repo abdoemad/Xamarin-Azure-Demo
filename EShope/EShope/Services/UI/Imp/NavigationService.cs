@@ -26,14 +26,15 @@ namespace EShope.Services.UI.Imp
         protected Page MainPage => Application.Current.MainPage;
         private void CreatePageViewModelMappings()
         {
-            _homePageType = typeof(HomePage);
+            _homePageType = typeof(ProductCatalogPage);
             _loginPageType = typeof(LoginPage);
             _navigationRootPage = typeof(MainPage);
 
             _mappings = new Dictionary<Type, Type>
             {
-                { typeof(ProductCatalogViewModel), typeof(HomePage) },
-                { typeof(ProductDetailsViewModel), typeof(ProductDetailsPage) },
+                { typeof(ProductCatalogViewModel), typeof(ProductCatalogPage) },
+                //{ typeof(ProductDetailsViewModel), typeof(ProductDetailsPage) },
+                { typeof(AddToCartViewModel),typeof(AddToCartPage)},
                 { typeof(ShoppingCartViewModel), typeof(ShoppingCartPage) },
                 { typeof(LoginViewModel), typeof(LoginPage) }
             };
@@ -77,7 +78,7 @@ namespace EShope.Services.UI.Imp
 
         public async Task NavigateTo<TViewModel>(object parameter, bool initiateViewModel) where TViewModel : ViewModelBase
         {
-            await ExceptionHandlingHelper.TryCatchAsync(async () =>
+            await ExceptionHelper.TryCatchAsync(async () =>
             {
                 var navigationPage = App.AppMainPage as MainPage;
                 if (navigationPage == null)

@@ -40,23 +40,25 @@ namespace EShope.Models
         public void AddQuantities(int quantities)
         {
             _quantity += quantities;
-            _product.DeductAvailableQuantity(quantities);
+            //_product.DeductQuantities(quantities);
             RaisePropertyChanged(() => Quantity);
         }
         public void SubtractQuantiries(int quantities)
         {
             _quantity -= quantities;
-            _product.RestoreQuantities(quantities);
+            //_product.RestoreQuantities(quantities);
             RaisePropertyChanged(() => Quantity);
         }
         public void IncrementQuantity() {
             _quantity++;
+            //_product.DeductQuantities(1);
             RaisePropertyChanged(() => Quantity);
         }
 
         public void DecrementQuantity()
         {
             _quantity--;
+            //_product.RestoreQuantities(1);
             RaisePropertyChanged(() => Quantity);
         }
 

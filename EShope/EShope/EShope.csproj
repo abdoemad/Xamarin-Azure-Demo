@@ -39,6 +39,12 @@
     <Compile Update="Pages\Base\LoadingPage.xaml.cs">
       <DependentUpon>LoadingPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\AddToCartPage.xaml.cs">
+      <DependentUpon>AddToCartPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\ProductCatalogPage.xaml.cs">
+      <DependentUpon>ProductCatalogPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Resources\AppResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -58,13 +64,13 @@
     <EmbeddedResource Update="Pages\Base\ShopppingBarContainerPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\HomePage.xaml">
+    <EmbeddedResource Update="Pages\ProductCatalogPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\ProductDetailsPage.xaml">
+    <EmbeddedResource Update="Pages\AddToCartPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\ShoppingCartPage.xaml">

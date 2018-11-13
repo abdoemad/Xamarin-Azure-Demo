@@ -20,7 +20,7 @@ namespace EShope.Models
         public int AvailableQuantity { get { return _availableQuantity; } private set { _availableQuantity = value; } }
         public string ShortDescription => Description.TruncateLongString(70);
 
-        public void DeductAvailableQuantity(int quantities)
+        public void DeductQuantities(int quantities)
         {
             _availableQuantity -= quantities;
             RaisePropertyChanged(() => AvailableQuantity);

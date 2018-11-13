@@ -81,7 +81,8 @@ namespace EShope
         #region ViewModels Resolving
         public LoginViewModel Login => SimpleIoc.Default.GetInstance<LoginViewModel>();
         public ProductCatalogViewModel ProductCatalog => SimpleIoc.Default.GetInstance<ProductCatalogViewModel>();
-        public ProductDetailsViewModel ProductDetails => SimpleIoc.Default.GetInstance<ProductDetailsViewModel>();
+        //public ProductDetailsViewModel ProductDetails => SimpleIoc.Default.GetInstance<ProductDetailsViewModel>();
+            
         public ShoppingCartViewModel ShoppingCart => SimpleIoc.Default.GetInstance<ShoppingCartViewModel>();
         public ShoppingBarViewModel ShoppingBar => SimpleIoc.Default.GetInstance<ShoppingBarViewModel>();
         #endregion
