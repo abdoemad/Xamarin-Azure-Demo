@@ -27,22 +27,22 @@ namespace EShope.Services.Data.Imp
             _client.SyncContext.InitializeAsync(store);
             _productTable = _client.GetSyncTable<Product>();
         }
-        private async Task InitLocalStoreAsync()
-        {
-            // new code to initialize the SQLite store
-            string path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "eshopelocaldb.db");
+        //private async Task InitLocalStoreAsync()
+        //{
+        //    // new code to initialize the SQLite store
+        //    string path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "eshopelocaldb.db");
 
-            if (!File.Exists(path))
-            {
-                File.Create(path).Dispose();
-            }
+        //    if (!File.Exists(path))
+        //    {
+        //        File.Create(path).Dispose();
+        //    }
 
-            var store = new MobileServiceSQLiteStore(path);
-            store.DefineTable<Product>();
+        //    var store = new MobileServiceSQLiteStore(path);
+        //    store.DefineTable<Product>();
 
-            // Uses the default conflict handler, which fails on conflict
-            await _client.SyncContext.InitializeAsync(store);
-        }
+        //    // Uses the default conflict handler, which fails on conflict
+        //    await _client.SyncContext.InitializeAsync(store);
+        //}
 
         public async Task SyncAsync()
         {

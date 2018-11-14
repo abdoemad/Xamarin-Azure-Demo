@@ -6,14 +6,14 @@ namespace EShope.API.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitialMigration : IMigrationMetadata
+    [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
+    public sealed partial class NewIniatiation : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialMigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(NewIniatiation));
         
         string IMigrationMetadata.Id
         {
-            get { return "201811041447161_InitialMigration"; }
+            get { return "201811132034000_NewIniatiation"; }
         }
         
         string IMigrationMetadata.Source

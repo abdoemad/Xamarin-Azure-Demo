@@ -1,4 +1,5 @@
 ﻿using Microsoft.Azure.Mobile.Server;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
@@ -9,6 +10,10 @@ namespace EShope.API.DataObjects
     public class Product : EntityData
     {
         private static readonly char delimiter = ';';
+
+        public Product() {
+            OrderItems = new HashSet<OrderItem>();
+        }
         //public int Id { get; set; }
         [Required]
         [MaxLength(100)]
@@ -27,7 +32,7 @@ namespace EShope.API.DataObjects
         string _picturesURls = string.Empty;
         [NotMapped]
         public string[] PicturesURls { get { return _picturesURls.Split(delimiter); } set { _picturesURls = string.Join($"{delimiter}", value); } }
-        //public ICollection<OrderItem> OrderProducts { get; set; }
+        public ICollection<OrderItem> OrderItems { get; set; }
         public class ProductConfiguration : EntityTypeConfiguration<Product>
         {
             public ProductConfiguration() {

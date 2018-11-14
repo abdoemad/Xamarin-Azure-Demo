@@ -12,6 +12,12 @@ using Owin;
 using System.Linq;
 using Microsoft.Azure.Mobile.Server.Tables.Config;
 using System.Data.Entity.Migrations;
+using System.Web.Http.Dependencies;
+using Unity;
+using Unity.Exceptions;
+using EShope.API.Repository.Base;
+using Unity.Lifetime;
+using EShope.API.Migrations;
 
 namespace EShope.API
 {
@@ -19,7 +25,12 @@ namespace EShope.API
     {
         public static void ConfigureMobileApp(IAppBuilder app)
         {
+            //var container = new UnityContainer();
+            //container.RegisterType<DbContext, EShopeMobileServiceContext>(new HierarchicalLifetimeManager());
+            //container.RegisterType<IRepository<Order>, EFRepository<Order>>(new HierarchicalLifetimeManager());
+
             HttpConfiguration config = new HttpConfiguration();
+            //config.DependencyResolver = new UnityResolver(container);
             //config.Formatters.JsonFormatter.SupportedMediaTypes
             //config.EnableSystemDiagnosticsTracing();
 
@@ -86,7 +97,62 @@ namespace EShope.API
     {
         protected override void Seed(EShopeMobileServiceContext context)
         {
-            
+            EShopeSeedData.AddToContext(context);
+            base.Seed(context);
+        }
+    }
+
+    public class UnityResolver : IDependencyResolver
+    {
+        protected IUnityContainer container;
+
+        public UnityResolver(IUnityContainer container)
+        {
+            if (container == null)
+            {
+                throw new ArgumentNullException("container");
+            }
+            this.container = container;
+        }
+
+        public object GetService(Type serviceType)
+        {
+            try
+            {
+                return container.Resolve(serviceType);
+            }
+            catch (ResolutionFailedException ex)
+            {
+                return null;
+            }
+        }
+
+        public IEnumerable<object> GetServices(Type serviceType)
+        {
+            try
+            {
+                return container.ResolveAll(serviceType);
+            }
+            catch (ResolutionFailedException ex)
+            {
+                return new List<object>();
+            }
+        }
+
+        public IDependencyScope BeginScope()
+        {
+            var child = container.CreateChildContainer();
+            return new UnityResolver(child);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            container.Dispose();
         }
     }
 }

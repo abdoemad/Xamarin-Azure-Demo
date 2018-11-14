@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EShope.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +8,20 @@ namespace EShope.Services.Infra.Imp
 {
     public class AutoMapper : IMapper
     {
-        public void Initialize(Dictionary<Type,Type> mapConfiguration)
+        //public AutoMapper() {
+            
+        //}
+        public void Initialize(Dictionary<Type, Type> mapConfiguration)
         {
-            Mapper.Initialize(cfg => {
-                //cfg.AddCollectionMappers();
-                mapConfiguration.ToList().ForEach(mapConfig =>
+            ExceptionHelper.TryCatch(() =>
+            {
+                Mapper.Initialize(cfg =>
                 {
-                    cfg.CreateMap(mapConfig.Key, mapConfig.Value);
+                    //cfg.AddCollectionMappers();
+                    mapConfiguration.ToList().ForEach(mapConfig =>
+                    {
+                        cfg.CreateMap(mapConfig.Key, mapConfig.Value);
+                    });
                 });
             });
         }

@@ -5,6 +5,8 @@ using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Tables;
 using EShope.API.DataObjects;
 using System;
+using EShope.API.Migrations;
+using System.Threading.Tasks;
 
 namespace EShope.API.Models
 {
@@ -25,6 +27,8 @@ namespace EShope.API.Models
 
         public EShopeMobileServiceContext() : base(connectionStringName)
         {
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<EShopeMobileServiceContext, Configuration>());
+
             Database.Log = s => WriteLog(s);
         }
         public void WriteLog(string msg)
@@ -33,7 +37,15 @@ namespace EShope.API.Models
         }
 
         //public DbSet<TodoItem> TodoItems { get; set; }
+        public override Task<int> SaveChangesAsync()
+        {
+            //var addedentries = ChangeTracker.Entries()
+            //    .Where(e => e.State == EntityState.Added && e.Member("Id").GetType() == typeof(string));
 
+            //addedentries.ToList().ForEach(entry => entry.Property("Id").CurrentValue = Guid.NewGuid().ToString());
+
+            return base.SaveChangesAsync();
+        }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Add(
@@ -51,7 +63,7 @@ namespace EShope.API.Models
                 .WillCascadeOnDelete();
 
             modelBuilder.Entity<OrderItem>()
-               .HasRequired(i => i.Product).WithOptional().WillCascadeOnDelete();
+               .HasRequired(i => i.Product).WithMany(p => p.OrderItems).HasForeignKey(o => o.ProductId).WillCascadeOnDelete();
         }
 
         public DbSet<User> Users { get; set; }

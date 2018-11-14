@@ -39,12 +39,20 @@
 						HorizontalOptions="Center" 
 						VerticalOptions="Center" 
 						
-						Text="{Binding CartItemsQuantities}" TextColor="White" FontSize="Micro"></Label>
+						Text="{Binding CartItemsQuantities}" TextColor="White" FontSize="Micro">
+
+					</Label>
+					
 				</Frame>
 				<Image Grid.Column="1" Margin="-14,5,0,5"
 					   VerticalOptions="Center"
 					   HorizontalOptions="Start"
 					   Source="{uie:ImageResource Source=EShope.Resources.Images.cart_image.png}"></Image>
+				<Grid.Triggers>
+					<DataTrigger TargetType="Grid" Binding="{Binding CartItemsQuantities}" Value="0">
+						<Setter Property="IsVisible" Value="False"></Setter>
+					</DataTrigger>
+				</Grid.Triggers>
 			</Grid>
 			<Frame Grid.Column="2" WidthRequest="3" BackgroundColor="Red" Style="{StaticResource Key=ContextMenuButtonStyle}">
 				<!--<Frame.Behaviors>
@@ -53,9 +61,9 @@
 				<!--<Frame.GestureRecognizers>
 					<TapGestureRecognizer Command="NavigateToShoppingCartCommand" NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
 					
-				</Frame.GestureRecognizers>-->
+				</Frame.GestureRecognizers>--><!--
+			</Frame>-->
 			</Frame>
-			<!--</Frame>-->
 		</Grid>
   </ContentView.Content>
 </ContentView>

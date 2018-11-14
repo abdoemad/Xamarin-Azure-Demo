@@ -46,9 +46,19 @@ namespace EShope.API.Migrations
                 ThumnailURL = "",
             };
 
+            var keyboardProduct = new Product
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Keyboard",
+                Description = "Keyboard Desc",
+                Price = 70,
+                StockQuantity = 1,
+                ThumnailURL = "",
+            };
+
             var products = new List<Product>
             {
-                tvProduct, laptopProduct, mobileProduct,
+                tvProduct, laptopProduct, mobileProduct, keyboardProduct,
                 new Product{
                     Id = Guid.NewGuid().ToString(),
                     Name = "Headphone",

@@ -6,23 +6,28 @@ using System.Web.Http.OData;
 using Microsoft.Azure.Mobile.Server;
 using EShope.API.DataObjects;
 using EShope.API.Models;
+using EShope.API.DTO;
+using EShope.API.Models.DomainManagers;
 
 namespace EShope.API.Controllers
 {
-    public class ProductController : TableController<Product>
+    public class ProductController : TableController<Product> //: TableController<ProductDTO>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             base.Initialize(controllerContext);
             EShopeMobileServiceContext context = new EShopeMobileServiceContext();
             DomainManager = new EntityDomainManager<Product>(context, Request);
+            //DomainManager = new DefaultMappedEntityDomainManager<ProductDTO, Product>(context, Request/*, Services*/);
+            
         }
 
         [EnableQuery(PageSize = 50)]
         // GET tables/Product
         public IQueryable<Product> GetAllProduct()
         {
-            return Query().Where(p => p.StockQuantity > 0);
+            var products = Query().Where(p => p.StockQuantity > 0).ToList();
+            return products.AsQueryable();
         }
 
         // GET tables/Product/48D68C86-6EA6-4C25-AA33-223FC9A27959

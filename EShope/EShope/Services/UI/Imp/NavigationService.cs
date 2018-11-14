@@ -115,5 +115,14 @@ namespace EShope.Services.UI.Imp
                 await mainPage.Navigation.PopAsync();
             }
         }
+
+        public async Task ClearStack()
+        {
+            if (MainPage is MainPage mainPage)
+            {
+                await MainPage.Navigation.PopToRootAsync();
+            }
+            
+        }
     }
 }

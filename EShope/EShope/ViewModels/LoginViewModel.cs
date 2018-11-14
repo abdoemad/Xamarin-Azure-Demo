@@ -82,7 +82,7 @@ namespace EShope.ViewModels
                 catch (Exception ex)
                 {
                     //IsBusy = false;
-                    await _dialogService.ShowDialog(ErrorMessagesResources.Login_ServerAuthenticationFailed, "Warning", "Ok");
+                    await _dialogService.ShowDialog("Warning", ErrorMessagesResources.Login_ServerAuthenticationFailed,  "Ok");
                     //return;
                 }
             }

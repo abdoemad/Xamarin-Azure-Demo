@@ -9,6 +9,7 @@ namespace EShope.Services.UI
 {
     public interface INavigationService
     {
+        Task ClearStack();
         Task Initialize();
 
         Task NavigateTo<TViewModel>() where TViewModel : ViewModelBase;
