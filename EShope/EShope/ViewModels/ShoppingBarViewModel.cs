@@ -5,6 +5,7 @@ using EShope.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -15,8 +16,10 @@ namespace EShope.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IConnectionService _connectionService;
         private ShoppingCartViewModel _shoppingCartViewModel;
-        public ShoppingBarViewModel(INavigationService navigationService, IConnectionService connectionService, ShoppingCartViewModel shoppingCartViewModel)
+        IDialogService _dialogService;
+        public ShoppingBarViewModel(INavigationService navigationService, IConnectionService connectionService, ShoppingCartViewModel shoppingCartViewModel, IDialogService dialogService)
         {
+            _dialogService = dialogService;
             _navigationService = navigationService;
             _shoppingCartViewModel = shoppingCartViewModel;
             _shoppingCartViewModel.CartListChanged += _shoppingCartViewModel_CartListChanged;
@@ -50,6 +53,13 @@ namespace EShope.ViewModels
         public IAsyncCommand NavigateToShoppingCartCommand => new AsyncCommand(async () =>
         {
             await _navigationService.NavigateTo<ShoppingCartViewModel>();
+        });
+
+        private IAsyncCommand _openMenuCommand;
+        public IAsyncCommand OpenMenuCommand => _openMenuCommand ?? new AsyncCommand(async () =>
+        {
+            await Task.Delay(200);
+            _dialogService.ToggleMenuVisibility();
         });
         #endregion
     }

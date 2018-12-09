@@ -42,6 +42,9 @@
     <Compile Update="Pages\AddToCartPage.xaml.cs">
       <DependentUpon>AddToCartPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Base\ShopppingBasePage.xaml.cs">
+      <DependentUpon>ShopppingBasePage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\ProductCatalogPage.xaml.cs">
       <DependentUpon>ProductCatalogPage.xaml</DependentUpon>
     </Compile>
@@ -55,13 +58,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ErrorMessagesResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\PopupMenuView.xaml.cs">
+      <DependentUpon>PopupMenuView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Pages\Base\LoadingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Base\ShopppingBarContainerPage.xaml">
+    <EmbeddedResource Update="Pages\Base\ShopppingBasePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\ProductCatalogPage.xaml">
@@ -76,6 +82,9 @@
     <EmbeddedResource Update="Pages\ShoppingCartPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Pages\TestPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\AppResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
@@ -84,6 +93,9 @@
     <EmbeddedResource Update="Resources\ErrorMessagesResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorMessagesResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PopupMenuView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ShoppingBarView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

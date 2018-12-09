@@ -11,13 +11,10 @@ namespace EShope.Services.UI
     {
         Task ClearStack();
         Task Initialize();
-
         Task NavigateTo<TViewModel>() where TViewModel : ViewModelBase;
-
         Task NavigateTo<TViewModel>(object paramter, bool initiateViewModel) where TViewModel : ViewModelBase;
-
         Task NagigatoToHomePage();
-
+        Task NavigateToLoginPage();
         Task NavigateBackAsync();
     }
 }

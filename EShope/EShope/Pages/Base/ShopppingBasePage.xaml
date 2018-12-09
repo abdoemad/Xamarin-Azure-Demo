@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:PageBase
+	xmlns:base="clr-namespace:EShope.Pages.Base" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:views="clr-namespace:EShope.Views"
+	x:Name="shoppingBarPage"
+             x:Class="EShope.Pages.Base.ShopppingBasePage">
+	<!--<ContentPage.ToolbarItems>
+		<ToolbarItem Text="Action 1" Order="Secondary" />
+		<ToolbarItem Text="Action 2" Order="Secondary" />
+	</ContentPage.ToolbarItems>-->
+	<ContentPage.Content>
+		<RelativeLayout x:Name="relativeLayout">
+			<views:PopupMenuView x:Name="popupMenu" WidthRequest="100" IsVisible="False" IsClippedToBounds="True" Unfocused="PopupMenu_Unfocused"
+			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=30}"
+			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-120}"
+			></views:PopupMenuView>
+			
+			<Grid RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Factor=1, Property=Height}">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="*"></RowDefinition>
+			</Grid.RowDefinitions>
+			<views:ShoppingBarView x:Name="shoppingBar"></views:ShoppingBarView>
+			
+			<ContentView Grid.Row="1" Content="{Binding Source={x:Reference shoppingBarPage}, Path=ContentPlaceHolder}"
+                         HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+			</ContentView>
+
+			<ActivityIndicator x:Name="busyIndicator" 
+							   Grid.Row="1"
+							   IsRunning="{Binding Source={x:Reference shoppingBarPage}, Path=IsBusy}" 
+							   IsVisible="{Binding Source={x:Reference shoppingBarPage}, Path=IsBusy}"></ActivityIndicator>
+		</Grid>
+			
+		</RelativeLayout>
+	</ContentPage.Content>
+</base:PageBase>
+	

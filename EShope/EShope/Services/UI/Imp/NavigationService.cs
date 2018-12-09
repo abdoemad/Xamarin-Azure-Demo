@@ -23,7 +23,7 @@ namespace EShope.Services.UI.Imp
         {
             CreatePageViewModelMappings();
         }
-        protected Page MainPage => Application.Current.MainPage;
+        protected Page CurrentMainPage => Application.Current.MainPage;
         private void CreatePageViewModelMappings()
         {
             _homePageType = typeof(ProductCatalogPage);
@@ -110,7 +110,7 @@ namespace EShope.Services.UI.Imp
 
         public async Task NavigateBackAsync()
         {
-            if (MainPage is MainPage mainPage)
+            if (CurrentMainPage is MainPage mainPage)
             {
                 await mainPage.Navigation.PopAsync();
             }
@@ -118,11 +118,37 @@ namespace EShope.Services.UI.Imp
 
         public async Task ClearStack()
         {
-            if (MainPage is MainPage mainPage)
+            if (CurrentMainPage is MainPage mainPage)
             {
-                await MainPage.Navigation.PopToRootAsync();
+                await CurrentMainPage.Navigation.PopToRootAsync();
             }
             
+        }
+
+        public async Task NavigateToLoginPage()
+        {
+            await ExceptionHelper.TryCatchAsync(async () =>
+            {
+                if (CurrentMainPage.GetType() == _loginPageType)
+                {
+                    //return Task.CompletedTask;
+                    //return Task.FromResult(false);
+                    return;
+                }
+                var navigationPage = App.AppMainPage as MainPage;
+                if (navigationPage == null)
+                {
+                    //throw new Exception();
+                    return;
+
+                }
+                await navigationPage.Navigation.PopToRootAsync();
+                var loginPage = Activator.CreateInstance(_loginPageType) as PageBase;
+
+                Application.Current.MainPage  = loginPage;
+                var viewModel = loginPage.BindingContext as ViewModelBase;
+                await viewModel.InitializeAsync(null);
+            });
         }
     }
 }

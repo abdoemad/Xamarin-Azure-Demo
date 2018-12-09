@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<base:ShopppingBarContainerPage
+<base:ShopppingBasePage
 			 xmlns:base="clr-namespace:EShope.Pages.Base" 
 			 xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:behaviors="clr-namespace:EShope.Behaviors"
 			 xmlns:uie="clr-namespace:EShope.UIExtensions"	
              x:Class="EShope.Pages.AddToCartPage" 
+			
 			 NavigationPage.HasNavigationBar="False">
 	<!--ControlTemplate="{StaticResource shoppingBarContainer}"-->
 	<!--BindingContext="{Binding ProductDetails, Source={StaticResource viewModelLocator}}"-->
-	<base:ShopppingBarContainerPage.ContentPlaceHolder>
+	<base:ShopppingBasePage.ContentPlaceHolder>
 		<Grid Margin="5">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto"></RowDefinition>
@@ -62,5 +63,5 @@
 				</Grid>
 			</Grid>
 		</Grid>
-</base:ShopppingBarContainerPage.ContentPlaceHolder>
-</base:ShopppingBarContainerPage>
+</base:ShopppingBasePage.ContentPlaceHolder>
+</base:ShopppingBasePage>

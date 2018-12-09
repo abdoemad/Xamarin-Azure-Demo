@@ -14,7 +14,7 @@ using EShope.Services.Device;
 
 namespace EShope.ViewModels
 {
-    public class ProductCatalogViewModel : ViewModelBase
+    public class ProductCatalogViewModel : ShoppingViewModelBase
     {
         IConnectionService _connectionService;
         private readonly IProductService _productService;

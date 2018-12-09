@@ -16,7 +16,7 @@ using Xamarin.Forms;
 
 namespace EShope.ViewModels
 {
-    public class ShoppingCartViewModel : ViewModelBase
+    public class ShoppingCartViewModel : ShoppingViewModelBase
     {
         #region Private Variables
         IOrderService _orderService;

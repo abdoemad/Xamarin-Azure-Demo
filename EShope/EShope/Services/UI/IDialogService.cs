@@ -11,6 +11,10 @@ namespace EShope.Services.UI
 
         Task ShowDialog(string message, string title, string acceptbtnLabel, string cancelbtnLabel);
 
-        
+        Task ShowMenu();
+
+        void ToggleMenuVisibility();
+
+        void HideMenu();
     }
 }

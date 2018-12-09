@@ -12,7 +12,7 @@ using Xamarin.Forms.Xaml;
 namespace EShope.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ProductCatalogPage : ShopppingBarContainerPage //LoadingPage // PageBase
+	public partial class ProductCatalogPage : ShopppingBasePage //LoadingPage // PageBase
     {
 		public ProductCatalogPage()
 		{

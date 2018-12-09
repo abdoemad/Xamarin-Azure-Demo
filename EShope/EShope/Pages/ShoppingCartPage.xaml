@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<base:ShopppingBarContainerPage
+<base:ShopppingBasePage
 	xmlns:base="clr-namespace:EShope.Pages.Base" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	xmlns:uie="clr-namespace:EShope.UIExtensions"
@@ -10,7 +10,7 @@
 	Title="Shopping cart"
 			 x:Name="cartPage">
 	<!--ControlTemplate="{StaticResource shoppingBarContainer}"-->
-	<base:ShopppingBarContainerPage.ContentPlaceHolder>
+	<base:ShopppingBasePage.ContentPlaceHolder>
 		<Grid>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="*"></RowDefinition>
@@ -73,5 +73,5 @@
 				</Button.Triggers>
 			</Button>
 		</Grid>
-    </base:ShopppingBarContainerPage.ContentPlaceHolder>
-</base:ShopppingBarContainerPage>
+    </base:ShopppingBasePage.ContentPlaceHolder>
+</base:ShopppingBasePage>

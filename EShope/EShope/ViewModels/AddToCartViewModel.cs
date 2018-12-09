@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace EShope.ViewModels
 {
-    public class AddToCartViewModel : ViewModelBase
+    public class AddToCartViewModel : ShoppingViewModelBase
     {
         INavigationService _navigationService;
         ShoppingCartViewModel _shoppingCartViewModel;
