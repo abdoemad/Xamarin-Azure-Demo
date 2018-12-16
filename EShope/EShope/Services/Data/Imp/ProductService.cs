@@ -15,10 +15,12 @@ namespace EShope.Services.Data.Imp
 {
     public class ProductService : IProductService
     {
+        IAPIConsumer _api;
         IMobileServiceClient _client;
         IMobileServiceSyncTable<Product> _productTable;
         public ProductService(IAPIConsumer api)
         {
+            _api = api;
             _client = new MobileServiceClient(api.DefaultEndPoint);
             //InitLocalStoreAsync();
             var store = new MobileServiceSQLiteStore("eshopelocaldb.db");
@@ -51,12 +53,11 @@ namespace EShope.Services.Data.Imp
             try
             {
                 //await this._client.SyncContext.PushAsync();
-
+                var productTableQuery = this._productTable.CreateQuery();
                 await this._productTable.PullAsync(
                     //The first parameter is a query name that is used internally by the client SDK to implement incremental sync.
                     //Use a different query name for each unique query in your program
-                    "availableProducts",
-                    this._productTable.CreateQuery());
+                    "availableProducts", productTableQuery);
             }
 
             catch (MobileServicePushFailedException exc)
@@ -100,10 +101,10 @@ namespace EShope.Services.Data.Imp
                 {
                     await this.SyncAsync();
                 }
-                var productQuery = _productTable;//.Where(p => p.AvailableQuantity > 1);
-                List<Product> items = await productQuery.ToListAsync();
-
-                return items;
+                //var productQuery = _productTable;//.Where(p => p.AvailableQuantity > 1);
+                var productList = await _productTable.ToListAsync();
+                productList.ForEach(p => { p.ThumbnailURL = _api.DefaultEndPoint + "/Images/" + p.ThumbnailURL; });
+                return productList;
             }
             catch (MobileServiceInvalidOperationException msioe)
             {

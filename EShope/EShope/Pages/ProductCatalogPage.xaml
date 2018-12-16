@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:uie="clr-namespace:EShope.UIExtensions"
 	xmlns:behaviors="clr-namespace:EShope.Behaviors"
+	xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
 	x:Class="EShope.Pages.ProductCatalogPage"
 			 
 			 BindingContext="{Binding ProductCatalog, Source={StaticResource viewModelLocator}}"
@@ -47,7 +48,13 @@
 									<ColumnDefinition Width="3*"></ColumnDefinition>
 									<ColumnDefinition Width="7*"></ColumnDefinition>
 								</Grid.ColumnDefinitions>
-								<Image Grid.Column="0" Margin="3" Aspect="AspectFit" VerticalOptions="CenterAndExpand" Source="{uie:ImageResourceExtension Source=EShope.Resources.Images.cart_image.png}"></Image>
+								<!--Source="{uie:ImageResourceExtension Source=EShope.Resources.Images.cart_image.png}"-->
+								<!--<UriImageSource Grid.Column="0" Margin="3" Aspect="AspectFit" VerticalOptions="CenterAndExpand" Source="{Binding ThumnailURL}"></UriImageSource>-->
+								<ffimageloading:CachedImage Grid.Column="0" Margin="3" HorizontalOptions="Center" VerticalOptions="Center" DownsampleToViewSize="true" Source = "{Binding ThumnailURL}" Aspect="AspectFit">
+									<!--<ffimageloading:CachedImage.Transformations>
+										<fftransformations:GrayscaleTransformation />
+									</ffimageloading:CachedImage.Transformations>-->
+								</ffimageloading:CachedImage>
 								<Grid Grid.Column="1">
 									<Grid.RowDefinitions>
 										<RowDefinition></RowDefinition>

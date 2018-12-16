@@ -1,4 +1,5 @@
 ﻿using Microsoft.Azure.Mobile.Server;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -26,7 +27,8 @@ namespace EShope.API.DataObjects
         public decimal Price { get; set; }
         [ConcurrencyCheck]
         public int StockQuantity { get; set; }
-        [DataType(DataType.ImageUrl)]
+        //[DataType(DataType.ImageUrl)]
+        [JsonProperty("thumnailURL1")]
         public string ThumnailURL { get; set; }
 
         string _picturesURls = string.Empty;
