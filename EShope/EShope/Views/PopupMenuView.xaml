@@ -6,7 +6,7 @@
       <StackLayout BackgroundColor="LightSeaGreen">
 			<Button Text="Logout" Command="{Binding LogoutCommand}"></Button>
 			<Button Text="Sync" Command="{Binding RequestSyncCommand}"></Button>
-			<Button Text="Home" Command="{Binding BackToHomeCommand}"></Button>
+			<Button Text="Home" Command="{Binding GoToHomeCommand}"></Button>
 		</StackLayout>
   </ContentView.Content>
 </ContentView>

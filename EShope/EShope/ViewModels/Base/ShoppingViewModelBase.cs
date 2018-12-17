@@ -17,11 +17,18 @@ namespace EShope.ViewModels.Base
         }
         IAsyncCommand _logoutCommand;
 
-        public IAsyncCommand LogoutCommand => new AsyncCommand(async () =>
+        public IAsyncCommand LogoutCommand => _logoutCommand ?? new AsyncCommand(async () =>
+         {
+             App.LoggedInUser = null;
+             await Task.Delay(150);
+             await _navigationService.NavigateToLoginPage();
+         });
+
+        IAsyncCommand _goToHomeCommand;
+
+        public IAsyncCommand GoToHomeCommand => _goToHomeCommand ?? new AsyncCommand(async () =>
         {
-            App.LoggedInUser = null;
-            await Task.Delay(150);
-            await _navigationService.NavigateToLoginPage();
+            await _navigationService.NagigatoToHomePage();
         });
     }
 }

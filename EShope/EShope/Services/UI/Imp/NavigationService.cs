@@ -47,10 +47,24 @@ namespace EShope.Services.UI.Imp
 
         public async Task NagigatoToHomePage()
         {
-            PageBase homePage = Activator.CreateInstance(_homePageType) as PageBase;
-            Application.Current.MainPage = new MainPage(homePage);
-            var viewModel = homePage.BindingContext as ViewModelBase;
-            await viewModel.InitializeAsync(null);
+            var mainPageType = Application.Current.MainPage.GetType();
+            var mainPageAsNavigationPage =  Application.Current.MainPage as NavigationPage;
+            if (Application.Current.MainPage != null && mainPageAsNavigationPage !=null && mainPageAsNavigationPage.CurrentPage.GetType() == _homePageType)
+            {
+                await Task.CompletedTask;
+            }
+            else if (Application.Current.MainPage == null || Application.Current.MainPage.GetType() != _navigationRootPage)
+            {
+                PageBase homePage = Activator.CreateInstance(_homePageType) as PageBase;
+                Application.Current.MainPage = new MainPage(homePage);
+                var viewModel = homePage.BindingContext as ViewModelBase;
+                await viewModel.InitializeAsync(null);
+            }
+            else
+            {
+                var navigation = CurrentMainPage.Navigation as INavigation;
+                await navigation.PopToRootAsync();
+            }
         }
 
         public async Task NavigateTo<TViewModel>() where TViewModel : ViewModelBase
