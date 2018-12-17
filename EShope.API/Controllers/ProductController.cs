@@ -8,6 +8,7 @@ using EShope.API.DataObjects;
 using EShope.API.Models;
 using EShope.API.DTO;
 using EShope.API.Models.DomainManagers;
+using System;
 
 namespace EShope.API.Controllers
 {
@@ -26,8 +27,15 @@ namespace EShope.API.Controllers
         // GET tables/Product
         public IQueryable<Product> GetAllProduct()
         {
-            var products = Query().Where(p => p.StockQuantity > 0).ToList();
-            return products.AsQueryable();
+            try
+            {
+                var products = Query().Where(p => p.StockQuantity > 0).ToList();
+                return products.AsQueryable();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         // GET tables/Product/48D68C86-6EA6-4C25-AA33-223FC9A27959

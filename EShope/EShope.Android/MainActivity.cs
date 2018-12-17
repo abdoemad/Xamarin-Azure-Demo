@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using FFImageLoading;
+using FFImageLoading.Forms.Droid;
 
 namespace EShope.Droid
 {
@@ -19,18 +20,20 @@ namespace EShope.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+            //Xamarin.Forms.Forms.SetFlags("FastRenderers_Experimental");
+            //FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
 
             //FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
 
-            var config = new FFImageLoading.Config.Configuration()
-            {
-                VerboseLogging = false,
-                VerbosePerformanceLogging = false,
-                VerboseMemoryCacheLogging = false,
-                VerboseLoadingCancelledLogging = false,
-                Logger = new CustomLogger(),
-            };
-            ImageService.Instance.Initialize(config);
+            //var config = new FFImageLoading.Config.Configuration()
+            //{
+            //    VerboseLogging = false,
+            //    VerbosePerformanceLogging = false,
+            //    VerboseMemoryCacheLogging = false,
+            //    VerboseLoadingCancelledLogging = false,
+            //    Logger = new CustomLogger(),
+            //};
+            //ImageService.Instance.Initialize(config);
 
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);

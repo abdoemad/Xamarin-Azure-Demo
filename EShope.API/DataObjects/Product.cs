@@ -27,8 +27,8 @@ namespace EShope.API.DataObjects
         public decimal Price { get; set; }
         [ConcurrencyCheck]
         public int StockQuantity { get; set; }
-        //[DataType(DataType.ImageUrl)]
-        [JsonProperty("thumnailURL1")]
+        [DataType(DataType.ImageUrl)]
+        //[JsonProperty("thumnailURL")]
         public string ThumnailURL { get; set; }
 
         string _picturesURls = string.Empty;

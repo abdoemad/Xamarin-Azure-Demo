@@ -29,7 +29,7 @@
 			<Label Grid.Row="0" Text="{Binding ProductList.Count, StringFormat='Total Products: {0}'}" Margin="3,2,0,2" FontSize="Micro" TextColor="LightGreen"></Label>
 			<ListView x:Name="productCatalogList" Grid.Row="1" 
 					  ItemsSource="{Binding ProductCatalogList}" 
-					  HasUnevenRows="True" VerticalOptions="FillAndExpand" RowHeight="50">
+					  HasUnevenRows="True" VerticalOptions="FillAndExpand" RowHeight="70">
 				<ListView.Behaviors>
 					<behaviors:EventToCommandBehavior EventName="ItemTapped" 
 													  EventArgsConverter="{StaticResource itemTappedEventArgsConverter}"
@@ -49,12 +49,12 @@
 									<ColumnDefinition Width="7*"></ColumnDefinition>
 								</Grid.ColumnDefinitions>
 								<!--Source="{uie:ImageResourceExtension Source=EShope.Resources.Images.cart_image.png}"-->
-								<!--<UriImageSource Grid.Column="0" Margin="3" Aspect="AspectFit" VerticalOptions="CenterAndExpand" Source="{Binding ThumnailURL}"></UriImageSource>-->
-								<ffimageloading:CachedImage Grid.Column="0" Margin="3" HorizontalOptions="Center" VerticalOptions="Center" DownsampleToViewSize="true" Source = "{Binding ThumnailURL}" Aspect="AspectFit">
+								<Image Grid.Column="0" Margin="3" Aspect="AspectFit" HeightRequest="70" VerticalOptions="CenterAndExpand" Source="{Binding ThumnailURL, Converter={StaticResource cachedImageSource}}"></Image>
+								<!--<ffimageloading:CachedImage Grid.Column="0" Margin="3" HorizontalOptions="Center" VerticalOptions="Center" DownsampleToViewSize="true" Source = "{Binding ThumnailURL}" Aspect="AspectFit">-->
 									<!--<ffimageloading:CachedImage.Transformations>
 										<fftransformations:GrayscaleTransformation />
 									</ffimageloading:CachedImage.Transformations>-->
-								</ffimageloading:CachedImage>
+								<!--</ffimageloading:CachedImage>-->
 								<Grid Grid.Column="1">
 									<Grid.RowDefinitions>
 										<RowDefinition></RowDefinition>

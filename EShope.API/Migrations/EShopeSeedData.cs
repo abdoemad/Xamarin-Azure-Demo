@@ -25,7 +25,7 @@ namespace EShope.API.Migrations
                 Description = "TV Desc: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                 Price = 150,
                 StockQuantity = 7,
-                ThumnailURL = ""
+                ThumnailURL = "tv_thumb.jpg"
             };
             var laptopProduct = new Product
             {
@@ -34,7 +34,7 @@ namespace EShope.API.Migrations
                 Description = "Laptop Desc: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                 Price = 300,
                 StockQuantity = 4,
-                ThumnailURL = ""
+                ThumnailURL = "laptop_thumb.png"
             };
             var mobileProduct = new Product
             {
@@ -43,7 +43,7 @@ namespace EShope.API.Migrations
                 Description = "Mobile Desc: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                 Price = 200,
                 StockQuantity = 2,
-                ThumnailURL = "",
+                ThumnailURL = "mobile_thumb.jpg",
             };
 
             var keyboardProduct = new Product
@@ -53,7 +53,7 @@ namespace EShope.API.Migrations
                 Description = "Keyboard Desc",
                 Price = 70,
                 StockQuantity = 1,
-                ThumnailURL = "",
+                ThumnailURL = "keyboard_thumb.jpg",
             };
 
             var products = new List<Product>
@@ -65,13 +65,13 @@ namespace EShope.API.Migrations
                     Description = "Headphone Desc: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." ,
                     Price=70,
                     StockQuantity=0,
-                    ThumnailURL=""
+                    ThumnailURL="headphone_thumb.jpg"
                 }
             };
 
             context.Set<Product>().AddRange(products);
 
-            //--------------
+            ////--------------
             var order1 = new Order
             {
                 Id = Guid.NewGuid().ToString(),

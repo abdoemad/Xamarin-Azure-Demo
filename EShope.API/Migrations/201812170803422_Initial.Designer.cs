@@ -13,7 +13,7 @@ namespace EShope.API.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201811140842155_Initial"; }
+            get { return "201812170803422_Initial"; }
         }
         
         string IMigrationMetadata.Source

@@ -1,6 +1,7 @@
 ﻿using EShope.Models;
 using EShope.Pages;
 using EShope.ViewModels;
+using FFImageLoading.Forms;
 using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
@@ -34,6 +35,9 @@ namespace EShope
         private void InitializeApp()
         {
             //DependencyResolver.ResolveUsing(type=>_locator.
+
+            //CachedImage.FixedOnMeasureBehavior = true;
+            //CachedImage.FixedAndroidMotionEventHandler = true;
         }
 
         protected override void OnStart()

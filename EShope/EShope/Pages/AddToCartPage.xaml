@@ -23,8 +23,10 @@
 				   VerticalTextAlignment="Center" 
 				   HorizontalTextAlignment="Start" 
 				   Margin="5,3,0,0" FontSize="Small"></Label>
-			<Image Grid.Row="1" Margin="3" Aspect="Fill" VerticalOptions="CenterAndExpand" 
-				   Source="{uie:ImageResourceExtension Source=EShope.Resources.Images.cart_image.png}"></Image>
+			<Image Grid.Row="1" Margin="3" Aspect="AspectFit" VerticalOptions="CenterAndExpand" 
+				   Source="{Binding Product.ThumnailURL, Converter={StaticResource cachedImageSource}}"
+				   ></Image>
+			<!--Source="{uie:ImageResourceExtension Source=EShope.Resources.Images.cart_image.png}"-->
 			<Label Grid.Row="2" FontAttributes="Bold" FontSize="Small" 
 				   Text="{Binding Product.Price, StringFormat='$ {0}.00'}"></Label>
 			<ScrollView Grid.Row="3">

@@ -8,6 +8,7 @@
 			 x:Class="EShope.App">
     <Application.Resources>
 		<ResourceDictionary>
+			<converters:CachedImageSource x:Key="cachedImageSource"></converters:CachedImageSource>
 			<converters:ValueChangedEventArgsConverter x:Key="valueChangedEventArgsConverter"/>
 			<converters:ItemTappedEventArgsConverter x:Key="itemTappedEventArgsConverter" />
 			<converters:InverseBoolConverter x:Key="inverseBoolConverter"></converters:InverseBoolConverter>

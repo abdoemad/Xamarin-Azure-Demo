@@ -214,9 +214,9 @@
     <Compile Include="DataObjects\TodoItem.cs" />
     <Compile Include="DataObjects\User.cs" />
     <Compile Include="DTO\ProductDTO.cs" />
-    <Compile Include="Migrations\201811140842155_Initial.cs" />
-    <Compile Include="Migrations\201811140842155_Initial.Designer.cs">
-      <DependentUpon>201811140842155_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201812170803422_Initial.cs" />
+    <Compile Include="Migrations\201812170803422_Initial.Designer.cs">
+      <DependentUpon>201812170803422_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\EShopeSeedData.cs" />
@@ -252,8 +252,8 @@
     <None Include="Properties\PublishProfiles\eshopemobile - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201811140842155_Initial.resx">
-      <DependentUpon>201811140842155_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201812170803422_Initial.resx">
+      <DependentUpon>201812170803422_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

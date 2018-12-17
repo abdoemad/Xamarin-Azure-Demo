@@ -10,7 +10,7 @@ namespace EShope.Services.Data.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string ThumbnailURL { get; set; }
+        public string ThumnailURL { get; set; }
         public string[] PicturesURLs { get; set; }
         public decimal Price { get; set; }
         [JsonProperty(PropertyName = "stockQuantity")]

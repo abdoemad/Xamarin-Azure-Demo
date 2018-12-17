@@ -43,23 +43,24 @@
 									<ColumnDefinition Width="2*"></ColumnDefinition>
 									<ColumnDefinition Width="2*"></ColumnDefinition>
 								</Grid.ColumnDefinitions>
-								<Image Grid.Column="0" Margin="3" Aspect="AspectFit" VerticalOptions="CenterAndExpand" Source="{uie:ImageResourceExtension Source=EShope.Resources.Images.cart_image.png}"></Image>
+								<Image Grid.Column="0" Margin="3" Aspect="AspectFit" VerticalOptions="CenterAndExpand" Source="{Binding Product.ThumnailURL, Converter={StaticResource cachedImageSource}}"></Image>
+								<!--Source="{uie:ImageResourceExtension Source=EShope.Resources.Images.cart_image.png}"-->
 								<Grid Grid.Column="1">
 									<Grid.RowDefinitions>
 										<RowDefinition Height="*"></RowDefinition>
 										<RowDefinition></RowDefinition>
 										<RowDefinition></RowDefinition>
 									</Grid.RowDefinitions>
-									<Label Grid.Row="0" Text="{Binding Product.Name}" FontSize="Small"></Label>
+									<Label Grid.Row="0" Text="{Binding Product.Name}" VerticalOptions="End" FontSize="Small"></Label>
 									<Label Grid.Row="1" Text="In stock" TextColor="Green"></Label>
-									<Label Grid.Row="2" Text="Delete" FontSize="Micro" TextColor="Blue">
+									<Label Grid.Row="2" Text="Delete" FontSize="Micro" TextColor="Blue" VerticalOptions="Start">
 										<Label.GestureRecognizers>
 											<TapGestureRecognizer Command="{Binding Source={x:Reference cartPage}, Path=BindingContext.DeleteCartItemCommand}" CommandParameter="{Binding}"></TapGestureRecognizer>
 										</Label.GestureRecognizers>
 									</Label>
 								</Grid>
-								<Label Grid.Column="2" Text="{Binding Product.Price}"></Label>
-								<Label Grid.Column="3" Text="{Binding Quantity}"></Label>
+								<Label Grid.Column="2" Text="{Binding Product.Price}" VerticalTextAlignment="Center" VerticalOptions="Center"></Label>
+								<Label Grid.Column="3" Text="{Binding Quantity}" VerticalTextAlignment="Center" VerticalOptions="Center"></Label>
 							</Grid>
 						</ViewCell>
 					</DataTemplate>

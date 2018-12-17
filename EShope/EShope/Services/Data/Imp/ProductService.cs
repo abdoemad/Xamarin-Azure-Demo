@@ -103,7 +103,7 @@ namespace EShope.Services.Data.Imp
                 }
                 //var productQuery = _productTable;//.Where(p => p.AvailableQuantity > 1);
                 var productList = await _productTable.ToListAsync();
-                productList.ForEach(p => { p.ThumbnailURL = _api.DefaultEndPoint + "/Images/" + p.ThumbnailURL; });
+                productList.ForEach(p => { p.ThumnailURL = _api.DefaultEndPoint + "/Images/" + p.ThumnailURL; });
                 return productList;
             }
             catch (MobileServiceInvalidOperationException msioe)
