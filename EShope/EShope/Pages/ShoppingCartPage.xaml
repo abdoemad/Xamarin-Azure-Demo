@@ -43,7 +43,7 @@
 									<ColumnDefinition Width="2*"></ColumnDefinition>
 									<ColumnDefinition Width="2*"></ColumnDefinition>
 								</Grid.ColumnDefinitions>
-								<Image Grid.Column="0" Margin="3" Aspect="AspectFit" VerticalOptions="CenterAndExpand" Source="{Binding Product.ThumnailURL, Converter={StaticResource cachedImageSource}}"></Image>
+								<Image Grid.Column="0" Margin="3" HeightRequest="70" Aspect="AspectFit" VerticalOptions="CenterAndExpand" Source="{Binding Product.ThumnailURL, Converter={StaticResource cachedImageSource}}"></Image>
 								<!--Source="{uie:ImageResourceExtension Source=EShope.Resources.Images.cart_image.png}"-->
 								<Grid Grid.Column="1">
 									<Grid.RowDefinitions>

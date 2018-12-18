@@ -43,14 +43,25 @@ namespace EShope.ViewModels
                 { typeof(Product), typeof(ProductViewModel) }
             };
             mapper.Initialize(mapConfig);
+
+            MessagingCenter.Subscribe<object>(this, "Sync request", async param =>
+            {
+                await SyncProducts();
+            });
         }
         public override async Task InitializeAsync(object data)
         {
-            IsBusy = true;
-            
-            var products = await _productService.GetProductsAsync(false);
+            var syncFlag = false;
+            if (data != null)
+                syncFlag = (bool)data;
 
-            if (products.Count == 0)
+            IsBusy = true;
+
+            IList<Product> products = null;
+            if(!syncFlag)
+                products = await _productService.GetProductsAsync(false);
+
+            if (products == null || products.Count == 0 || syncFlag)
             {
                 var isInternetConnected = _connectionService.IsConnected;
                 if (isInternetConnected)
@@ -62,6 +73,11 @@ namespace EShope.ViewModels
             ProductCatalogList = productsViewModels;
             IsBusy = false;
         }
+        public async Task SyncProducts()
+        {
+            await InitializeAsync(true);
+        }
+
         private readonly ICommand _productSelectionCommand;
         public ICommand ProductSelectionCommand => _productSelectionCommand ?? new Command<ProductViewModel>(product =>
          {

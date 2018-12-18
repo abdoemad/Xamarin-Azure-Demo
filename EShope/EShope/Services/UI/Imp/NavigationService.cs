@@ -19,8 +19,10 @@ namespace EShope.Services.UI.Imp
         protected Type _homePageType;
         protected Type _loginPageType;
         protected Type _navigationRootPage;
-        public NavigationService()
+        IDialogService _dialogService;
+        public NavigationService(/*IDialogService dialogService*/)
         {
+            //_dialogService = dialogService;
             CreatePageViewModelMappings();
         }
         protected Page CurrentMainPage => Application.Current.MainPage;
@@ -47,6 +49,7 @@ namespace EShope.Services.UI.Imp
 
         public async Task NagigatoToHomePage()
         {
+            //_dialogService.HideMenu();
             var mainPageType = Application.Current.MainPage.GetType();
             var mainPageAsNavigationPage =  Application.Current.MainPage as NavigationPage;
             if (Application.Current.MainPage != null && mainPageAsNavigationPage !=null && mainPageAsNavigationPage.CurrentPage.GetType() == _homePageType)
@@ -65,10 +68,12 @@ namespace EShope.Services.UI.Imp
                 var navigation = CurrentMainPage.Navigation as INavigation;
                 await navigation.PopToRootAsync();
             }
+           
         }
 
         public async Task NavigateTo<TViewModel>() where TViewModel : ViewModelBase
         {
+            //_dialogService.HideMenu();
             NavigationPage navigationPage = App.AppMainPage as MainPage;
             if (navigationPage == null)
             {
@@ -92,6 +97,7 @@ namespace EShope.Services.UI.Imp
 
         public async Task NavigateTo<TViewModel>(object parameter, bool initiateViewModel) where TViewModel : ViewModelBase
         {
+            //_dialogService.HideMenu();
             await ExceptionHelper.TryCatchAsync(async () =>
             {
                 var navigationPage = App.AppMainPage as MainPage;
@@ -124,6 +130,7 @@ namespace EShope.Services.UI.Imp
 
         public async Task NavigateBackAsync()
         {
+            //_dialogService.HideMenu();
             if (CurrentMainPage is MainPage mainPage)
             {
                 await mainPage.Navigation.PopAsync();
@@ -132,6 +139,7 @@ namespace EShope.Services.UI.Imp
 
         public async Task ClearStack()
         {
+            //_dialogService.HideMenu();
             if (CurrentMainPage is MainPage mainPage)
             {
                 await CurrentMainPage.Navigation.PopToRootAsync();
@@ -141,6 +149,7 @@ namespace EShope.Services.UI.Imp
 
         public async Task NavigateToLoginPage()
         {
+            //_dialogService.HideMenu();
             await ExceptionHelper.TryCatchAsync(async () =>
             {
                 if (CurrentMainPage.GetType() == _loginPageType)

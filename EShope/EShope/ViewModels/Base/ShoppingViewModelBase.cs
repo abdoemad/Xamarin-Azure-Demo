@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace EShope.ViewModels.Base
 {
@@ -11,7 +13,8 @@ namespace EShope.ViewModels.Base
     {
         IDialogService _dialogService;
         INavigationService _navigationService;
-        public ShoppingViewModelBase() {
+        public ShoppingViewModelBase()
+        {
             _dialogService = ViewModelLocator.Resolve<IDialogService>();
             _navigationService = ViewModelLocator.Resolve<INavigationService>();
         }
@@ -21,6 +24,7 @@ namespace EShope.ViewModels.Base
          {
              App.LoggedInUser = null;
              await Task.Delay(150);
+             _dialogService.HideMenu();
              await _navigationService.NavigateToLoginPage();
          });
 
@@ -28,7 +32,17 @@ namespace EShope.ViewModels.Base
 
         public IAsyncCommand GoToHomeCommand => _goToHomeCommand ?? new AsyncCommand(async () =>
         {
+            _dialogService.HideMenu();
             await _navigationService.NagigatoToHomePage();
         });
+
+        private readonly ICommand _requestSyncCommand;
+
+        public ICommand RequestSyncCommand => _requestSyncCommand ?? new Command(() =>
+       {
+           MessagingCenter.Send<object>(this, "Sync request");
+
+           _dialogService.HideMenu();
+       });
     }
 }

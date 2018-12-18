@@ -40,8 +40,11 @@ namespace EShope.Services.UI.Imp
             return Task.CompletedTask;
         }
 
-        public void HideMenu() {
+        public void HideMenu()
+        {
             var mainPage = App.AppMainPage as MainPage;
+            if (mainPage == null)
+                return;
             var shoppingBasePage = mainPage.CurrentPage as ShopppingBasePage;
             shoppingBasePage.HideMenu();
         }
