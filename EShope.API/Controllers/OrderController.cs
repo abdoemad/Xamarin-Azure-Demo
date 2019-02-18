@@ -9,6 +9,7 @@ using EShope.API.Models;
 using System;
 using Microsoft.Azure.Mobile.Server.Config;
 using EShope.API.Repository.Base;
+using EShope.API.Services;
 
 namespace EShope.API.Controllers
 {
@@ -21,6 +22,12 @@ namespace EShope.API.Controllers
         //{
         //    _orderRepository = orderRepository;
         //}
+        private AzureServiceBusService serviceBus;
+
+        public OrderController() {
+            
+        }
+
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             base.Initialize(controllerContext);
@@ -61,6 +68,9 @@ namespace EShope.API.Controllers
             });
             //item.UserId = userId;
             Order current = await InsertAsync(order);
+            serviceBus = new AzureServiceBusService();
+            await serviceBus.SendMessagesAsync($"New Order {current.Id} by {current.UserId}");
+            await serviceBus.Close();
             //return CreatedAtRoute("Tables", new { id = current.Id }, current);
             return Ok(new { id = current.Id });
         }
