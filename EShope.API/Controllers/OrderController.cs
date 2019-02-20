@@ -69,7 +69,7 @@ namespace EShope.API.Controllers
             //item.UserId = userId;
             Order current = await InsertAsync(order);
             serviceBus = new AzureServiceBusService();
-            await serviceBus.SendMessagesAsync($"New Order {current.Id} by {current.UserId}");
+            await serviceBus.SendMessagesAsync($"New Order {current.Id} by {current.UserId} -- {current.CheckoutDateTime} -- {DateTime.Now.ToLongTimeString()}");
             await serviceBus.Close();
             //return CreatedAtRoute("Tables", new { id = current.Id }, current);
             return Ok(new { id = current.Id });
