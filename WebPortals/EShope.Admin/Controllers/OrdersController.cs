@@ -17,23 +17,31 @@ namespace EShope.Admin.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
-        private readonly IHubContext<OrdersHub> _ordersHub;
+        static IHubContext<OrdersHub> _ordersHub;
 
-        static IQueueClient queueClient;
+        //static IQueueClient queueClient;
         static string ServiceBusConnectionString = "Endpoint=sb://eshope.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=HX/6hR5BJOeR5hI9Uzfj55+bhrA6PYP+B+FtMJSLh6A=";
         static string QueueName = "orderes";
         static IList<string> recievedMessages = new List<string>();
-        bool initialized = false;
+        static bool initialized = false;
+        static string TopicName = "pendingorders";
+        const string SubscriptionName = "pendingorders-handler";
+
+        //static ITopicClient topicClient;
+        static ISubscriptionClient subscriptionClient;
+
         public OrdersController(IHubContext<OrdersHub> ordersHub) {
             _ordersHub = ordersHub;
-            if (!initialized)
+            if(!initialized)
                 Intialize();
             //recievedMessages = new List<string>();
         }
-        void Intialize()
+        static void Intialize()
         {
-            queueClient = new QueueClient(ServiceBusConnectionString, QueueName);
+            //queueClient = new QueueClient(ServiceBusConnectionString, QueueName);
+            subscriptionClient = new SubscriptionClient(ServiceBusConnectionString, TopicName, Program.SubscriptionName);
 
+            //topicClient = new TopicClient(ServiceBusConnectionString, TopicName);
             Console.WriteLine("======================================================");
             Console.WriteLine("Press any key to exit after receiving all the messages.");
             Console.WriteLine("======================================================");
@@ -41,7 +49,7 @@ namespace EShope.Admin.Controllers
             // Register QueueClient's MessageHandler and receive messages in a loop
             RegisterOnMessageHandlerAndReceiveMessages();
         }
-        void RegisterOnMessageHandlerAndReceiveMessages()
+        static void RegisterOnMessageHandlerAndReceiveMessages()
         {
             // Configure the MessageHandler Options in terms of exception handling, number of concurrent messages to deliver etc.
             var messageHandlerOptions = new MessageHandlerOptions(ExceptionReceivedHandler)
@@ -56,9 +64,10 @@ namespace EShope.Admin.Controllers
             };
 
             // Register the function that will process messages
-            queueClient.RegisterMessageHandler(ProcessMessagesAsync, messageHandlerOptions);
+            //queueClient.RegisterMessageHandler(ProcessMessagesAsync, messageHandlerOptions);
+            subscriptionClient.RegisterMessageHandler(ProcessMessagesAsync, messageHandlerOptions);
         }
-        async Task ProcessMessagesAsync(Message message, CancellationToken token)
+        static async Task ProcessMessagesAsync(Message message, CancellationToken token)
         {
             var messageBody = Encoding.UTF8.GetString(message.Body);
             recievedMessages.Add(messageBody);
@@ -67,9 +76,10 @@ namespace EShope.Admin.Controllers
 
             // Complete the message so that it is not received again.
             // This can be done only if the queueClient is created in ReceiveMode.PeekLock mode (which is default).
-            await queueClient.CompleteAsync(message.SystemProperties.LockToken);
+            //await queueClient.CompleteAsync(message.SystemProperties.LockToken);
+            await subscriptionClient.CompleteAsync(message.SystemProperties.LockToken);
 
-            await _ordersHub.Clients.All.SendAsync("NewOrder", $"{message.MessageId} {messageBody} -- {DateTime.Now.ToLongTimeString()}");
+            await _ordersHub.Clients.All.SendAsync("NewOrder", $"{message.MessageId} {messageBody} -- {DateTime.Now.ToLongTimeString()} -- { subscriptionClient.SubscriptionName}");
             // Note: Use the cancellationToken passed as necessary to determine if the queueClient has already been closed.
             // If queueClient has already been Closed, you may chose to not call CompleteAsync() or AbandonAsync() etc. calls 
             // to avoid unnecessary exceptions.

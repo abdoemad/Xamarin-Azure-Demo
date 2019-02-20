@@ -15,6 +15,8 @@ namespace EShope.API.Services
         static IQueueClient queueClient;
         static string ServiceBusConnectionString = "Endpoint=sb://eshope.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=HX/6hR5BJOeR5hI9Uzfj55+bhrA6PYP+B+FtMJSLh6A=";
         static string QueueName = "orderes";
+        static string TopicName = "pendingorders";
+        static ITopicClient topicClient;
         public AzureServiceBusService()
         {
             Intialize();
@@ -23,7 +25,7 @@ namespace EShope.API.Services
         void Intialize()
         {
             queueClient = new QueueClient(ServiceBusConnectionString, QueueName);
-
+            topicClient = new TopicClient(ServiceBusConnectionString, TopicName);
             Console.WriteLine("======================================================");
             Console.WriteLine("Press any key to exit after receiving all the messages.");
             Console.WriteLine("======================================================");
@@ -82,7 +84,8 @@ namespace EShope.API.Services
                 Console.WriteLine($"Sending message: {message}");
 
                 // Send the message to the queue
-                await queueClient.SendAsync(messageEntity);
+                //await queueClient.SendAsync(messageEntity);
+                await topicClient.SendAsync(messageEntity);
 
             }
             catch (Exception exception)
