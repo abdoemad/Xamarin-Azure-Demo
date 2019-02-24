@@ -26,6 +26,15 @@ namespace EShope.ViewModels
 
             _connectionService = connectionService;
             connectionService.ConnectivityChanged += ConnectivityChanged;
+
+            MessagingCenter.Subscribe<object>(this, "DeviceOrientationChanged", (orientation) =>
+            {
+                if ((DeviceOrientations)orientation == DeviceOrientations.Landscape)
+                    _userName += "*";
+                else
+                    _userName = _userName.TrimEnd(new char[] { '*' });
+                RaisePropertyChanged(() => UserName);
+            });
         }
 
         private void _shoppingCartViewModel_CartListChanged(object sender, EventArgs e)
@@ -42,8 +51,8 @@ namespace EShope.ViewModels
         {
             _connectionService.ConnectivityChanged -= ConnectivityChanged;
         }
-
-        public string UserName => App.LoggedInUser.UserName;
+        private string _userName;
+        public string UserName => _userName = _userName ?? App.LoggedInUser.UserName;
 
         public int CartItemsQuantities => _shoppingCartViewModel.TotalQuantities;
 

@@ -17,6 +17,8 @@ namespace EShope.ViewModels.Base
         {
             _dialogService = ViewModelLocator.Resolve<IDialogService>();
             _navigationService = ViewModelLocator.Resolve<INavigationService>();
+
+
         }
         IAsyncCommand _logoutCommand;
 

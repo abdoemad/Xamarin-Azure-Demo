@@ -83,6 +83,7 @@
     <Compile Include="Renders\MyEntryRender.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DeviceOrientation.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\fa-Brands-Regular-400.otf" />

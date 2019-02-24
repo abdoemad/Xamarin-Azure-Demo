@@ -8,12 +8,19 @@ using Android.Widget;
 using Android.OS;
 using FFImageLoading;
 using FFImageLoading.Forms.Droid;
+using Android.Content.Res;
+using EShope.Droid.Services;
 
 namespace EShope.Droid
 {
     [Activity(Label = "EShope", Icon = "@mipmap/cart_image", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        public override void OnConfigurationChanged(Configuration newConfig)
+        {
+            base.OnConfigurationChanged(newConfig);
+            DeviceOrientation.NotifyOrientationChange(newConfig);
+        }
         protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
