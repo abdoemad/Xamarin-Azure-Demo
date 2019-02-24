@@ -71,8 +71,8 @@ namespace EShope.API
             // Use Entity Framework Code First to create database tables based on your DbContext
             //Database.SetInitializer(new MobileServiceInitializer());
 
-            var migrator = new DbMigrator(new Migrations.Configuration());
-            migrator.Update();
+            //var migrator = new DbMigrator(new Migrations.Configuration());
+            //migrator.Update();
 
             MobileAppSettingsDictionary settings = config.GetMobileAppSettingsProvider().GetMobileAppSettings();
 
