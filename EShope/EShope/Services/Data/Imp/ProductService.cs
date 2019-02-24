@@ -53,6 +53,9 @@ namespace EShope.Services.Data.Imp
             try
             {
                 //await this._client.SyncContext.PushAsync();
+                //_productTable.DeleteAsync();
+                //var productList = await _productTable.ToListAsync();
+                //productList.ForEach(p => _productTable.DeleteAsync(p));
                 var productTableQuery = this._productTable.CreateQuery();
                 await this._productTable.PullAsync(
                     //The first parameter is a query name that is used internally by the client SDK to implement incremental sync.
@@ -102,7 +105,7 @@ namespace EShope.Services.Data.Imp
                     await this.SyncAsync();
                 }
                 //var productQuery = _productTable;//.Where(p => p.AvailableQuantity > 1);
-                var productList = await _productTable.ToListAsync();
+                var productList = await _productTable.ToListAsync();              
                 productList.ForEach(p => { p.ThumnailURL = _api.DefaultEndPoint + "/Images/" + p.ThumnailURL; });
                 return productList;
             }

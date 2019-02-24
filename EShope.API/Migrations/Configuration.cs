@@ -11,7 +11,7 @@ namespace EShope.API.Migrations
     {
         public Configuration()
         {
-            //AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = false;
             SetSqlGenerator("System.Data.SqlClient", new EntityTableSqlGenerator());
 
         }

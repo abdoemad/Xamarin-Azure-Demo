@@ -306,6 +306,11 @@
     <Content Include="Images\default_product.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\headphone_thumb.jpg" />
+    <Content Include="Images\keyboard_thumb.jpg" />
+    <Content Include="Images\laptop_thumb.png" />
+    <Content Include="Images\mobile_thumb.jpg" />
+    <Content Include="Images\tv_thumb.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

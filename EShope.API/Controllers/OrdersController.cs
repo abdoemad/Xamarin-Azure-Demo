@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using EShope.API.DataObjects;
 using EShope.API.Models;
+using EShope.API.Services;
 using Microsoft.Azure.Mobile.Server.Config;
 
 namespace EShope.API.Controllers
@@ -96,6 +97,9 @@ namespace EShope.API.Controllers
             try
             {
                 await db.SaveChangesAsync();
+                AzureServiceBusService serviceBus = new AzureServiceBusService();
+                await serviceBus.SendMessagesAsync($"New Order {order.Id} by {order.UserId} -- {order.CheckoutDateTime} -- {DateTime.Now.ToLongTimeString()}");
+                await serviceBus.Close();
             }
             catch (DbUpdateException ex)
             {
