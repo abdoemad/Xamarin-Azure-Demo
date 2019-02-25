@@ -60,10 +60,12 @@
 										<RowDefinition></RowDefinition>
 										<RowDefinition></RowDefinition>
 										<RowDefinition></RowDefinition>
+										<!--<RowDefinition></RowDefinition>-->
 									</Grid.RowDefinitions>
 									<Label Grid.Row="0" Text="{Binding Name}" FontSize="Small" VerticalTextAlignment="End"></Label>
 									<Label Grid.Row="1" Text="{Binding ShortDescription}" FontSize="Micro" VerticalTextAlignment="Center" HorizontalOptions="Start"></Label>
 									<Label Grid.Row="2" Text="{Binding Price, StringFormat='{}{0:C0}.00'}" FontSize="Small" VerticalTextAlignment="Start"></Label>
+									<!--<Label Grid.Row="3" Text="{Binding DiagnosticData}" FontSize="Small" VerticalTextAlignment="Start"></Label>-->
 								</Grid>
 							</Grid>
 						</ViewCell>

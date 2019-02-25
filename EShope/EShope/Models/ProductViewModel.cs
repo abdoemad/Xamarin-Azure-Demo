@@ -20,6 +20,8 @@ namespace EShope.Models
         public int AvailableQuantity { get { return _availableQuantity; } private set { _availableQuantity = value; } }
         public string ShortDescription => Description.TruncateLongString(70);
 
+        public string DiagnosticData => string.Join(", ", new string[] { Id, ThumnailURL });
+
         public void DeductQuantities(int quantities)
         {
             _availableQuantity -= quantities;

@@ -10,6 +10,8 @@ using EShope.Services.Infra;
 using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 using Microsoft.WindowsAzure.MobileServices.Sync;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace EShope.Services.Data.Imp
 {
@@ -18,15 +20,19 @@ namespace EShope.Services.Data.Imp
         IAPIConsumer _api;
         IMobileServiceClient _client;
         IMobileServiceSyncTable<Product> _productTable;
+        MobileServiceSQLiteStore _store;
         public ProductService(IAPIConsumer api)
         {
             _api = api;
             _client = new MobileServiceClient(api.DefaultEndPoint);
             //InitLocalStoreAsync();
-            var store = new MobileServiceSQLiteStore("eshopelocaldb.db");
-            store.DefineTable<Product>();
+            _store = new MobileServiceSQLiteStore("eshopelocaldb.db");
+            _store.DefineTable<Product>();
 
-            _client.SyncContext.InitializeAsync(store);
+            _client.SyncContext.InitializeAsync(_store);
+            var handler = new MobileServiceSyncHandler();
+
+            //_client.SyncContext.InitializeAsync(_store, handler, StoreTrackingOptions.None);
             _productTable = _client.GetSyncTable<Product>();
         }
         //private async Task InitLocalStoreAsync()
@@ -45,6 +51,13 @@ namespace EShope.Services.Data.Imp
         //    // Uses the default conflict handler, which fails on conflict
         //    await _client.SyncContext.InitializeAsync(store);
         //}
+        async Task<List<JObject>> GetProductsAsyncAPI() {
+            var uriBuilder = new UriBuilder($"{_api.DefaultEndPoint}")
+            {
+                Path = "tables/product",
+            };
+            return await _api.GetAsync<List<JObject>>(uriBuilder.Uri.AbsoluteUri);
+        }
 
         public async Task SyncAsync()
         {
@@ -56,11 +69,18 @@ namespace EShope.Services.Data.Imp
                 //_productTable.DeleteAsync();
                 //var productList = await _productTable.ToListAsync();
                 //productList.ForEach(p => _productTable.DeleteAsync(p));
-                var productTableQuery = this._productTable.CreateQuery();
-                await this._productTable.PullAsync(
-                    //The first parameter is a query name that is used internally by the client SDK to implement incremental sync.
-                    //Use a different query name for each unique query in your program
-                    "availableProducts", productTableQuery);
+                var deleteQuery = new Microsoft.WindowsAzure.MobileServices.Query.MobileServiceTableQueryDescription("Product");
+
+                await _store.DeleteAsync(deleteQuery);
+                var productList = await GetProductsAsyncAPI();
+                //var productTableQuery = this._productTable.CreateQuery();
+                await _store.UpsertAsync("Product", productList , true);
+                //_client.SyncContext.Store.
+                    
+                //await this._productTable.PullAsync(
+                //    //The first parameter is a query name that is used internally by the client SDK to implement incremental sync.
+                //    //Use a different query name for each unique query in your program
+                //    "availableProducts", productTableQuery);
             }
 
             catch (MobileServicePushFailedException exc)
