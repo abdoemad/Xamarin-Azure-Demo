@@ -10,6 +10,10 @@ using FFImageLoading;
 using FFImageLoading.Forms.Droid;
 using Android.Content.Res;
 using EShope.Droid.Services;
+using Android.Gms.Common;
+using Firebase.Messaging;
+using Firebase.Iid;
+using Android.Util;
 
 namespace EShope.Droid
 {
@@ -44,6 +48,7 @@ namespace EShope.Droid
 
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
             LoadApplication(new App());
 
             //PopupMenu
