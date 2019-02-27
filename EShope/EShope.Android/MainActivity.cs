@@ -14,6 +14,7 @@ using Android.Gms.Common;
 using Firebase.Messaging;
 using Firebase.Iid;
 using Android.Util;
+using System.Threading.Tasks;
 
 namespace EShope.Droid
 {
@@ -48,10 +49,45 @@ namespace EShope.Droid
 
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
+            //Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
             LoadApplication(new App());
 
             //PopupMenu
+
+#if DEBUG
+            // Force refresh of the token. If we redeploy the app, no new token will be sent but the old one will
+            // be invalid.
+            Task.Run(() =>
+            {
+                // This may not be executed on the main thread.
+                FirebaseInstanceId.Instance.DeleteInstanceId();
+                Console.WriteLine("Forced token: " + FirebaseInstanceId.Instance.Token);
+            });
+#endif
+        }
+
+        public bool IsPlayServicesAvailable()
+        {
+            int resultCode = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);
+            if (resultCode != ConnectionResult.Success)
+            {
+                if (GoogleApiAvailability.Instance.IsUserResolvableError(resultCode))
+                {
+                    // In a real project you can give the user a chance to fix the issue.
+                    Console.WriteLine($"Error: {GoogleApiAvailability.Instance.GetErrorString(resultCode)}");
+                }
+                else
+                {
+                    Console.WriteLine("Error: Play services not supported!");
+                    Finish();
+                }
+                return false;
+            }
+            else
+            {
+                Console.WriteLine("Play Services available.");
+                return true;
+            }
         }
     }
     public class CustomLogger : FFImageLoading.Helpers.IMiniLogger

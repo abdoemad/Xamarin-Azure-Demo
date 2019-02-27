@@ -21,6 +21,9 @@ namespace EShope.Services.Data.Imp
         IMobileServiceClient _client;
         IMobileServiceSyncTable<Product> _productTable;
         MobileServiceSQLiteStore _store;
+
+        public IMobileServiceClient MobileServiceClient => _client;
+
         public ProductService(IAPIConsumer api)
         {
             _api = api;
