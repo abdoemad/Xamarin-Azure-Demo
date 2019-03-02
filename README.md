@@ -42,3 +42,17 @@ Xamarin.Forms project for learning purpose, still under development
 
 ## View Model Layer & Validation design
 <img src="https://github.com/abdoemad/Xamarin-Azure-Demo/blob/master/design%20arch%20images/vm_and_validation.png">
+
+### Database design
+SQL Server with Entity Framework (Code First with Migrations)
+
+<img src="https://github.com/abdoemad/Xamarin-Azure-Demo/blob/master/design%20arch%20images/db-diagram.PNG" width="400" height="500">
+
+### Mobile backend Endpoints
+| Endpoint | Call |
+|--|--|
+| List Products | http://eshopemobile.azurewebsites.net/tables/product?ZUMO-API-VERSION=2.0.0 |
+| List Users | https://eshopemobile.azurewebsites.net/api/users?ZUMO-API-VERSION=2.0.0 |
+| User Orders | http://eshopemobile.azurewebsites.net/tables/order?ZUMO-API-VERSION=2.0.0&userId=32eb7603-8179-4774-8f02-133060e0196d |
+
+
