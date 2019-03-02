@@ -150,36 +150,39 @@ namespace EShope.ViewModels
 
         public ICommand SubmitCommand => _submitCommand ?? new Command(async () =>
         {
-            if (!_connectionService.IsConnected)
+            await ExceptionHelper.TryCatchAsync(async () =>
             {
-                await _dialogService.ShowDialog("Warning", "Please turn on internet connectivity in order to submit your order", "OK");
-                return;
-            }
-
-            if (App.LoggedInUser.Id == null || App.LoggedInUser.Id == Guid.Empty)
-            {
-                await _dialogService.ShowDialog("Warning", $"The Signed In user '{App.LoggedInUser.UserName}' is not online verified", "OK");
-                return;
-            }
-            IsBusy = true;
-            var order = new Order
-            {
-                UserId = App.LoggedInUser.Id,
-                OrderItems = _cartList.Select(c => new OrderItem
+                if (!_connectionService.IsConnected)
                 {
-                    ProductId = c.Product.Id.ToString(),
-                    Quantity = c.Quantity
-                }).ToList()
-            };
+                    await _dialogService.ShowDialog("Warning", "Please turn on internet connectivity in order to submit your order", "OK");
+                    return;
+                }
 
-            var orderId = await _orderService.CheckoutAsync(order);
-            if (!string.IsNullOrEmpty(orderId) && orderId != Guid.Empty.ToString())
-            {
-                _cartList.Clear();
-                CartListChanged?.Invoke(this, null);
-                await _navigationService.ClearStack();
-            }
-            IsBusy = false;
+                if (App.LoggedInUser.Id == null || App.LoggedInUser.Id == Guid.Empty)
+                {
+                    await _dialogService.ShowDialog("Warning", $"The Signed In user '{App.LoggedInUser.UserName}' is not online verified", "OK");
+                    return;
+                }
+                IsBusy = true;
+                var order = new Order
+                {
+                    UserId = App.LoggedInUser.Id,
+                    OrderItems = _cartList.Select(c => new OrderItem
+                    {
+                        ProductId = c.Product.Id.ToString(),
+                        Quantity = c.Quantity
+                    }).ToList()
+                };
+
+                var orderId = await _orderService.CheckoutAsync(order);
+                if (!string.IsNullOrEmpty(orderId) && orderId != Guid.Empty.ToString())
+                {
+                    _cartList.Clear();
+                    CartListChanged?.Invoke(this, null);
+                    await _navigationService.ClearStack();
+                }
+                IsBusy = false;
+            });
         });
     }
 }

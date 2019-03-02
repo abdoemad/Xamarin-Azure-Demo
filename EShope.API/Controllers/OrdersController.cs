@@ -137,6 +137,8 @@ namespace EShope.API.Controllers
                 this.Configuration.GetMobileAppSettingsProvider().GetMobileAppSettings();
 
             // Get the Notification Hubs credentials for the mobile app.
+            //"eshopenotifyhub";// settings.NotificationHubName;
+            //"Endpoint=sb://eshopenotifyhub.servicebus.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=QqmckPU7pDyRlYchxaVBT7LVjliPUwtUg6IZnexQAZYUWU=";// settings.Connections[MobileAppSettingsKeys.NotificationHubConnectionString].ConnectionString;
             string notificationHubName = settings.NotificationHubName;
             string notificationHubConnection = settings.Connections[MobileAppSettingsKeys.NotificationHubConnectionString].ConnectionString;
 
@@ -185,12 +187,13 @@ namespace EShope.API.Controllers
             try
             {
                 await db.SaveChangesAsync();
-                //await PushNotificationAsync(order);
+                
                 //TODO: Ioc & Interface & Repo
                 var savedOrder = await GetOrderFromDB(order.Id);
                 AzureServiceBusService serviceBus = new AzureServiceBusService();
-                await serviceBus.SendMessagesAsync($"User '{order.User.Name}' ordered '{order.OrderItems.Sum(i=>i.Quantity)}' pieces with total price {order.OrderItems.Sum(i => i.Quantity * i.Product.Price)} is placed at {order.CheckoutDateTime}, \r\nDiagnostic data: {Request.Headers.UserAgent} {this.Request.GetOwinContext()?.Request.RemoteIpAddress} {RequestContext.Principal.Identity?.Name}");
+                await serviceBus.SendMessagesAsync($"User '{savedOrder.User.Name}' ordered '{savedOrder.OrderItems.Sum(i=>i.Quantity)}' items with total price {savedOrder.OrderItems.Sum(i => i.Quantity * i.Product.Price)} is placed in {savedOrder.CheckoutDateTime}, \r\nDiagnostic data: {Request.Headers.UserAgent} {this.Request.GetOwinContext()?.Request.RemoteIpAddress} {RequestContext.Principal.Identity?.Name}");
                 await serviceBus.Close();
+                await PushNotificationAsync(savedOrder);
             }
             catch (DbUpdateException ex)
             {
