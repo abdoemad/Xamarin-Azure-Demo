@@ -31,5 +31,14 @@ Xamarin.Forms project for learning purpose, still under development
 - EShope Mobile backend: Web API project(.Net Framework 4.7.2)
 - EShope Admins.Net Core(2.2) run Angular(7) with SignalR
 
-### Xamarin.Forms Skeleton
+### Menu
 <img src="https://github.com/abdoemad/Xamarin-Azure-Demo/blob/master/screenshots/menu.jpeg" alt="alt text" width="300" height="200">
+
+### Xamarin.Forms project
+<img src="https://github.com/abdoemad/Xamarin-Azure-Demo/blob/master/design%20arch%20images/xamarin-skeleton.png">
+
+### Pages design
+<img src="https://github.com/abdoemad/Xamarin-Azure-Demo/blob/master/design%20arch%20images/pages%20design.png" width="600" height="500">
+
+## View Model Layer & Validation design
+<img src="https://github.com/abdoemad/Xamarin-Azure-Demo/blob/master/design%20arch%20images/vm_and_validation.png">
