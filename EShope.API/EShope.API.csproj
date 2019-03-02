@@ -130,6 +130,9 @@
     <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.2.2\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Net.Http.Headers">
+      <HintPath>..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.net.http.headers\2.2.0\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
@@ -313,6 +316,7 @@
     <Compile Include="DataObjects\TodoItem.cs" />
     <Compile Include="DataObjects\User.cs" />
     <Compile Include="DTO\ProductDTO.cs" />
+    <Compile Include="Helpers\ExceptionHelper.cs" />
     <Compile Include="Migrations\201812170803422_Initial.cs" />
     <Compile Include="Migrations\201812170803422_Initial.Designer.cs">
       <DependentUpon>201812170803422_Initial.cs</DependentUpon>
@@ -328,6 +332,7 @@
     <Compile Include="Repository\Base\EFRepository.cs" />
     <Compile Include="Repository\Base\IRepository.cs" />
     <Compile Include="Services\AzureServiceBusService.cs" />
+    <Compile Include="Services\OrderService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

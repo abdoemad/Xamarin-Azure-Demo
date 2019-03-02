@@ -70,7 +70,7 @@ namespace EShope.Droid.Services
                     "{" +
                         "\"notification\" : {" +
                         "\"body\" : \"$(messageParam)\"," +
-                          "\"title\" : \"Xamarin - EShope\"," +
+                          "\"title\" : \"Xamarin EShope\"," +
                         "\"icon\" : \"myicon\" }" +
                     "}";
 

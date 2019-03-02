@@ -69,7 +69,7 @@ namespace EShope.Admin.Controllers
         static async Task ProcessMessagesAsync(Message message, CancellationToken token)
         {
             var messageBody = Encoding.UTF8.GetString(message.Body);
-            recievedMessages.Add(messageBody);
+            //recievedMessages.Add(messageBody);
             // Process the message
             Trace.WriteLine($"Received message: SequenceNumber:{message.SystemProperties.SequenceNumber} Body:{messageBody}");
 

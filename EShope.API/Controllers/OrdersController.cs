@@ -10,11 +10,13 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using EShope.API.DataObjects;
+using EShope.API.Helpers;
 using EShope.API.Models;
 using EShope.API.Services;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Config;
 using Microsoft.Azure.NotificationHubs;
+using Microsoft.Net.Http.Headers;
 
 namespace EShope.API.Controllers
 {
@@ -144,7 +146,7 @@ namespace EShope.API.Controllers
             // Send the message so that all template registrations that contain "messageParam"
             // receive the notifications. This includes APNS, GCM, WNS, and MPNS template registrations.
             Dictionary<string, string> templateParams = new Dictionary<string, string>();
-            templateParams["messageParam"] = $"Your order is placed at {order.CheckoutDateTime.ToShortDateString()} with itmes {order.OrderItems.Count}";
+            templateParams["messageParam"] = $"Your order is placed in {order.CheckoutDateTime.ToShortDateString()} with total itmes: {order.OrderItems.Count}";
 
             try
             {
@@ -183,9 +185,11 @@ namespace EShope.API.Controllers
             try
             {
                 await db.SaveChangesAsync();
-                await PushNotificationAsync(order);
+                //await PushNotificationAsync(order);
+                //TODO: Ioc & Interface & Repo
+                var savedOrder = await GetOrderFromDB(order.Id);
                 AzureServiceBusService serviceBus = new AzureServiceBusService();
-                await serviceBus.SendMessagesAsync($"New Order {order.Id} by {order.UserId} -- {order.CheckoutDateTime} -- {DateTime.Now.ToLongTimeString()}");
+                await serviceBus.SendMessagesAsync($"User '{order.User.Name}' ordered '{order.OrderItems.Sum(i=>i.Quantity)}' pieces with total price {order.OrderItems.Sum(i => i.Quantity * i.Product.Price)} is placed at {order.CheckoutDateTime}, \r\nDiagnostic data: {Request.Headers.UserAgent} {this.Request.GetOwinContext()?.Request.RemoteIpAddress} {RequestContext.Principal.Identity?.Name}");
                 await serviceBus.Close();
             }
             catch (DbUpdateException ex)
@@ -207,7 +211,19 @@ namespace EShope.API.Controllers
             //return CreatedAtRoute("DefaultApi", new { id = order.Id }, order);
             return Ok(order.Id);
         }
-
+        async Task<Order> GetOrderFromDB(string orderId)
+        {
+            return await ExceptionHelper.TryCatch<Order>(async () =>
+            {
+                using (var context = new EShopeMobileServiceContext())
+                {
+                    var order = context.Orders.Include(o => o.User)
+                    .Include(o => o.OrderItems).Include(o => o.OrderItems.Select(i => i.Product))
+                    .FirstOrDefaultAsync(o => o.Id == orderId);
+                    return await order;
+                }
+            });
+        }
         // DELETE: api/Orders/5
         [ResponseType(typeof(Order))]
         public async Task<IHttpActionResult> DeleteOrder(string id)
