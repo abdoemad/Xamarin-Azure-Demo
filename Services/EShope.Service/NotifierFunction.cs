@@ -4,10 +4,10 @@ using Microsoft.Azure.WebJobs.Host;
 
 namespace EShope.Service
 {
-    public static class Function1
+    public static class NotifierFunction
     {
-        [FunctionName("Function1")]
-        public static void Run([QueueTrigger("notificationqueue", Connection = "eshopestorage")]string myQueueItem, TraceWriter log)
+        [FunctionName("NotifierFunction")]
+        public static void Run([QueueTrigger("notificationqueue", Connection = "conn")]string myQueueItem, TraceWriter log)
         {
             log.Info($"C# Queue trigger function processed: {myQueueItem}");
         }

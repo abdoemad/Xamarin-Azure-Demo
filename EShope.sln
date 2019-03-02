@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EShope.Admin", "WebPortals\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{D6635094-B40C-4CDE-AB7F-9FA11935E645}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShope.Service", "Services\EShope.Service\EShope.Service.csproj", "{215B8AFF-0F78-4BDE-8D3E-A446F0E8607B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EShope.Service", "Services\EShope.Service\EShope.Service.csproj", "{215B8AFF-0F78-4BDE-8D3E-A446F0E8607B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
