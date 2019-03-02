@@ -1,3 +1,4 @@
+using EShope.Admin.Controllers;
 using EShope.Admin.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -73,6 +74,8 @@ namespace EShope.Admin
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
+            OrdersController.Intialize();
         }
     }
 }

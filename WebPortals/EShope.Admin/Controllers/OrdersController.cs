@@ -32,11 +32,10 @@ namespace EShope.Admin.Controllers
 
         public OrdersController(IHubContext<OrdersHub> ordersHub) {
             _ordersHub = ordersHub;
-            if(!initialized)
-                Intialize();
+
             //recievedMessages = new List<string>();
         }
-        static void Intialize()
+        public static void Intialize()
         {
             //queueClient = new QueueClient(ServiceBusConnectionString, QueueName);
             subscriptionClient = new SubscriptionClient(ServiceBusConnectionString, TopicName, Program.SubscriptionName);
