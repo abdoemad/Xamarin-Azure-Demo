@@ -12,7 +12,7 @@ You can build the solution and run Android.Xamarin App using those users “user
 ## Menu
 <img src="https://github.com/abdoemad/Xamarin-Azure-Demo/blob/master/screenshots/menu.jpeg" alt="alt text" width="300" height="200">
 
-### Purchasing cycle Functionalities
+### Purchasing cycle functionalities
 | Business | Details |
 |--|--|
 | Login online / offline with input validation	| Online to get the user id. |
