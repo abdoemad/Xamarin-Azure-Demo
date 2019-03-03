@@ -1,4 +1,4 @@
-# Xamarin-Azure-Demo
+# Xamarin Azure Demo
 Xamarin.Forms project for learning purpose, still under development.
 
 ### Build & Try
