@@ -34,9 +34,6 @@ You can build the solution and run Android.Xamarin App using those users “user
 - EShope Mobile backend: Web API project (.Net Framework 4.7.2)
 - EShope Admin: .Net Core (2.2) run Angular with SignalR
 
-### Menu
-<img src="https://github.com/abdoemad/Xamarin-Azure-Demo/blob/master/screenshots/menu.jpeg" alt="alt text" width="300" height="200">
-
 #### Custom Views
 -	Shopping Bar
 -	Menu
