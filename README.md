@@ -2,7 +2,7 @@
 Xamarin.Forms project for learning purpose, still under development.
 
 ### Build & Try
-You can build the solution and run Android.Xamarin App with those users “userOrders” “emptyUser”
+You can build the solution and run Android.Xamarin App using those users “userOrders” “emptyUser”
 
 ## Pages
 | Login | Product Catalog | Add to Cart | Cart |
@@ -13,7 +13,7 @@ You can build the solution and run Android.Xamarin App with those users “userO
 <img src="https://github.com/abdoemad/Xamarin-Azure-Demo/blob/master/screenshots/menu.jpeg" alt="alt text" width="300" height="200">
 
 ### Purchasing cycle Functionalities
-| Buss Func | Desc|
+| Business | Details |
 |--|--|
 | Login online / offline with input validation	| Online to get the user id. |
 | List products  (offline sync)	| Get products from the API |
@@ -45,7 +45,7 @@ You can build the solution and run Android.Xamarin App with those users “userO
 -	Direct composition in the base view
 -	ControlTemplate & ContentPresenter
 
-### Xamarin.Forms project
+### Xamarin.Forms skeleton
 <img src="https://github.com/abdoemad/Xamarin-Azure-Demo/blob/master/design%20arch%20images/xamarin-skeleton.png">
 
 ### Pages design
@@ -77,7 +77,7 @@ SQL Server with Entity Framework (Code First with Migrations)
 | User Orders | http://eshopemobile.azurewebsites.net/tables/order?ZUMO-API-VERSION=2.0.0&userId=32eb7603-8179-4774-8f02-133060e0196d |
 
 #### EShope Admin 
-List orders: https://eshopeadmin.azurewebsites.net/orders
+Streaming new orders: https://eshopeadmin.azurewebsites.net/orders
 
 ### Azure Arch
 <img src="https://github.com/abdoemad/Xamarin-Azure-Demo/blob/master/design%20arch%20images/azure.png">
