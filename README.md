@@ -27,8 +27,8 @@ You can build the solution and run Android.Xamarin App with those users “userO
 -	FontAwesome
 
 ### Projects
-- Xamarin projects
-- - Shared (.Net Standard 2.0)
+- Mobile app
+- - Xamarin.Forms 3.5 into .Net Standard project (2.0)
 - - Xamarin.Android 
 - - Xamarin.IOS
 - EShope Mobile backend: Web API project (.Net Framework 4.7.2)
