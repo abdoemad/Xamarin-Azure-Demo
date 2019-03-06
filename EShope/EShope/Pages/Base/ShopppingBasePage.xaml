@@ -5,12 +5,23 @@
 	xmlns:views="clr-namespace:EShope.Views"
 	x:Name="shoppingBarPage"
              x:Class="EShope.Pages.Base.ShopppingBasePage">
+	<!--<ContentPage.Padding>
+		<OnPlatform x:TypeArguments="Thickness">
+			<On Platform="iOS" Value="0,20,0,0" />
+		</OnPlatform>
+	</ContentPage.Padding>-->
 	<!--<ContentPage.ToolbarItems>
 		<ToolbarItem Text="Action 1" Order="Secondary" />
 		<ToolbarItem Text="Action 2" Order="Secondary" />
 	</ContentPage.ToolbarItems>-->
 	<ContentPage.Content>
+		
 		<RelativeLayout x:Name="relativeLayout">
+			<RelativeLayout.Margin>
+				<OnPlatform x:TypeArguments="Thickness">
+					<On Platform="iOS" Value="0, 20, 0, 0"></On>
+				</OnPlatform>
+			</RelativeLayout.Margin>
 			<views:PopupMenuView x:Name="popupMenu" WidthRequest="100" IsVisible="False" IsClippedToBounds="True" Unfocused="PopupMenu_Unfocused"
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=30}"
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-120}"

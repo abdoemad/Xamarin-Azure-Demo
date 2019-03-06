@@ -10,10 +10,13 @@ namespace EShope.Pages.Base
     {
         public PageBase()
         {
-            
+
             //Content = new Grid {
-                 
+
             //};
+            //this.Padding = Device.RuntimePlatform == Device.iOS ? new Thickness(0, 20, 0, 0) : new Thickness();
+
+            //this.Content.Margin = Device.RuntimePlatform == Device.iOS ? new Thickness(0, 20, 0, 0) : new Thickness();
         }
         public PageBase(ViewModelBase viewModel)
         {

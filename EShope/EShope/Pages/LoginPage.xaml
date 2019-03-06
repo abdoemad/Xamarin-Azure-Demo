@@ -11,7 +11,9 @@
 			 x:Class="EShope.Pages.LoginPage" 
 			 BackgroundColor="LightGreen" 
 			 BindingContext="{Binding Login, Source={StaticResource viewModelLocator}}"
+	
 			 IsBusy="{Binding IsBusy}">
+	<!--Padding="0,40,0,0"-->
 	<!--<ContentPage.BindingContext>
 		<viewModels:LoginViewModel></viewModels:LoginViewModel>
 	</ContentPage.BindingContext>-->
@@ -40,7 +42,8 @@
 				<Label Grid.Column="1" Text="{x:Static resources:AppResources.AppTitle}" VerticalTextAlignment="Center"></Label>
 			</Grid>
 				<!--<BoxView Color="Gray" WidthRequest="30" HeightRequest="30"></BoxView>-->
-				<Entry Grid.Row="1" Text="{Binding User.UserName}" Placeholder="Enter username.." uie:Validation.Errors="{Binding User.Errors[UserName]}"></Entry>
+				<!--uie:Validation.Errors="{Binding User.Errors[UserName]}"-->
+				<Entry Grid.Row="1" Text="{Binding User.UserName}" Placeholder="Enter username.." ></Entry>
 				
 				<Label Grid.Row="2" Text="{Binding User.Errors[UserName], Converter={StaticResource firstErrorConverter}}" FontSize="Small" TextColor="Red"></Label>
 				<Button Grid.Row="3" Command="{Binding LoginCommand}" Text="Login" IsEnabled="{Binding IsUserEntityValid}"></Button>

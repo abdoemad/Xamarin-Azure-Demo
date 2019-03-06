@@ -26,7 +26,7 @@ namespace EShope.ViewModels
             User = new UserViewMode() { };
 
             User.PropertyChanged += User_PropertyChanged;
-            User.Errors.ErrorsChanged += Errors_ErrorsChanged;
+            //User.Errors.ErrorsChanged += Errors_ErrorsChanged;
 
             RaisePropertyChanged(() => IsUserEntityValid);
         }
@@ -59,13 +59,13 @@ namespace EShope.ViewModels
             //{
                 IsBusy = true;
             //});
-              var res = await User.ValidatePropertiesAsync();
-              if (User.HasErrors)
-              {
-                  IsBusy = false;
-                  RaisePropertyChanged(() => IsUserEntityValid);
-                  return;
-              }
+              //var res = await User.ValidatePropertiesAsync();
+              //if (User.HasErrors)
+              //{
+              //    IsBusy = false;
+              //    RaisePropertyChanged(() => IsUserEntityValid);
+              //    return;
+              //}
 
             if (_connectionService.IsConnected)
             {
@@ -90,8 +90,8 @@ namespace EShope.ViewModels
             await _navigationService.NagigatoToHomePage();
             IsBusy = false;
 
-        }, () => !User.HasErrors);
+        }, () => true/*!User.HasErrors*/);
 
-        public bool IsUserEntityValid => !User.HasErrors;
+        public bool IsUserEntityValid => true; // !User.HasErrors;
     }
 }
