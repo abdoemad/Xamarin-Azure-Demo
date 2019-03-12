@@ -15,6 +15,8 @@ using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.EntityFrameworkCore;
 using EShope.CoreAPIApp.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication;
 
 namespace EShope.CoreAPIApp
 {
@@ -30,6 +32,11 @@ namespace EShope.CoreAPIApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(sharedOptions =>
+            {
+                sharedOptions.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddAzureAdBearer(options => Configuration.Bind("AzureAd", options));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             // Register the Swagger generator, defining 1 or more Swagger documents
@@ -74,7 +81,7 @@ namespace EShope.CoreAPIApp
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "EShope API V1");
                 //c.RoutePrefix = string.Empty;
             });
-
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
         }
