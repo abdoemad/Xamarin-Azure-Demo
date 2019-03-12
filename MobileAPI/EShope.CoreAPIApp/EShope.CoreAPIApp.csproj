@@ -6,6 +6,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
     <WebProject_DirectoryAccessLevelKey>1</WebProject_DirectoryAccessLevelKey>
+    <UserSecretsId>1033e69d-e08b-4dba-888b-3d97c2ca191c</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
