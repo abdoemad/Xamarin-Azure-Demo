@@ -13,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.EntityFrameworkCore;
+using EShope.CoreAPIApp.Models;
 
 namespace EShope.CoreAPIApp
 {
@@ -44,6 +46,9 @@ namespace EShope.CoreAPIApp
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+
+            services.AddDbContext<EShopeCoreAPIAppContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("EShopeCoreAPIAppContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
