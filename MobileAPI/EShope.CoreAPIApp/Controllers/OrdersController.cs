@@ -28,7 +28,7 @@ namespace EShope.CoreAPIApp.Controllers
         }
 
         // GET: api/Orders/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "OrdersById")]
         public async Task<ActionResult<Order>> GetOrder(string id)
         {
             var order = await _context.Order.FindAsync(id);

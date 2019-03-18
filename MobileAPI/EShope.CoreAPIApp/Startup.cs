@@ -72,14 +72,20 @@ namespace EShope.CoreAPIApp
             }
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
+            app.UseSwagger(c =>
+            {
+                //var basepath = "/api/AppStatus";
+                //c.PreSerializeFilters.Add((swaggerDoc, httpReq) => swaggerDoc.BasePath = basepath);
+
+                c.PreSerializeFilters.Add((swaggerDoc, httpReq) => swaggerDoc.Host = "eshopeapiapp.azurewebsites.net");
+            });
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "EShope API V1");
-                //c.RoutePrefix = string.Empty;
+                c.RoutePrefix = string.Empty;
             });
             app.UseAuthentication();
             app.UseHttpsRedirection();

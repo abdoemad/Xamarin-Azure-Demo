@@ -360,6 +360,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\eshopemobile - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\MobileAppProjAsAPI - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201812170803422_Initial.resx">
