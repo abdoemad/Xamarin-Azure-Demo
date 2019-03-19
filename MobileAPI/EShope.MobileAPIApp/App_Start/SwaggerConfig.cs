@@ -2,6 +2,8 @@ using System.Web.Http;
 using WebActivatorEx;
 using EShope.MobileAPIApp;
 using Swashbuckle.Application;
+using Microsoft.Azure.Mobile.Server.Swagger;
+using Microsoft.Azure.Mobile.Server;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
@@ -13,8 +15,12 @@ namespace EShope.MobileAPIApp
         {
             var thisAssembly = typeof(SwaggerConfig).Assembly;
 
-            GlobalConfiguration.Configuration
-                .EnableSwagger(c =>
+            var httpConfig = GlobalConfiguration.Configuration;
+            // Use the custom ApiExplorer that applies constraints. This prevents
+            // duplicate routes on /api and /tables from showing in the Swagger doc.
+            httpConfig.Services.Replace(typeof(System.Web.Http.Description.IApiExplorer), new MobileAppApiExplorer(httpConfig));
+
+            httpConfig.EnableSwagger(c =>
                     {
                         // By default, the service root url is inferred from the request used to access the docs.
                         // However, there may be situations (e.g. proxy and load-balanced environments) where this does not
@@ -33,6 +39,8 @@ namespace EShope.MobileAPIApp
                         // additional fields by chaining methods off SingleApiVersion.
                         //
                         c.SingleApiVersion("v1", "EShope.MobileAPIApp");
+
+
 
                         // If you want the output Swagger docs to be indented properly, enable the "PrettyPrint" option.
                         //
@@ -121,6 +129,10 @@ namespace EShope.MobileAPIApp
                         //
                         //c.SchemaFilter<ApplySchemaVendorExtensions>();
 
+                        // Looks at attributes on properties to decide whether they are readOnly.
+                        // Right now, this only applies to the DatabaseGeneratedAttribute.
+                        c.SchemaFilter<MobileAppSchemaFilter>();
+
                         // In a Swagger 2.0 document, complex types are typically declared globally and referenced by unique
                         // Schema Id. By default, Swashbuckle does NOT use the full type name in Schema Ids. In most cases, this
                         // works well because it prevents the "implementation detail" of type namespaces from leaking into your
@@ -144,6 +156,10 @@ namespace EShope.MobileAPIApp
                         // approach to serialize enums as strings, you can also force Swashbuckle to describe them as strings.
                         //
                         //c.DescribeAllEnumsAsStrings();
+
+                        // Tells the Swagger doc that any MobileAppController needs a
+                        // ZUMO-API-VERSION header with default 2.0.0
+                        c.OperationFilter<EShope.MobileAPIApp.SwaggerCode.MobileAppHeaderFilter>();
 
                         // Similar to Schema filters, Swashbuckle also supports Operation and Document filters:
                         //
