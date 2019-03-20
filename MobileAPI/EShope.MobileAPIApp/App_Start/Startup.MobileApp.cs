@@ -41,6 +41,7 @@ namespace EShope.MobileAPIApp
             }
 
             app.UseWebApi(config);
+            SwaggerConfig.Register(config);
         }
     }
 

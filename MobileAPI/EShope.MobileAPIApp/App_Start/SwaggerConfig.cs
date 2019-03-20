@@ -5,17 +5,17 @@ using Swashbuckle.Application;
 using Microsoft.Azure.Mobile.Server.Swagger;
 using Microsoft.Azure.Mobile.Server;
 
-[assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
+//[assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
 namespace EShope.MobileAPIApp
 {
     public class SwaggerConfig
     {
-        public static void Register()
+        public static void Register(HttpConfiguration httpConfig = null)
         {
             var thisAssembly = typeof(SwaggerConfig).Assembly;
 
-            var httpConfig = GlobalConfiguration.Configuration;
+            httpConfig = httpConfig ?? GlobalConfiguration.Configuration;
             // Use the custom ApiExplorer that applies constraints. This prevents
             // duplicate routes on /api and /tables from showing in the Swagger doc.
             httpConfig.Services.Replace(typeof(System.Web.Http.Description.IApiExplorer), new MobileAppApiExplorer(httpConfig));
@@ -265,6 +265,14 @@ namespace EShope.MobileAPIApp
                         // "apiKeyIn" can either be "query" or "header"
                         //
                         //c.EnableApiKeySupport("apiKey", "header");
+
+                        //c.EnableOAuth2Support("na", "na", "na");
+
+                        //// Replaces some javascript files with specific logic to:
+                        //// 1. Do the OAuth flow using the App Service Auth parameters
+                        //// 2. Parse the returned token
+                        //// 3. Apply the token to the X-ZUMO-AUTH header
+                        //c.MobileAppUi(httpConfig);
                     });
         }
     }

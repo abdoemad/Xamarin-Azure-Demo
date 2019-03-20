@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShope.APIApp", "MobileAPI\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShope.MobileAPIApp", "MobileAPI\EShope.MobileAPIApp\EShope.MobileAPIApp.csproj", "{A7AFD9B2-478D-4326-9ED7-70E3F624689A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MobileTest", "MobileTest", "{75D24199-EF8F-4696-A796-64D30DCB8E96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
