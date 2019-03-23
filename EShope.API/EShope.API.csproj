@@ -61,8 +61,8 @@
     <Reference Include="Microsoft.Azure.Amqp, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Azure.Amqp.2.3.7\lib\net45\Microsoft.Azure.Amqp.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.Server, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.2.0.0\lib\net46\Microsoft.Azure.Mobile.Server.dll</HintPath>
+    <Reference Include="Microsoft.Azure.Mobile.Server, Version=2.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.2.0.3\lib\net46\Microsoft.Azure.Mobile.Server.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.Mobile.Server.Authentication, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Azure.Mobile.Server.Authentication.2.0.0\lib\net46\Microsoft.Azure.Mobile.Server.Authentication.dll</HintPath>
@@ -81,6 +81,9 @@
     </Reference>
     <Reference Include="Microsoft.Azure.Mobile.Server.Quickstart, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Azure.Mobile.Server.Quickstart.2.0.0\lib\net46\Microsoft.Azure.Mobile.Server.Quickstart.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile.Server.Swagger, Version=2.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.Swagger.2.0.3\lib\net46\Microsoft.Azure.Mobile.Server.Swagger.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.Mobile.Server.Tables, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Azure.Mobile.Server.Tables.2.0.0\lib\net46\Microsoft.Azure.Mobile.Server.Tables.dll</HintPath>

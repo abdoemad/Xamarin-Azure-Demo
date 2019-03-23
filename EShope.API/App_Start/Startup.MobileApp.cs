@@ -90,6 +90,7 @@ namespace EShope.API
             }
 
             app.UseWebApi(config);
+            SwaggerConfig.Register(config);
         }
     }
 

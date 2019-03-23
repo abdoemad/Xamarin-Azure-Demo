@@ -12,6 +12,7 @@ using System.Web.Http.Description;
 using EShope.API.DataObjects;
 using EShope.API.Models;
 using Microsoft.Azure.Mobile.Server.Config;
+using Swashbuckle.Swagger.Annotations;
 
 namespace EShope.API.Controllers
 {
@@ -19,7 +20,7 @@ namespace EShope.API.Controllers
     public class UsersController : ApiController
     {
         private EShopeMobileServiceContext db = new EShopeMobileServiceContext();
-
+        [SwaggerOperation("GetAllUsers")]
         // GET: api/Users
         public IQueryable<User> GetUsers()
         {
